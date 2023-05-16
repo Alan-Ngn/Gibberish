@@ -8,8 +8,8 @@ class Channel(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    admin_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('admin_id')), nullable=False)
-    title = db.Column(db.string(255), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
 
     channels_users = db.relationship("User", back_populates="users_channels", cascade="all, delete-orphan")
     channels_messages = db.relationship("User", secondary=messages, back_populates="users_messages", cascade="all, delete-orphan")
