@@ -43,5 +43,19 @@ class User(db.Model, UserMixin):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'status': self.status,
-            'admin': self.admin
+            'admin': self.admin,
+        }
+
+    def to_dict_relationship(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'status': self.status,
+            'admin': self.admin,
+            'admin_channels': [channel.to_dict() for channel in self.users_channels],
+            'messages': [message.to_dict() for message in self.users_messages],
+            'channels': [channel.to_dict() for channel in self.users_members]
         }

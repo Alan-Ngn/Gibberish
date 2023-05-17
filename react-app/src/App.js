@@ -5,6 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import ChannelById from "./components/ChannelById";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route path='/channels/:channelId' component={ChannelById} />
         </Switch>
       )}
     </>
