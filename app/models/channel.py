@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, UniqueConstraint, add_prefix_for_prod
-from .message import messages
 from .member import members
 class Channel(db.Model):
     __tablename__ = 'channels'
@@ -12,5 +11,5 @@ class Channel(db.Model):
     title = db.Column(db.String(255), nullable=False)
 
     channels_users = db.relationship("User", back_populates="users_channels")
-    channels_messages = db.relationship("User", secondary=messages, back_populates="users_messages", cascade="all, delete-orphan")
-    channels_members = db.relationship("User", secondary=members, back_populates="users_members", cascade="all, delete-orphan")
+    channels_messages = db.relationship("Message", back_populates="messages_channels", cascade="all, delete-orphan")
+    channels_members = db.relationship("User", secondary=members, back_populates="users_members")

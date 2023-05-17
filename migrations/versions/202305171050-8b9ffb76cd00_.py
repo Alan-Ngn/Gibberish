@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 882491b3c7b6
+Revision ID: 8b9ffb76cd00
 Revises: 
-Create Date: 2023-05-16 14:42:11.382753
+Create Date: 2023-05-17 10:50:30.941042
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '882491b3c7b6'
+revision = '8b9ffb76cd00'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
+    sa.Column('first_name', sa.String(length=100), nullable=False),
+    sa.Column('last_name', sa.String(length=100), nullable=False),
+    sa.Column('status', sa.String(length=20), nullable=False),
+    sa.Column('admin', sa.Boolean(), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
@@ -29,25 +33,27 @@ def upgrade():
     )
     op.create_table('channels',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('admin_id', sa.Integer(), nullable=False),
+    sa.Column('admin_id', sa.Integer(), nullable=True),
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.ForeignKeyConstraint(['admin_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('members',
-    sa.Column('users', sa.Integer(), nullable=False),
-    sa.Column('channels', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['channels'], ['channels.id'], ),
-    sa.ForeignKeyConstraint(['users'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('users', 'channels')
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('channel_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('user_id', 'channel_id')
     )
     op.create_table('messages',
-    sa.Column('users', sa.Integer(), nullable=False),
-    sa.Column('channels', sa.Integer(), nullable=False),
-    sa.Column('message', sa.String(length=255), nullable=False),
-    sa.ForeignKeyConstraint(['channels'], ['channels.id'], ),
-    sa.ForeignKeyConstraint(['users'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('users', 'channels')
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('channel_id', sa.Integer(), nullable=False),
+    sa.Column('message', sa.String(length=255), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
 

@@ -1,12 +1,16 @@
-from .db import db, environment, SCHEMA, UniqueConstraint, add_prefix_for_prod
+from .db import db, environment, SCHEMA, UniqueConstraint, add_prefix_for_prod, func
 
-messages = db.Table(
-    'messages',
-    db.Model.metadata,
-    db.Column('users', db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), primary_key=True ),
-    db.Column('channels', db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')), primary_key=True ),
-    db.Column('message', db.String(255), nullable=False)
-)
+class Message(db.Model):
+    __tablename__ = 'messages'
 
-if environment == "production":
-    messages.schema = SCHEMA
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    channel_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('channels.id')), nullable=False)
+    message = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+
+    messages_users = db.relationship("User", back_populates="users_messages")
+    messages_channels = db.relationship("Channel", back_populates="channels_messages")
