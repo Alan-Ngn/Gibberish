@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import CreateChannelModal from '../CreateChannel';
 import { loadUsersThunk } from '../../store/user';
 import DeleteChannelModal from '../DeleteChannel';
+import KebabModal from '../KebabMenu';
 
 function Navigation({ isLoaded }){
 	const dispatch = useDispatch()
@@ -36,8 +37,8 @@ function Navigation({ isLoaded }){
 						<div>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
 							<OpenModalButton
-							 buttonText='Delete Channel'
-							 modalComponent={<DeleteChannelModal channelId={channel.id}/>}
+							 buttonText='Edit/Delete'
+							 modalComponent={<KebabModal channelId={channel.id} members={channel.members}/>}
 							/>
 						</div>
 
@@ -46,7 +47,7 @@ function Navigation({ isLoaded }){
 						<OpenModalButton
 							buttonText='Add Channel'
 							onButtonClick={onButtonClick}
-							modalComponent={<CreateChannelModal adminId={sessionUser.id}/>}
+							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]}/>}
 						/>
 					)}
 				</li>

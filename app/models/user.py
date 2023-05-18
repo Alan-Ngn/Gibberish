@@ -57,5 +57,5 @@ class User(db.Model, UserMixin):
             'admin': self.admin,
             'admin_channels': [channel.to_dict() for channel in self.users_channels],
             'messages': [message.to_dict() for message in self.users_messages],
-            'channels': [channel.to_dict() for channel in self.users_members]
+            'channels': [channel.to_dict_relationship() for channel in self.users_members]
         }

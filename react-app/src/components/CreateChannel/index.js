@@ -3,16 +3,18 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk } from "../../store/channel"
 
-const CreateChannelModal = ({adminId}) => {
+const CreateChannelModal = ({channelId, members}) => {
+    const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
 	const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState('')
-    const [checkUser, setCheckUser] = useState([])
+    const [checkUser, setCheckUser] = useState([...memberId])
     const [err, setErr] = useState(null)
+    const [x, setX] =useState(false)
     const updateTitle =(e) => setTitle(e.target.value)
-
+    console.log(checkUser, 'what is my checkusers before i push any checkboxes')
     const payload = {}
 
     const handleSubmit = async(e) => {
@@ -29,10 +31,10 @@ const CreateChannelModal = ({adminId}) => {
     }
 
     const handleClick = (e) =>{
-        console.log('handle click works')
-        setCheckUser([... new Set([...checkUser, e.target.id])])
-        if (checkUser.includes(e.target.id)){
-            setCheckUser([...checkUser.filter(user => user !== e.target.id)])
+        console.log('handle click works',Number(e.target.id))
+        setCheckUser([... new Set([...checkUser, Number(e.target.id)])])
+        if (checkUser.includes(Number(e.target.id))){
+            setCheckUser([...checkUser.filter(user => user !== Number(e.target.id))])
         }
         console.log('adding users to array',checkUser)
     }
@@ -49,6 +51,7 @@ const CreateChannelModal = ({adminId}) => {
                     onChange={updateTitle}
                 />
                 <fieldset>
+
                     {Object.values(users).map((user)=>(
                         <div>
                             <input
@@ -57,6 +60,7 @@ const CreateChannelModal = ({adminId}) => {
                              id={user.id}
                              name={user.username}
                              onClick={handleClick}
+                             checked={checkUser.includes(user.id)}
                              >
                             </input>
                             <label
