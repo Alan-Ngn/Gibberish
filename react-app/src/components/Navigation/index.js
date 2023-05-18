@@ -30,9 +30,9 @@ function Navigation({ isLoaded }){
 					<ProfileButton user={sessionUser} />
 				</li>
 			)}
-			{isLoaded && sessionUser.channels && (
+			{isLoaded && sessionUser && (
 				<li>
-					{sessionUser.channels.map((channel)=>(
+					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
 							<OpenModalButton
