@@ -22,3 +22,9 @@ def create_member(channelId):
     db.session.execute(members.insert().values(user_id=user_id, channel_id = channelId))
     db.session.commit()
     return 'success'
+
+@member_routes.route('/<int:id>/channel/<int:channelId>/delete', methods=['DELETE'])
+def delete_member(id, channelId):
+    db.session.execute(members.delete().where(members.c.user_id==id).where(members.c.channel_id==channelId))
+    db.session.commit()
+    return 'success'

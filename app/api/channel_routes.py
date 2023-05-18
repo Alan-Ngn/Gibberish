@@ -43,3 +43,17 @@ def delete_channel(channelId):
     db.session.delete(channel)
     db.session.commit()
     return deleted_channel
+
+@channel_routes.route('/<int:channelId>/edit', methods=['PUT'])
+def edit_channel(channelId):
+    form = ChannelForm()
+    print('this is in the update backend', form.data)
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        channel = Channel.query.get(channelId)
+        channel.title = form.data['title']
+        db.session.add(channel)
+        db.session.commit()
+        return channel.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -61,11 +61,29 @@ export const deleteChannelThunk = (channelId) => async(dispatch) => {
     if (response.ok){
 
         await dispatch(authenticate())
-        
+
     } else {
         console.log('DELETE CHANNEL THUNK FAILED')
         return false
     }
+}
+
+export const editChannelThunk = (channel, channelId) => async(dispatch) => {
+    console.log("WE ARE INSIDE THE EDIT CHANNEL THUNK", channel, channelId)
+    const response = await fetch(`/api/channels/${channelId}/edit`,{
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(channel)
+    })
+    if(response.ok){
+        await dispatch(authenticate())
+    } else {
+        console.log('update thunk failed')
+        return false
+    }
+
 }
 
 const channelsReducer = (state = {}, action) => {
