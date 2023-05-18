@@ -52,6 +52,22 @@ export const createChannelThunk = (channel, members) => async(dispatch) => {
         return false
     }
 }
+
+export const deleteChannelThunk = (channelId) => async(dispatch) => {
+    console.log("WE ARE INSDIE THE DELETE CHANNEL THUNK", channelId)
+    const response = await fetch(`/api/channels/${channelId}`, {
+        method: "DELETE"
+    })
+    if (response.ok){
+
+        await dispatch(authenticate())
+        
+    } else {
+        console.log('DELETE CHANNEL THUNK FAILED')
+        return false
+    }
+}
+
 const channelsReducer = (state = {}, action) => {
     let newState;
     switch (action.type) {

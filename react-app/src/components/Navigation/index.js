@@ -6,6 +6,7 @@ import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
 import CreateChannelModal from '../CreateChannel';
 import { loadUsersThunk } from '../../store/user';
+import DeleteChannelModal from '../DeleteChannel';
 
 function Navigation({ isLoaded }){
 	const dispatch = useDispatch()
@@ -32,7 +33,14 @@ function Navigation({ isLoaded }){
 			{isLoaded && sessionUser.channels && (
 				<li>
 					{sessionUser.channels.map((channel)=>(
-						<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
+						<div>
+							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
+							<OpenModalButton
+							 buttonText='Delete Channel'
+							 modalComponent={<DeleteChannelModal channelId={channel.id}/>}
+							/>
+						</div>
+
 					))}
 					{sessionUser.admin && (
 						<OpenModalButton
