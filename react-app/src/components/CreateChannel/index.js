@@ -1,17 +1,31 @@
 import { useState } from "react"
 import { useModal } from "../../context/Modal"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { createChannelThunk } from "../../store/channel"
 
 const CreateChannelModal = ({adminId}) => {
+    const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
+	const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState('')
     const [checkUser, setCheckUser] = useState([])
+    const [err, setErr] = useState(null)
     const updateTitle =(e) => setTitle(e.target.value)
+
+    const payload = {}
 
     const handleSubmit = async(e) => {
         e.preventDefault()
-
+        payload.admin_id = sessionUser.id
+        payload.title = title
+        console.log(payload, checkUser,'CREATE CHANNEL DATA')
+        if(checkUser.length > 0){
+            dispatch(createChannelThunk(payload, checkUser))
+        } else {
+            setErr('Please add members')
+        }
+        closeModal()
     }
 
     const handleClick = (e) =>{
@@ -43,7 +57,6 @@ const CreateChannelModal = ({adminId}) => {
                              id={user.id}
                              name={user.username}
                              onClick={handleClick}
-                             isChecked={checkUser.includes(user.id)}
                              >
                             </input>
                             <label
