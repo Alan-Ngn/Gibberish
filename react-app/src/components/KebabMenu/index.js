@@ -5,7 +5,7 @@ import OpenModalButton from "../OpenModalButton"
 import DeleteChannelModal from "../DeleteChannel"
 import CreateChannelModal from "../CreateChannel"
 
-const KebabModal = ({channelId, members}) => {
+const KebabModal = ({channelId, members, channelTitle}) => {
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
@@ -30,7 +30,7 @@ const KebabModal = ({channelId, members}) => {
             />
             <OpenModalButton
             buttonText='Edit Channel'
-            modalComponent={<CreateChannelModal channelId={channelId} members={members}/>}
+            modalComponent={<CreateChannelModal channelId={channelId} members={members} channelTitle={channelTitle}/>}
             />
         </div>
     )

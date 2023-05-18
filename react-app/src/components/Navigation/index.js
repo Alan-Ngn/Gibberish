@@ -38,7 +38,8 @@ function Navigation({ isLoaded }){
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
 							<OpenModalButton
 							 buttonText='Edit/Delete'
-							 modalComponent={<KebabModal channelId={channel.id} members={channel.members}/>}
+							 onButtonClick={onButtonClick}
+							 modalComponent={<KebabModal channelId={channel.id} members={channel.members} channelTitle={channel.title}/>}
 							/>
 						</div>
 
@@ -47,7 +48,7 @@ function Navigation({ isLoaded }){
 						<OpenModalButton
 							buttonText='Add Channel'
 							onButtonClick={onButtonClick}
-							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]}/>}
+							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]} channelTitle={''}/>}
 						/>
 					)}
 				</li>

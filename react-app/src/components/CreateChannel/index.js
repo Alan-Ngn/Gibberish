@@ -3,13 +3,13 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk } from "../../store/channel"
 
-const CreateChannelModal = ({channelId, members}) => {
+const CreateChannelModal = ({channelId, members, channelTitle}) => {
     const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
 	const sessionUser = useSelector(state => state.session.user);
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState(channelTitle)
     const [checkUser, setCheckUser] = useState([...memberId])
     const [err, setErr] = useState(null)
     const [x, setX] =useState(false)
@@ -22,7 +22,12 @@ const CreateChannelModal = ({channelId, members}) => {
         payload.admin_id = sessionUser.id
         payload.title = title
         console.log(payload, checkUser,'CREATE CHANNEL DATA')
-        if(checkUser.length > 0){
+        if(members.length > 0 && checkUser.length > 0){
+            const deleteMembers = memberId.filter(member => !checkUser.includes(member))
+            console.log(deleteMembers, 'delete members')
+            const addMembers = checkUser.filter(member => !memberId.includes(member))
+            console.log(addMembers,' add members')}
+        else if(checkUser.length > 0){
             dispatch(createChannelThunk(payload, checkUser))
         } else {
             setErr('Please add members')
@@ -59,7 +64,7 @@ const CreateChannelModal = ({channelId, members}) => {
                              type="checkbox"
                              id={user.id}
                              name={user.username}
-                             onClick={handleClick}
+                             onChange={handleClick}
                              checked={checkUser.includes(user.id)}
                              >
                             </input>
