@@ -1,17 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
 import CreateChannelModal from '../CreateChannel';
+import { loadUsersThunk } from '../../store/user';
 
 function Navigation({ isLoaded }){
+	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
 
 	const addChannel = (e) => {
 
 	}
+
+	const onButtonClick = (e) =>{
+		dispatch(loadUsersThunk())
+	}
+
 	return (
 		<ul>
 			<li>
@@ -30,6 +37,7 @@ function Navigation({ isLoaded }){
 					{sessionUser.admin && (
 						<OpenModalButton
 							buttonText='Add Channel'
+							onButtonClick={onButtonClick}
 							modalComponent={<CreateChannelModal adminId={sessionUser.id}/>}
 						/>
 					)}
