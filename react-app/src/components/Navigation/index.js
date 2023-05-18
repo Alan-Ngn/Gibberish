@@ -22,17 +22,17 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
-		<ul>
-			<li>
+		<div>
+			<div>
 				<NavLink exact to="/">Home</NavLink>
-			</li>
+			</div>
 			{isLoaded && (
-				<li>
+				<div>
 					<ProfileButton user={sessionUser} />
-				</li>
+				</div>
 			)}
 			{isLoaded && sessionUser && (
-				<li>
+				<nav className='channel-nav'>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
@@ -51,9 +51,9 @@ function Navigation({ isLoaded }){
 							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]} channelTitle={''}/>}
 						/>
 					)}
-				</li>
+				</nav>
 			)}
-		</ul>
+		</div>
 	);
 }
 

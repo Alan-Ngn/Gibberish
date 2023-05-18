@@ -5,3 +5,18 @@
 .hidden {
   display: none;
 }
+
+.channel-nav{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  width:30%;
+  height: 1000px;
+
+}
+
+.channel-nav div a{
+  text-decoration: none;
+  color:white
+
+}
