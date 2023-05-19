@@ -53,9 +53,9 @@ export const createChannelThunk = (channel, members) => async(dispatch) => {
     }
 }
 
-export const deleteChannelThunk = (channelId) => async(dispatch) => {
-    console.log("WE ARE INSDIE THE DELETE CHANNEL THUNK", channelId)
-    const response = await fetch(`/api/channels/${channelId}`, {
+export const deleteChannelThunk = (id) => async(dispatch) => {
+    console.log("WE ARE INSDIE THE DELETE CHANNEL THUNK", id)
+    const response = await fetch(`/api/channels/${id}`, {
         method: "DELETE"
     })
     if (response.ok){
@@ -68,9 +68,9 @@ export const deleteChannelThunk = (channelId) => async(dispatch) => {
     }
 }
 
-export const editChannelThunk = (channel, channelId) => async(dispatch) => {
-    console.log("WE ARE INSIDE THE EDIT CHANNEL THUNK", channel, channelId)
-    const response = await fetch(`/api/channels/${channelId}/edit`,{
+export const editChannelThunk = (channel, id) => async(dispatch) => {
+    console.log("WE ARE INSIDE THE EDIT CHANNEL THUNK", channel, id)
+    const response = await fetch(`/api/channels/${id}/edit`,{
         method:"PUT",
         headers: {
             "Content-Type": "application/json",

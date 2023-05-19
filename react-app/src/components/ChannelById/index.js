@@ -33,12 +33,16 @@ const ChannelById = () => {
 
     if(getChannel.id !== Number(channelId)) return null
     console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
+    console.log(sessionUser.id, getChannel.messages[0].user_id)
     return (
         <section className="ChannelById">
             {getChannel.messages.map((message) =>(
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
                     <p>{message.message}</p>
+                    {sessionUser.id === message.user_id && (
+                        <i class="fa-solid fa-ellipsis-vertical" />
+                    )}
                 </div>
             ))}
             <form onSubmit={handleSubmit}>

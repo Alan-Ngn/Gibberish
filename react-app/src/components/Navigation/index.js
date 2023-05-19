@@ -36,7 +36,7 @@ function Navigation({ isLoaded }){
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
-							<ChannelDropdown channelId={channel.id} members={channel.members} channelTitle={channel.title}/>
+							<ChannelDropdown id={channel.id} members={channel.members} channelTitle={channel.title}/>
 						</div>
 
 					))}

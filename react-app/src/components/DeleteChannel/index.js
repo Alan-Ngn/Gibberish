@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 
-const DeleteChannelModal = ({channelId}) => {
+const DeleteChannelModal = ({id}) => {
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
@@ -13,10 +13,10 @@ const DeleteChannelModal = ({channelId}) => {
     const [err, setErr] = useState(null)
     const updateTitle =(e) => setTitle(e.target.value)
 
-    console.log(channelId, 'this is my channel Id')
+    console.log(id, 'this is my channel Id')
     const deleteOnClick = (e) => {
         e.preventDefault();
-        dispatch(deleteChannelThunk(channelId)).then(closeModal);
+        dispatch(deleteChannelThunk(id)).then(closeModal);
       };
 
     const cancelOnClick = (e) => {

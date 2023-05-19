@@ -7,7 +7,7 @@ import { loadUsersThunk } from "../../store/user";
 import './ChannelMenu.css'
 
 
-function ChannelDropdown({id, members, channelTitle}) {
+function MessageDropdown({id, members, channelTitle}) {
   const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -46,12 +46,8 @@ function ChannelDropdown({id, members, channelTitle}) {
         {
           <>
             <OpenModalButton
-            buttonText='Delete Channel'
+            buttonText='Delete Message'
             modalComponent={<DeleteChannelModal id={id} />}
-            />
-            <OpenModalButton
-            buttonText='Edit Channel'
-            modalComponent={<CreateChannelModal id={id} members={members} channelTitle={channelTitle}/>}
             />
           </>
         }
@@ -60,4 +56,4 @@ function ChannelDropdown({id, members, channelTitle}) {
   );
 }
 
-export default ChannelDropdown;
+export default MessageDropdown;
