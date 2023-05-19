@@ -30,3 +30,13 @@ p {
     width: 100%;
     height: 80px
 }
+
+.message-button {
+    color: white;
+}
+
+.chat-form {
+    display: flex;
+    flex-direction: row;
+    
+}

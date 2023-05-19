@@ -32,11 +32,12 @@ const ChannelById = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
+        setMessage('')
     }
 
     if(getChannel.id !== Number(channelId)) return null
-    console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
-    console.log(sessionUser.id, getChannel.messages[0].user_id)
+    // console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
+    // console.log(sessionUser.id, getChannel.messages[0].user_id)
     return (
         <section className="ChannelById">
             <div className="chat-area">
@@ -53,7 +54,7 @@ const ChannelById = () => {
                 </div>
             ))}
             </div>
-            <form onSubmit={handleSubmit}>
+            <form className="chat-form" onSubmit={handleSubmit}>
                 <textarea
                     className="chat-box"
                     name="message"
@@ -64,7 +65,7 @@ const ChannelById = () => {
                     onChange={updateMessage}
                 >
                 </textarea>
-                <button type="submit">Post Message</button>
+                <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
             </form>
         </section>
     )

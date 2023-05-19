@@ -17,7 +17,14 @@ function OpenModalButton({
   };
 
   return (
-        <button className='modal-button' onClick={onClick}>{buttonText==='Edit/Delete' ? <i class="fa-solid fa-ellipsis-vertical"></i> : buttonText}</button>
+      <button className='modal-button' onClick={onClick}>
+          {buttonText==='Edit/Delete' ? <i class="fa-solid fa-ellipsis-vertical"></i> : buttonText ==='Add channels' ?
+          <div className='add-channel'>
+            <i class="fa-solid fa-plus" />
+            <div className='button-text'>{buttonText}</div>
+          </div> : buttonText}
+      </button>
+
   );
 }
 

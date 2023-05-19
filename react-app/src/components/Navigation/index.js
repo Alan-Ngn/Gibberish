@@ -32,6 +32,7 @@ function Navigation({ isLoaded }){
 			)}
 			{isLoaded && sessionUser && (
 				<nav className='side-nav'>
+					<div>Channels</div>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
@@ -41,7 +42,7 @@ function Navigation({ isLoaded }){
 					))}
 					{sessionUser.admin && (
 						<OpenModalButton
-							buttonText='Add Channel'
+							buttonText='Add channels'
 							onButtonClick={onButtonClick}
 							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]} channelTitle={''}/>}
 						/>

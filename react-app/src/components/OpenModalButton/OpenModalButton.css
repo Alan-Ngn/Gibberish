@@ -6,4 +6,23 @@
 	/* font: inherit; */
 	/* cursor: pointer; */
 	/* outline: inherit; */
+
+}
+
+.add-channel{
+	display:flex;
+	flex-direction: row;
+	justify-content:left;
+	gap: 40px;
+
+}
+
+.button-text{
+	font-size: 15px;
+}
+
+.add-channel i::before {
+    /* background-color: rgb(23, 23, 24);
+	padding: 2px */
+	size: 20px;
 }
