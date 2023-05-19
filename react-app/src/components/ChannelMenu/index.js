@@ -1,19 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannel";
 import DeleteChannelModal from "../DeleteChannel";
+import { loadUsersThunk } from "../../store/user";
+import './ChannelMenu.css'
 
 
 function ChannelDropdown({channelId, members, channelTitle}) {
+  const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
-    
+    dispatch(loadUsersThunk())
+
   };
 
   useEffect(() => {
@@ -36,7 +39,7 @@ function ChannelDropdown({channelId, members, channelTitle}) {
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button className="channel-dropdown" onClick={openMenu}>
         <i class="fa-solid fa-ellipsis-vertical" />
       </button>
       <ul className={ulClassName} ref={ulRef}>

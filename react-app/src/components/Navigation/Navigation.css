@@ -1,5 +1,11 @@
 .profile-dropdown {
   position: absolute;
+
+
+  background-color: rgb(87, 86, 86);
+  width:125px;
+  padding: 5px;
+
 }
 
 .hidden {
@@ -24,7 +30,5 @@
 
 .channel-nav {
   display:flex;
-
   justify-content: space-between;
 }
-
