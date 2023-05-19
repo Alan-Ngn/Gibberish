@@ -1,0 +1,18 @@
+.chat {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+p {
+    margin: 0px;
+    padding:1px;
+}
+
+.chat-name {
+    font-weight: bold;
+}
+
+.ChannelById {
+    margin: 20px;
+}

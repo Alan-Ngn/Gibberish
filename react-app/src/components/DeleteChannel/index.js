@@ -25,12 +25,12 @@ const DeleteChannelModal = ({channelId}) => {
       };
 
     return (
-        <div className="modal song-modal">
+        <div className="modal channel-modal">
           <h1>Comfirm Delete</h1>
-          <p>Are you sure you want to remove this song from the listings?</p>
-          <button onClick={deleteOnClick}>Yes (Delete Song)</button>
+          <p>Are you sure you want to remove this channel from the listings?</p>
+          <button onClick={deleteOnClick}>Yes (Delete Channel)</button>
           <button onClick={cancelOnClick}>
-            No (Keep Song)
+            No (Keep Channel)
           </button>
         </div>
     )

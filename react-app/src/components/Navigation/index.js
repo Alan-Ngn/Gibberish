@@ -22,7 +22,7 @@ function Navigation({ isLoaded }){
 	}
 
 	return (
-		<div>
+		<nav className='main-nav'>
 			<div>
 				<NavLink exact to="/">Home</NavLink>
 			</div>
@@ -32,9 +32,9 @@ function Navigation({ isLoaded }){
 				</div>
 			)}
 			{isLoaded && sessionUser && (
-				<nav className='channel-nav'>
+				<nav className='side-nav'>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
-						<div>
+						<div className='channel-nav'>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
 							<OpenModalButton
 							 buttonText='Edit/Delete'
@@ -53,7 +53,7 @@ function Navigation({ isLoaded }){
 					)}
 				</nav>
 			)}
-		</div>
+		</nav>
 	);
 }
 

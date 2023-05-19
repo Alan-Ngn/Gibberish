@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
-
+import './OpenModalButton.css'
 function OpenModalButton({
   modalComponent, // component to render inside the modal
   buttonText, // text of the button that opens the modal
@@ -10,13 +10,14 @@ function OpenModalButton({
   const { setModalContent, setOnModalClose } = useModal();
 
   const onClick = () => {
+    console.log('did i get clicked?')
     if (onModalClose) setOnModalClose(onModalClose);
     setModalContent(modalComponent);
     if (onButtonClick) onButtonClick();
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+        <button className='modal-button' onClick={onClick}>{buttonText==='Edit/Delete' ? <i class="fa-solid fa-ellipsis-vertical"></i> : buttonText}</button>
   );
 }
 

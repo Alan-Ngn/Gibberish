@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadChannelByIdThunk } from "../../store/channel"
 import { useParams } from "react-router-dom"
-
+import './ChannelById.css'
 const ChannelById = () => {
     const dispatch = useDispatch()
     const { channelId } = useParams()
@@ -20,9 +20,8 @@ const ChannelById = () => {
     return (
         <section className="ChannelById">
             {getChannel.messages.map((message) =>(
-                <div>
-
-                    <p>{message.user.first_name} {message.user.last_name}</p>
+                <div className="chat">
+                    <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
                     <p>{message.message}</p>
                 </div>
             ))}
