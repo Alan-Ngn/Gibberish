@@ -15,10 +15,18 @@ p {
 
 .ChannelById {
     margin: 20px;
-    width: 60%
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .message{
     display: flex;
     justify-content: space-between;
+}
+
+.chat-box{
+    width: 100%;
+    height: 80px
 }

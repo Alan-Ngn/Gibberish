@@ -39,6 +39,8 @@ const ChannelById = () => {
     console.log(sessionUser.id, getChannel.messages[0].user_id)
     return (
         <section className="ChannelById">
+            <div className="chat-area">
+                <h2>{getChannel.title}</h2>
             {getChannel.messages.map((message) =>(
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
@@ -50,6 +52,7 @@ const ChannelById = () => {
                     </div>
                 </div>
             ))}
+            </div>
             <form onSubmit={handleSubmit}>
                 <textarea
                     className="chat-box"
