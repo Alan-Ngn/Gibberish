@@ -4,6 +4,9 @@ import { loadChannelByIdThunk } from "../../store/channel"
 import { useParams } from "react-router-dom"
 import './ChannelById.css'
 import { createMessageThunk } from "../../store/message"
+import MessageDropdown from "../MessageMenu"
+
+
 const ChannelById = () => {
     const dispatch = useDispatch()
     const { channelId } = useParams()
@@ -39,10 +42,12 @@ const ChannelById = () => {
             {getChannel.messages.map((message) =>(
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
+                    <div className="message">
                     <p>{message.message}</p>
                     {sessionUser.id === message.user_id && (
-                        <i class="fa-solid fa-ellipsis-vertical" />
+                        <MessageDropdown id={message.id}/>
                     )}
+                    </div>
                 </div>
             ))}
             <form onSubmit={handleSubmit}>

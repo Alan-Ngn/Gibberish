@@ -15,4 +15,10 @@ p {
 
 .ChannelById {
     margin: 20px;
+    width: 60%
+}
+
+.message{
+    display: flex;
+    justify-content: space-between;
 }

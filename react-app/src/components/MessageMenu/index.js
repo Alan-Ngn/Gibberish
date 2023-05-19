@@ -4,7 +4,7 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannel";
 import DeleteModal from "../DeleteChannel";
 import { loadUsersThunk } from "../../store/user";
-import './ChannelMenu.css'
+
 
 
 function MessageDropdown({id, members, channelTitle}) {
