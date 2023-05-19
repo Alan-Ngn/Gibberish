@@ -5,10 +5,12 @@ import { useParams } from "react-router-dom"
 import './ChannelById.css'
 import { createMessageThunk } from "../../store/message"
 import MessageDropdown from "../MessageMenu"
+import { useMessage } from "../../context/EditMessage"
 
 
 const ChannelById = () => {
     const dispatch = useDispatch()
+    const { edit, setEdit, messageId,setMessageId } = useMessage();
     const { channelId } = useParams()
     const [message, setMessage] = useState('')
     const [messagePayload, setMessagePayload] = useState({})
@@ -16,7 +18,7 @@ const ChannelById = () => {
 	const sessionUser = useSelector(state => state.session.user);
     const messageObj ={}
     const updateMessage = (e) => setMessage(e.target.value)
-
+    console.log(edit,'global context edit')
     useEffect(() => {
         if(getChannel.id !== Number(channelId)){
             dispatch(loadChannelByIdThunk(channelId))
@@ -46,7 +48,7 @@ const ChannelById = () => {
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
                     <div className="message">
-                    <p>{message.message}</p>
+                    {edit && messageId === message.id ? <textarea></textarea> : (<p>{message.message}</p>)}
                     {sessionUser.id === message.user_id && (
                         <MessageDropdown id={message.id} channelId={channelId}/>
                     )}

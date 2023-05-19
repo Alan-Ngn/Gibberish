@@ -4,11 +4,13 @@ import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannel";
 import DeleteModal from "../DeleteChannel";
 import { loadUsersThunk } from "../../store/user";
+import { useMessage } from "../../context/EditMessage";
 
 
 
 function MessageDropdown({id, members, channelTitle, channelId}) {
   const dispatch = useDispatch()
+  const { edit, setEdit, messageId, setMessageId } = useMessage();
   console.log(id,'mkessage id')
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -34,6 +36,10 @@ function MessageDropdown({id, members, channelTitle, channelId}) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  const handleEdit = () => {
+    setEdit(!edit)
+    setMessageId(id)
+  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
@@ -50,6 +56,7 @@ function MessageDropdown({id, members, channelTitle, channelId}) {
             buttonText='Delete Message'
             modalComponent={<DeleteModal id={id} type={'message'} channelId={channelId}/>}
             />
+            <button onClick={handleEdit}>Edit Message</button>
           </>
         }
       </ul>

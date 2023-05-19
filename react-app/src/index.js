@@ -9,6 +9,7 @@ import * as sessionActions from "./store/session";
 import App from "./App";
 
 import "./index.css";
+import MessageProvider from "./context/EditMessage";
 
 const store = configureStore();
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV !== "production") {
 // HTML elements on top of the all the other HTML elements:
 function Root() {
 	return (
+		<MessageProvider>
 		<ModalProvider>
 			<Provider store={store}>
 				<BrowserRouter>
@@ -30,6 +32,7 @@ function Root() {
 				</BrowserRouter>
 			</Provider>
 		</ModalProvider>
+		</MessageProvider>
 	);
 }
 
