@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 
-const DeleteChannelModal = ({id}) => {
+const DeleteModal = ({id}) => {
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
@@ -36,4 +36,4 @@ const DeleteChannelModal = ({id}) => {
     )
 }
 
-export default DeleteChannelModal
+export default DeleteModal

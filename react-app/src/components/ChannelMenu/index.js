@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import OpenModalButton from "../OpenModalButton";
 import CreateChannelModal from "../CreateChannel";
-import DeleteChannelModal from "../DeleteChannel";
+import DeleteModal from "../DeleteChannel";
 import { loadUsersThunk } from "../../store/user";
 import './ChannelMenu.css'
 
@@ -47,7 +47,7 @@ function ChannelDropdown({id, members, channelTitle}) {
           <>
             <OpenModalButton
             buttonText='Delete Channel'
-            modalComponent={<DeleteChannelModal id={id} />}
+            modalComponent={<DeleteModal id={id} />}
             />
             <OpenModalButton
             buttonText='Edit Channel'

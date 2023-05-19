@@ -6,7 +6,6 @@ import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
 import CreateChannelModal from '../CreateChannel';
 import { loadUsersThunk } from '../../store/user';
-import DeleteChannelModal from '../DeleteChannel';
 import ChannelDropdown from '../ChannelMenu';
 
 function Navigation({ isLoaded }){
