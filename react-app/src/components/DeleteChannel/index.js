@@ -3,7 +3,10 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 
-const DeleteModal = ({id}) => {
+import { deleteMessageThunk } from "../../store/message"
+
+const DeleteModal = ({id, type, channelId}) => {
+  console.log(type, 'this is the type to delte')
     const dispatch = useDispatch()
     const {closeModal} = useModal()
     const users = useSelector(state => state.users)
@@ -16,7 +19,12 @@ const DeleteModal = ({id}) => {
     console.log(id, 'this is my channel Id')
     const deleteOnClick = (e) => {
         e.preventDefault();
-        dispatch(deleteChannelThunk(id)).then(closeModal);
+        if (type === 'delete'){
+          dispatch(deleteChannelThunk(id)).then(closeModal);
+        }
+        if (type === 'message'){
+          dispatch(deleteMessageThunk(id, channelId)).then(closeModal)
+        }
       };
 
     const cancelOnClick = (e) => {

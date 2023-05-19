@@ -29,3 +29,11 @@ def create_message(channel_id, user_id):
         db.session.commit()
         return new_message.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@message_routes.route('/<int:id>', methods=['DELETE'])
+def delete_message(id):
+    message = Message.query.get(id)
+    deleted_message = message.to_dict()
+    db.session.delete(message)
+    db.session.commit()
+    return deleted_message

@@ -48,7 +48,7 @@ const ChannelById = () => {
                     <div className="message">
                     <p>{message.message}</p>
                     {sessionUser.id === message.user_id && (
-                        <MessageDropdown id={message.id}/>
+                        <MessageDropdown id={message.id} channelId={channelId}/>
                     )}
                     </div>
                 </div>

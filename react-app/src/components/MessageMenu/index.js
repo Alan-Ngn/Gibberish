@@ -7,8 +7,9 @@ import { loadUsersThunk } from "../../store/user";
 
 
 
-function MessageDropdown({id, members, channelTitle}) {
+function MessageDropdown({id, members, channelTitle, channelId}) {
   const dispatch = useDispatch()
+  console.log(id,'mkessage id')
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
@@ -47,7 +48,7 @@ function MessageDropdown({id, members, channelTitle}) {
           <>
             <OpenModalButton
             buttonText='Delete Message'
-            modalComponent={<DeleteModal id={id} />}
+            modalComponent={<DeleteModal id={id} type={'message'} channelId={channelId}/>}
             />
           </>
         }
