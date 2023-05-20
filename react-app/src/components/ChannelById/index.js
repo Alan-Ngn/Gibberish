@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { loadChannelByIdThunk } from "../../store/channel"
 import { useParams } from "react-router-dom"
 import './ChannelById.css'
-import { createMessageThunk } from "../../store/message"
+import { createMessageThunk, editMessageThunk } from "../../store/message"
 import MessageDropdown from "../MessageMenu"
 import { useMessage } from "../../context/EditMessage"
 
@@ -13,11 +13,16 @@ const ChannelById = () => {
     const { edit, setEdit, messageId,setMessageId } = useMessage();
     const { channelId } = useParams()
     const [message, setMessage] = useState('')
+    const [editMessage, setEditMessage] = useState('')
     const [messagePayload, setMessagePayload] = useState({})
+    const [editMessagePayload, setEditMessagePayload] = useState({})
     const getChannel = useSelector(state => state.channels)
 	const sessionUser = useSelector(state => state.session.user);
     const messageObj ={}
+    const editMessageObj = {}
     const updateMessage = (e) => setMessage(e.target.value)
+    const updateEditMessage = (e) => setEditMessage(e.target.value)
+
     console.log(edit,'global context edit')
     useEffect(() => {
         if(getChannel.id !== Number(channelId)){
@@ -31,10 +36,23 @@ const ChannelById = () => {
         setMessagePayload(messageObj)
     },[message])
 
+    useEffect(()=>{
+        editMessageObj.message = editMessage
+        console.log(editMessage)
+        setEditMessagePayload(editMessageObj)
+    },[editMessage])
+
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
         setMessage('')
+    }
+
+    const handleEditSubmit = (e) => {
+        e.preventDefault();
+        dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
+        setEditMessage('')
+        setEdit(false)
     }
 
     if(getChannel.id !== Number(channelId)) return null
@@ -48,7 +66,21 @@ const ChannelById = () => {
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
                     <div className="message">
-                    {edit && messageId === message.id ? <textarea></textarea> : (<p>{message.message}</p>)}
+                    {edit && messageId === message.id ?
+                    <form onSubmit={handleEditSubmit}>
+                        <textarea
+                        className="edit-box"
+                        name="edit-message"
+                        id="edit-message"
+                        type='text'
+                        placeholder={message.message}
+                        value={editMessage}
+                        onChange={updateEditMessage}
+                        >
+                        </textarea>
+                        <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
+                    </form>
+                    : (<p>{message.message}</p>)}
                     {sessionUser.id === message.user_id && (
                         <MessageDropdown id={message.id} channelId={channelId}/>
                     )}

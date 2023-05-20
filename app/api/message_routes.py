@@ -37,3 +37,17 @@ def delete_message(id):
     db.session.delete(message)
     db.session.commit()
     return deleted_message
+
+@message_routes.route('/<int:id>/edit', methods=['PUT'])
+def edit_message(id):
+    form = MessageForm()
+    print('inside backend for update message', id, form.data['message'])
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        message = Message.query.get(id)
+        message.message = form.data['message']
+        db.session.add(message)
+        db.session.commit()
+        return message.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401

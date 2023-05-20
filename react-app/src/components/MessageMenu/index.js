@@ -37,7 +37,7 @@ function MessageDropdown({id, members, channelTitle, channelId}) {
   }, [showMenu]);
 
   const handleEdit = () => {
-    setEdit(!edit)
+    setEdit(true)
     setMessageId(id)
   }
 

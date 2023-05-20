@@ -31,3 +31,20 @@ export const deleteMessageThunk = (id, channelId) => async(dispatch) => {
         return false
     }
 }
+
+export const editMessageThunk = (message, id, channelId) => async(dispatch) => {
+    console.log('INSIDE EDIT MESSAGE THUNK', message, id, channelId)
+    const response = await fetch(`/api/messages/${id}/edit`, {
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message)
+    })
+    if(response.ok){
+        dispatch(loadChannelByIdThunk(channelId))
+    } else {
+        console.log('EDIT MESSAGE THUNK FAILED')
+        return false
+    }
+}
