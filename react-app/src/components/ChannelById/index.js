@@ -55,6 +55,10 @@ const ChannelById = () => {
         setEdit(false)
     }
 
+    const handleEditCancel = (e) =>{
+        setEdit(false)
+    }
+
     if(getChannel.id !== Number(channelId)) return null
     // console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
     // console.log(sessionUser.id, getChannel.messages[0].user_id)
@@ -79,6 +83,7 @@ const ChannelById = () => {
                         >
                         </textarea>
                         <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
+                        <button className="message-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
                     </form>
                     : (<p>{message.message}</p>)}
                     {sessionUser.id === message.user_id && (

@@ -39,6 +39,7 @@ function MessageDropdown({id, members, channelTitle, channelId}) {
   const handleEdit = () => {
     setEdit(true)
     setMessageId(id)
+    setShowMenu(false)
   }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
