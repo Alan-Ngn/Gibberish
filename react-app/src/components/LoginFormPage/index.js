@@ -31,7 +31,7 @@ function LoginFormPage() {
       </div>
       <div className="login">
         <i class="fa-solid fa-head-side-cough"></i>
-        {/* <img src={process.env.PUBLIC_URL + '/blahblah.jpg'}></img> */}
+        <img src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>
         <h1>Sign in to Gibberish</h1>
         <h3>We suggest using the email address you use for fun.</h3>
         <button className="login-button">Sign in With Demo User</button>
