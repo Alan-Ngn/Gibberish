@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -23,38 +23,46 @@ function LoginFormPage() {
 
   return (
     <div className="splash-page">
-      <h3>New to Slack?</h3>
-      <h3>Create an Account</h3>
-      <h1>Sign in to Gibberish</h1>
-      <h3>We suggest using the email address you use for fun.</h3>
-      <button className="login-button">Sign in With Demo User</button>
-      <button className="login-button">Sign in With Demo Admin</button>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button className="login-button" type="submit">Log In</button>
-      </form>
+      <div className="sign-up-wrapper">
+        <div className="sign-up">
+          <h3>New to Gibberish?</h3>
+          <Link to='/signup'>Create an Account</Link>
+        </div>
+      </div>
+      <div className="login">
+        <i class="fa-solid fa-head-side-cough"></i>
+        {/* <img src={process.env.PUBLIC_URL + '/blahblah.jpg'}></img> */}
+        <h1>Sign in to Gibberish</h1>
+        <h3>We suggest using the email address you use for fun.</h3>
+        <button className="login-button">Sign in With Demo User</button>
+        <button className="login-button">Sign in With Demo Admin</button>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <ul>
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+          <label>
+            Email
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+          <button className="login-button" type="submit">Sign In With Email</button>
+        </form>
+      </div>
     </div>
   );
 }

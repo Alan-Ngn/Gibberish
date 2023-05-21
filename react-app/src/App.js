@@ -20,15 +20,13 @@ function App() {
     <>
       <div className="site">
         <Route path="/login" component={LoginFormPage} />
+        <Route path="/signup" component={SignupFormPage}/>
         <ProtectedRoute>
           <div className="nav-list-wrapper">
             <Navigation isLoaded={isLoaded} />
           </div>
           {isLoaded && (
             <Switch>
-              <Route path="/signup">
-                <SignupFormPage />
-              </Route>
               <Route path='/channels/:channelId' component={ChannelById} />
             </Switch>
           )}
