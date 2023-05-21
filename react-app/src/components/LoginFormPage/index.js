@@ -22,9 +22,14 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="splash-page">
+      <h3>New to Slack?</h3>
+      <h3>Create an Account</h3>
+      <h1>Sign in to Gibberish</h1>
+      <h3>We suggest using the email address you use for fun.</h3>
+      <button className="login-button">Sign in With Demo User</button>
+      <button className="login-button">Sign in With Demo Admin</button>
+      <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
@@ -48,9 +53,9 @@ function LoginFormPage() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className="login-button" type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 }
 

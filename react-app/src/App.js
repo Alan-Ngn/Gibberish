@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ChannelById from "./components/ChannelById";
 import "./index.css";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,22 +18,22 @@ function App() {
 
   return (
     <>
-    <div className="site">
-        <div className="nav-list-wrapper">
-          <Navigation isLoaded={isLoaded} />
-        </div>
-        {isLoaded && (
-          <Switch>
-            <Route path="/login" >
-              <LoginFormPage />
-            </Route>
-            <Route path="/signup">
-              <SignupFormPage />
-            </Route>
-            <Route path='/channels/:channelId' component={ChannelById} />
-          </Switch>
-        )}
-    </div>
+      <div className="site">
+        <Route path="/login" component={LoginFormPage} />
+        <ProtectedRoute>
+          <div className="nav-list-wrapper">
+            <Navigation isLoaded={isLoaded} />
+          </div>
+          {isLoaded && (
+            <Switch>
+              <Route path="/signup">
+                <SignupFormPage />
+              </Route>
+              <Route path='/channels/:channelId' component={ChannelById} />
+            </Switch>
+          )}
+      </ProtectedRoute>
+      </div>
     </>
   );
 }
