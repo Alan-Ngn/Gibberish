@@ -16,6 +16,7 @@ const ChannelById = () => {
     const [editMessage, setEditMessage] = useState('')
     const [messagePayload, setMessagePayload] = useState({})
     const [editMessagePayload, setEditMessagePayload] = useState({})
+    const [err, setErr] = useState('')
     const getChannel = useSelector(state => state.channels)
 	const sessionUser = useSelector(state => state.session.user);
     const messageObj ={}
@@ -42,10 +43,15 @@ const ChannelById = () => {
         setEditMessagePayload(editMessageObj)
     },[editMessage])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
+        const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
         setMessage('')
+        if (data) {
+            setErr(data)
+        } else {
+            setErr('')
+        }
     }
 
     const handleEditSubmit = (e) => {
@@ -93,13 +99,14 @@ const ChannelById = () => {
                 </div>
             ))}
             </div>
+                {err.length > 0 && (<p className="error-handling">{err[0]}</p>)}
             <form className="chat-form" onSubmit={handleSubmit}>
                 <textarea
                     className="chat-box"
                     name="message"
                     id="message"
                     type="text"
-                    placeholder={`Message ${getChannel.title}`}
+                    placeholder={err.length > 0 ? (err[0]) : `Message ${getChannel.title}`}
                     value={message}
                     onChange={updateMessage}
                 >

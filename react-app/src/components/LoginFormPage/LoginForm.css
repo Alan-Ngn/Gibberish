@@ -20,6 +20,8 @@
     color: rgb(238, 238, 238);
     border: 1px solid;
     gap: 10px;
+    height: 40px;
+    width: 300px;
 }
 
 .login-form {
@@ -41,4 +43,13 @@
     text-decoration: none;
     background-color: transparent;
     background: none;
+}
+
+input {
+    height: 40px;
+    width: 294px;
+}
+
+.error-handling {
+    color: white;
 }

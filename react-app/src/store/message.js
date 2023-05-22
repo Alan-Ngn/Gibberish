@@ -13,10 +13,15 @@ export const createMessageThunk = (message, channelId, userId) => async(dispatch
     if(response.ok){
         const data = await response.json();
         dispatch(loadChannelByIdThunk(channelId))
-    } else {
-        console.log('LOAD MESSAGE THUNK FAILED')
-        return false
-    }
+	} else if (response.status < 500) {
+		const data = await response.json();
+        console.log(data.errors, 'ERRRORSRSRSR')
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 }
 
 export const deleteMessageThunk = (id, channelId) => async(dispatch) => {
