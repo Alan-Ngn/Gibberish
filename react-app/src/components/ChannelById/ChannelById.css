@@ -56,7 +56,7 @@ p {
     word-break:break-all;
     /* hyphens: auto; */
 }
-textarea.edit-box-error::placeholder {
+textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
     color: red
 }
 

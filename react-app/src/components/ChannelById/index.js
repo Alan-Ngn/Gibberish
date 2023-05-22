@@ -108,7 +108,7 @@ const ChannelById = () => {
                 </div>
             ))}
             </div>
-                {err.length > 0 && (<p className="error-handling">{err[0]}</p>)}
+                {/* {err.length > 0 && (<p className="error-handling">{err[0]}</p>)} */}
             <form className='chat-form' onSubmit={handleSubmit}>
                 <textarea
                     className={ulClassName}
