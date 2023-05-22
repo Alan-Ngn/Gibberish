@@ -40,7 +40,7 @@ function LoginFormPage() {
         </div>
       </div>
       <div className="login">
-        <img src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>
+        <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>
         <h1>Sign in to Gibberish</h1>
         <h3>We suggest using the email address you use for fun.</h3>
         <button onClick={handleDemo} className="login-button"><i class="fa-solid fa-user"></i> Sign in With Demo User</button>

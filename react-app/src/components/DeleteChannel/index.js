@@ -19,7 +19,7 @@ const DeleteModal = ({id, type, channelId}) => {
     console.log(id, 'this is my channel Id')
     const deleteOnClick = (e) => {
         e.preventDefault();
-        if (type === 'delete'){
+        if (type === 'channel'){
           dispatch(deleteChannelThunk(id)).then(closeModal);
         }
         if (type === 'message'){

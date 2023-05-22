@@ -12,9 +12,6 @@ function Navigation({ isLoaded }){
 	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
 
-	const addChannel = (e) => {
-
-	}
 
 	const onButtonClick = (e) =>{
 		dispatch(loadUsersThunk())
@@ -36,7 +33,9 @@ function Navigation({ isLoaded }){
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
 							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
-							<ChannelDropdown id={channel.id} members={channel.members} channelTitle={channel.title}/>
+							{sessionUser.id === channel.admin_id && (
+								<ChannelDropdown id={channel.id} members={channel.members} channelTitle={channel.title}/>
+							)}
 						</div>
 
 					))}
