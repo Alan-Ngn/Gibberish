@@ -8,9 +8,9 @@ import { useMessage } from "../../context/EditMessage";
 
 
 
-function MessageDropdown({id, members, channelTitle, channelId}) {
+function MessageDropdown({id, members, channelTitle, channelId, message}) {
   const dispatch = useDispatch()
-  const { edit, setEdit, messageId, setMessageId } = useMessage();
+  const { edit, setEdit, messageId, setMessageId, ogMessage, setOgMessage } = useMessage();
   console.log(id,'mkessage id')
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -39,6 +39,7 @@ function MessageDropdown({id, members, channelTitle, channelId}) {
   const handleEdit = () => {
     setEdit(true)
     setMessageId(id)
+    setOgMessage(message)
     setShowMenu(false)
   }
 

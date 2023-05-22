@@ -38,5 +38,9 @@ p {
 .chat-form {
     display: flex;
     flex-direction: row;
-    
+
+}
+
+.edit-box{
+    width: 100%
 }

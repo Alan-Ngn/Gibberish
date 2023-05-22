@@ -10,7 +10,7 @@ import { useMessage } from "../../context/EditMessage"
 
 const ChannelById = () => {
     const dispatch = useDispatch()
-    const { edit, setEdit, messageId,setMessageId } = useMessage();
+    const { edit, setEdit, messageId, setMessageId, ogMessage, setOgMessage } = useMessage();
     const { channelId } = useParams()
     const [message, setMessage] = useState('')
     const [editMessage, setEditMessage] = useState('')
@@ -22,7 +22,7 @@ const ChannelById = () => {
     const messageObj ={}
     const editMessageObj = {}
     const updateMessage = (e) => setMessage(e.target.value)
-    const updateEditMessage = (e) => setEditMessage(e.target.value)
+    const updateEditMessage = (e) => setOgMessage(e.target.value)
 
     console.log(edit,'global context edit')
     useEffect(() => {
@@ -38,10 +38,10 @@ const ChannelById = () => {
     },[message])
 
     useEffect(()=>{
-        editMessageObj.message = editMessage
-        console.log(editMessage)
+        editMessageObj.message = ogMessage
+        console.log(ogMessage)
         setEditMessagePayload(editMessageObj)
-    },[editMessage])
+    },[ogMessage])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,7 +57,7 @@ const ChannelById = () => {
     const handleEditSubmit = (e) => {
         e.preventDefault();
         dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
-        setEditMessage('')
+        // setEditMessage('')
         setEdit(false)
     }
 
@@ -84,7 +84,7 @@ const ChannelById = () => {
                         id="edit-message"
                         type='text'
                         placeholder={message.message}
-                        value={editMessage}
+                        value={ogMessage}
                         onChange={updateEditMessage}
                         >
                         </textarea>
@@ -93,7 +93,7 @@ const ChannelById = () => {
                     </form>
                     : (<p>{message.message}</p>)}
                     {sessionUser.id === message.user_id && (
-                        <MessageDropdown id={message.id} channelId={channelId}/>
+                        <MessageDropdown id={message.id} channelId={channelId} message={message.message}/>
                     )}
                     </div>
                 </div>
