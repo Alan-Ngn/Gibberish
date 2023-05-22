@@ -17,13 +17,15 @@ const ChannelById = () => {
     const [messagePayload, setMessagePayload] = useState({})
     const [editMessagePayload, setEditMessagePayload] = useState({})
     const [err, setErr] = useState('')
+    const [editErr, setEditErr] = useState('')
+    const ulClassName = "chat-box" + (err ? "-error" : "");
+    const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
     const getChannel = useSelector(state => state.channels)
 	const sessionUser = useSelector(state => state.session.user);
     const messageObj ={}
     const editMessageObj = {}
     const updateMessage = (e) => setMessage(e.target.value)
     const updateEditMessage = (e) => setOgMessage(e.target.value)
-
     console.log(edit,'global context edit')
     useEffect(() => {
         if(getChannel.id !== Number(channelId)){
@@ -54,14 +56,21 @@ const ChannelById = () => {
         }
     }
 
-    const handleEditSubmit = (e) => {
+    const handleEditSubmit = async (e) => {
         e.preventDefault();
-        dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
+        const data = await dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
         // setEditMessage('')
-        setEdit(false)
+        if (data) {
+            setEditErr(data)
+        } else {
+            setEditErr('')
+            setEdit(false)
+        }
+        console.log(editErr, ' what is our edit error')
     }
 
     const handleEditCancel = (e) =>{
+        setEditErr('')
         setEdit(false)
     }
 
@@ -75,15 +84,15 @@ const ChannelById = () => {
             {getChannel.messages.map((message) =>(
                 <div className="chat">
                     <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
-                    <div className="message">
+                    <div className="message-wrapper">
                     {edit && messageId === message.id ?
                     <form onSubmit={handleEditSubmit}>
                         <textarea
-                        className="edit-box"
+                        className={ulEditClassName}
                         name="edit-message"
                         id="edit-message"
                         type='text'
-                        placeholder={message.message}
+                        placeholder={editErr.length > 0 ? (editErr[0]) : `Edit Message ${message.message}`}
                         value={ogMessage}
                         onChange={updateEditMessage}
                         >
@@ -91,7 +100,7 @@ const ChannelById = () => {
                         <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
                         <button className="message-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
                     </form>
-                    : (<p>{message.message}</p>)}
+                    : (<p className="message">{message.message}</p>)}
                     {sessionUser.id === message.user_id && (
                         <MessageDropdown id={message.id} channelId={channelId} message={message.message}/>
                     )}
@@ -100,9 +109,9 @@ const ChannelById = () => {
             ))}
             </div>
                 {err.length > 0 && (<p className="error-handling">{err[0]}</p>)}
-            <form className="chat-form" onSubmit={handleSubmit}>
+            <form className='chat-form' onSubmit={handleSubmit}>
                 <textarea
-                    className="chat-box"
+                    className={ulClassName}
                     name="message"
                     id="message"
                     type="text"

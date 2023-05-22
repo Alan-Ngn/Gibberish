@@ -48,8 +48,13 @@ export const editMessageThunk = (message, id, channelId) => async(dispatch) => {
     })
     if(response.ok){
         dispatch(loadChannelByIdThunk(channelId))
-    } else {
-        console.log('EDIT MESSAGE THUNK FAILED')
-        return false
-    }
+	} else if (response.status < 500) {
+		const data = await response.json();
+        console.log(data.errors, 'ERRRORSRSRSR')
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 }
