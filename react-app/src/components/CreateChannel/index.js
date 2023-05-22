@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, editChannelThunk } from "../../store/channel"
 import { createMemberThunk, deleteMemberThunk } from "../../store/member"
 
-const CreateChannelModal = ({id, members, channelTitle}) => {
+const CreateChannelModal = ({id, members, channelTitle, type}) => {
     const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
     const {closeModal} = useModal()
@@ -24,7 +24,7 @@ const CreateChannelModal = ({id, members, channelTitle}) => {
         payload.title = title
         console.log(' CHANNEL ID')
         console.log(payload, checkUser,'CREATE CHANNEL DATA', id)
-        if(members.length > 0 && checkUser.length > 0){
+        if(type==='edit' && members.length > 0 && checkUser.length > 0){
             dispatch(editChannelThunk(payload, id))
             const deleteMembers = memberId.filter(member => !checkUser.includes(member))
             console.log(deleteMembers, 'delete members')
@@ -36,7 +36,7 @@ const CreateChannelModal = ({id, members, channelTitle}) => {
                 dispatch(createMemberThunk(id, addMembers))
             }
             console.log(addMembers,' add members')}
-        else if(checkUser.length > 0){
+        else if(type==='create' && checkUser.length > 0){
             dispatch(createChannelThunk(payload, checkUser))
         } else {
             setErr('Please add members')
@@ -66,7 +66,7 @@ const CreateChannelModal = ({id, members, channelTitle}) => {
                 />
                 <fieldset>
 
-                    {Object.values(users).map((user)=>(
+                    {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
                         <div>
                             <input
                              key={user.id}

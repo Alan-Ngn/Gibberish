@@ -51,7 +51,7 @@ function ChannelDropdown({id, members, channelTitle}) {
             />
             <OpenModalButton
             buttonText='Edit Channel'
-            modalComponent={<CreateChannelModal id={id} members={members} channelTitle={channelTitle}/>}
+            modalComponent={<CreateChannelModal id={id} members={members} channelTitle={channelTitle} type={'edit'}/>}
             />
           </>
         }

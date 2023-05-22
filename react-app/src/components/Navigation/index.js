@@ -43,7 +43,7 @@ function Navigation({ isLoaded }){
 						<OpenModalButton
 							buttonText='Add channels'
 							onButtonClick={onButtonClick}
-							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[]} channelTitle={''}/>}
+							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[sessionUser]} channelTitle={''} type={'create'}/>}
 						/>
 					)}
 				</nav>
