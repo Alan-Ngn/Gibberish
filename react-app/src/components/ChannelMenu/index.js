@@ -41,21 +41,22 @@ function ChannelDropdown({id, members, channelTitle}) {
     <>
       <button className="channel-dropdown" onClick={openMenu}>
         <i class="fa-solid fa-ellipsis-vertical" />
+        <ul className={ulClassName} ref={ulRef}>
+          {
+            <>
+              <OpenModalButton
+              buttonText='Delete Channel'
+              modalComponent={<DeleteModal id={id} type={'channel'}/>}
+              />
+
+              <OpenModalButton
+              buttonText='Edit Channel'
+              modalComponent={<CreateChannelModal id={id} members={members} channelTitle={channelTitle} type={'edit'}/>}
+              />
+            </>
+          }
+        </ul>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
-        {
-          <>
-            <OpenModalButton
-            buttonText='Delete Channel'
-            modalComponent={<DeleteModal id={id} type={'channel'}/>}
-            />
-            <OpenModalButton
-            buttonText='Edit Channel'
-            modalComponent={<CreateChannelModal id={id} members={members} channelTitle={channelTitle} type={'edit'}/>}
-            />
-          </>
-        }
-      </ul>
     </>
   );
 }

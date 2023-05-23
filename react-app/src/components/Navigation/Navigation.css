@@ -3,7 +3,7 @@
 
 
   background-color: rgb(87, 86, 86);
-  width:125px;
+  /* width:125px; */
   padding: 5px;
 
 }
@@ -31,4 +31,5 @@
 .channel-nav {
   display:flex;
   justify-content: space-between;
+  
 }
