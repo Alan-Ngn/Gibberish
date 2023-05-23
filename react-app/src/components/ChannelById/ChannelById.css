@@ -1,6 +1,7 @@
 .chat {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 5px;
 }
 
@@ -63,4 +64,31 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
 .edit-box-error {
     border: 3px solid red;
 
+}
+
+.hide-edit-delete {
+    display:none;
+
+}
+
+.chat:hover  .hide-edit-delete {
+    display:block;
+    border: 1px solid rgb(87, 86, 86);
+    padding-top: 8px;
+    border-radius: 3px;
+}
+
+.edit-button {
+    color: white;
+}
+
+.edit-button-text {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -35px;
+    z-index: 1;
+
+}
+.edit-button:hover .edit-button-text{
+    visibility: visible;
 }

@@ -45,7 +45,7 @@ function ChannelDropdown({id, members, channelTitle}) {
           {
             <>
               <OpenModalButton
-              buttonText='Delete Channel'
+              buttonText='Delete'
               modalComponent={<DeleteModal id={id} type={'channel'}/>}
               />
 
