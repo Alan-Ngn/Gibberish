@@ -63,7 +63,11 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
     if(!users) return null
 
     return (
-        <div>
+        <div className="create-channel-modal">
+            <div className="create-channel-header">
+                <h3>Create a channel</h3>
+                <button><i class="fa-solid fa-xmark"></i></button>
+            </div>
             {err.length > 0 && (<p>{err[0]}</p>)}
             <form onSubmit={handleSubmit}>
                 {type==='edit' && (
@@ -80,6 +84,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
                     value={title}
                     onChange={updateTitle}
                 />
+                <p>Channels are where conversations happen around a topic. Use a name that is easy to find and understand</p>
                 <fieldset>
                     {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
                         <div>

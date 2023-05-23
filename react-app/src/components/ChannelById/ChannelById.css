@@ -85,9 +85,13 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
 .edit-button-text, .delete-button-text, .confirm-delete-button-text, .cancel-delete-button-text {
     visibility: hidden;
     position: absolute;
-    margin-top: -35px;
+    margin-top: -50px;
     z-index: 1;
-
+    border: 1px solid rgb(87, 86, 86);
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    background-color: black;
 }
 .edit-button:hover .edit-button-text{
     visibility: visible;
@@ -103,13 +107,10 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
     visibility: visible;
     color: white;
 }
-
+.confirm-delete-button {
+    position: relative;
+}
 .cancel-delete-button:hover .cancel-delete-button-text{
     visibility: visible;
-    color: white;
-    border: 1px solid rgb(87, 86, 86);
-    border-radius: 3px;
-    padding: 5px;
-    position: absolute;
-    background-color: black;
+
 }

@@ -7,6 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 #modal-background {
@@ -20,5 +21,15 @@
 
 #modal-content {
   position: absolute;
-  background-color:white;
+  background-color: rgba(37, 37, 38, 1);
+  border-radius: 7px;
+  border: 1px solid rgb(87, 86, 86);
+  height: fit-content;
+  width: 25%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
