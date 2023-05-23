@@ -46,11 +46,15 @@ export const createChannelThunk = (channel, members) => async(dispatch) => {
             }
         }
         await dispatch(authenticate())
-        return data
-    } else {
-        console.log('CREATE CHANNEL THUNK FAILED')
-        return false
-    }
+	} else if (response.status < 500) {
+		const data = await response.json();
+        console.log(data.errors, 'ERRRORSRSRSR')
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 }
 
 export const deleteChannelThunk = (id) => async(dispatch) => {
@@ -79,11 +83,15 @@ export const editChannelThunk = (channel, id) => async(dispatch) => {
     })
     if(response.ok){
         await dispatch(authenticate())
-    } else {
-        console.log('update thunk failed')
-        return false
-    }
-
+	} else if (response.status < 500) {
+		const data = await response.json();
+        console.log(data.errors, 'ERRRORSRSRSR')
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
 }
 
 const channelsReducer = (state = {}, action) => {

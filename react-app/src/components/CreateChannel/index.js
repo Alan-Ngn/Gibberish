@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal"
 import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, editChannelThunk } from "../../store/channel"
 import { createMemberThunk, deleteMemberThunk } from "../../store/member"
-
+import './CreateChannel.css';
 const CreateChannelModal = ({id, members, channelTitle, type}) => {
     const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
@@ -12,8 +12,8 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
 	const sessionUser = useSelector(state => state.session.user);
     const [title, setTitle] = useState(channelTitle)
     const [checkUser, setCheckUser] = useState([...memberId])
-    const [err, setErr] = useState(null)
-    const [x, setX] =useState(false)
+    const [err, setErr] = useState('')
+    const [x, setX] =useState(id)
     const updateTitle =(e) => setTitle(e.target.value)
     console.log(checkUser, 'what is my checkusers before i push any checkboxes')
     const payload = {}
@@ -22,12 +22,19 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
         e.preventDefault()
         payload.admin_id = sessionUser.id
         payload.title = title
+        payload.id = id
         console.log(' CHANNEL ID')
         console.log(payload, checkUser,'CREATE CHANNEL DATA', id)
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
-            dispatch(editChannelThunk(payload, id))
+            const data = await dispatch(editChannelThunk(payload, id))
             const deleteMembers = memberId.filter(member => !checkUser.includes(member))
             console.log(deleteMembers, 'delete members')
+            if (data) {
+                setErr(data)
+            } else {
+                setErr('')
+                closeModal()
+            }
             if(deleteMembers.length > 0){
                 dispatch(deleteMemberThunk(id, deleteMembers))
             }
@@ -37,11 +44,19 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
             }
             console.log(addMembers,' add members')}
         else if(type==='create' && checkUser.length > 0){
-            dispatch(createChannelThunk(payload, checkUser))
+            const data = await dispatch(createChannelThunk(payload, checkUser))
+            console.log(data,'these are the errors for creating')
+            if (data) {
+                setErr(data)
+            } else {
+                setErr('')
+                console.log('why didnt you close')
+                closeModal()
+            }
         } else {
             setErr('Please add members')
         }
-        closeModal()
+        // closeModal()
     }
 
     const handleClick = (e) =>{
@@ -56,7 +71,15 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
     if(!users) return null
     return (
         <div>
+            {err.length > 0 && (<p>{err[0]}</p>)}
             <form onSubmit={handleSubmit}>
+                {type==='edit' && (
+                    <input
+                    className="id-hide"
+                    name='id'
+                    id='id'
+                    value={id}/>
+                )}
                 <input
                     name="title"
                     id="title"
@@ -65,7 +88,6 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
                     onChange={updateTitle}
                 />
                 <fieldset>
-
                     {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
                         <div>
                             <input
