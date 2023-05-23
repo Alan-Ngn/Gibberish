@@ -82,7 +82,7 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
     color: white;
 }
 
-.edit-button-text, .delete-button-text {
+.edit-button-text, .delete-button-text, .confirm-delete-button-text, .cancel-delete-button-text {
     visibility: hidden;
     position: absolute;
     margin-top: -35px;
@@ -97,4 +97,19 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
 }
 .fa-solid, .fa-regular {
     color: white;
+}
+
+.confirm-delete-button:hover .confirm-delete-button-text{
+    visibility: visible;
+    color: white;
+}
+
+.cancel-delete-button:hover .cancel-delete-button-text{
+    visibility: visible;
+    color: white;
+    border: 1px solid rgb(87, 86, 86);
+    border-radius: 3px;
+    padding: 5px;
+    position: absolute;
+    background-color: black;
 }

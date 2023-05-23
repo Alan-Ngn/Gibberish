@@ -137,11 +137,13 @@ const ChannelById = () => {
                     )}
                     {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
                                   <div>
-                                    <button className="confirm-delete-button" onClick={confirmDelete}><i class="fa-regular fa-square-check"></i><div className="delete-button-text">Delete</div></button>
-                                    <button onClick={()=>{
+                                    <button className="confirm-delete-button" onClick={confirmDelete}><i class="fa-regular fa-square-check"></i><div className="confirm-delete-button-text">Confirm</div></button>
+                                    <button
+                                        className="cancel-delete-button"
+                                        onClick={()=>{
                                         setIsDelete(false)
                                         setEditDelete(true)
-                                    }}><i class="fa-solid fa-ban"></i></button>
+                                    }}><i class="fa-solid fa-ban"></i><div className="cancel-delete-button-text">Cancel</div></button>
                                   {/* <MessageDropdown id={message.id} channelId={channelId} message={message.message}/> */}
                                 </div>
                     )}
