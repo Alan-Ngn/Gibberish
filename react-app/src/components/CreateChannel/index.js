@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, editChannelThunk } from "../../store/channel"
 import { createMemberThunk, deleteMemberThunk } from "../../store/member"
 import './CreateChannel.css';
+
 const CreateChannelModal = ({id, members, channelTitle, type}) => {
     const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
@@ -13,9 +14,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
     const [title, setTitle] = useState(channelTitle)
     const [checkUser, setCheckUser] = useState([...memberId])
     const [err, setErr] = useState('')
-    const [x, setX] =useState(id)
     const updateTitle =(e) => setTitle(e.target.value)
-    console.log(checkUser, 'what is my checkusers before i push any checkboxes')
     const payload = {}
 
     const handleSubmit = async(e) => {
@@ -23,52 +22,46 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
         payload.admin_id = sessionUser.id
         payload.title = title
         payload.id = id
-        console.log(' CHANNEL ID')
-        console.log(payload, checkUser,'CREATE CHANNEL DATA', id)
+
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
             const data = await dispatch(editChannelThunk(payload, id))
             const deleteMembers = memberId.filter(member => !checkUser.includes(member))
-            console.log(deleteMembers, 'delete members')
+            const addMembers = checkUser.filter(member => !memberId.includes(member))
             if (data) {
                 setErr(data)
             } else {
                 setErr('')
+                if(deleteMembers.length > 0){
+                    dispatch(deleteMemberThunk(id, deleteMembers))
+                }
+                if(addMembers.length > 0){
+                    dispatch(createMemberThunk(id, addMembers))
+                }
                 closeModal()
             }
-            if(deleteMembers.length > 0){
-                dispatch(deleteMemberThunk(id, deleteMembers))
-            }
-            const addMembers = checkUser.filter(member => !memberId.includes(member))
-            if(addMembers.length > 0){
-                dispatch(createMemberThunk(id, addMembers))
-            }
-            console.log(addMembers,' add members')}
+        }
         else if(type==='create' && checkUser.length > 0){
             const data = await dispatch(createChannelThunk(payload, checkUser))
-            console.log(data,'these are the errors for creating')
             if (data) {
                 setErr(data)
             } else {
                 setErr('')
-                console.log('why didnt you close')
                 closeModal()
             }
         } else {
             setErr('Please add members')
         }
-        // closeModal()
     }
 
     const handleClick = (e) =>{
-        console.log('handle click works',Number(e.target.id))
         setCheckUser([... new Set([...checkUser, Number(e.target.id)])])
         if (checkUser.includes(Number(e.target.id))){
             setCheckUser([...checkUser.filter(user => user !== Number(e.target.id))])
         }
-        console.log('adding users to array',checkUser)
     }
-    console.log('adding users to array',checkUser)
+
     if(!users) return null
+
     return (
         <div>
             {err.length > 0 && (<p>{err[0]}</p>)}
