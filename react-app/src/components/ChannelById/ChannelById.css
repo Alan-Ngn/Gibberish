@@ -78,11 +78,11 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
     border-radius: 3px;
 }
 
-.edit-button {
+.edit-button, .delete-button {
     color: white;
 }
 
-.edit-button-text {
+.edit-button-text, .delete-button-text {
     visibility: hidden;
     position: absolute;
     margin-top: -35px;
@@ -91,4 +91,10 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
 }
 .edit-button:hover .edit-button-text{
     visibility: visible;
+}
+.delete-button:hover .delete-button-text{
+    visibility: visible;
+}
+.fa-solid, .fa-regular {
+    color: white;
 }

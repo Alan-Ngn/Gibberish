@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { loadChannelByIdThunk } from "../../store/channel"
 import { useParams } from "react-router-dom"
 import './ChannelById.css'
-import { createMessageThunk, editMessageThunk } from "../../store/message"
+import { createMessageThunk, deleteMessageThunk, editMessageThunk } from "../../store/message"
 import MessageDropdown from "../MessageMenu"
 import { useMessage } from "../../context/EditMessage"
 import OpenModalButton from "../OpenModalButton"
@@ -21,6 +21,8 @@ const ChannelById = () => {
     const [editMessagePayload, setEditMessagePayload] = useState({})
     const [err, setErr] = useState('')
     const [editErr, setEditErr] = useState('')
+    const [editDelete, setEditDelete] = useState(true)
+    const [isDelete, setIsDelete] = useState(false)
     const ulClassName = "chat-box" + (err ? "-error" : "");
     const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
     const getChannel = useSelector(state => state.channels)
@@ -63,20 +65,27 @@ const ChannelById = () => {
         e.preventDefault();
         const data = await dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
         // setEditMessage('')
+        console.log(data,'HANDLE EDIT SUBMIT')
         if (data) {
             setEditErr(data)
         } else {
             setEditErr('')
             setEdit(false)
+            setEditDelete(true)
         }
-        console.log(editErr, ' what is our edit error')
+        console.log(editErr[0], ' what is our edit error')
     }
 
     const handleEditCancel = (e) =>{
+        e.preventDefault()
         setEditErr('')
         setEdit(false)
+        setEditDelete(true)
     }
 
+    const confirmDelete = (e) => {
+        dispatch(deleteMessageThunk(messageId, channelId)).then(setIsDelete(false)).then(setEditDelete(true))
+    }
     if(getChannel.id !== Number(channelId)) return null
     // console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
     // console.log(sessionUser.id, getChannel.messages[0].user_id)
@@ -96,7 +105,7 @@ const ChannelById = () => {
                             name="edit-message"
                             id="edit-message"
                             type='text'
-                            placeholder={editErr.length > 0 ? (editErr[0]) : `Edit Message ${message.message}`}
+                            placeholder={editErr[0]}
                             value={editMessage}
                             onChange={updateEditMessage}
                             >
@@ -107,17 +116,32 @@ const ChannelById = () => {
                         : (<p className="message">{message.message}</p>)}
                         </div>
                     </div>
-                    {sessionUser.id === message.user_id && (
+                    {sessionUser.id === message.user_id && editDelete && (
                                   <div className="hide-edit-delete">
                                     <button className="edit-button" onClick={() => {
                                         setEdit(true)
+                                        setEditDelete(false)
                                         setMessageId(message.id)
                                         setEditMessage(message.message)}}><i class="fa-solid fa-screwdriver-wrench"/><div className="edit-button-text">Edit</div></button>
-
-                                    <OpenModalButton
+                                    <button className="delete-button" onClick={() => {
+                                        setIsDelete(true)
+                                        setEditDelete(false)
+                                        setMessageId(message.id)
+                                        }}><i class="fa-solid fa-trash"/><div className="delete-button-text">Delete</div></button>
+                                    {/* <OpenModalButton
                                         buttonText='Delete'
                                         modalComponent={<DeleteModal id={message.id} type={'message'} channelId={channelId}/>}
-                                    />
+                                    /> */}
+                                  {/* <MessageDropdown id={message.id} channelId={channelId} message={message.message}/> */}
+                                </div>
+                    )}
+                    {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
+                                  <div>
+                                    <button className="confirm-delete-button" onClick={confirmDelete}><i class="fa-regular fa-square-check"></i><div className="delete-button-text">Delete</div></button>
+                                    <button onClick={()=>{
+                                        setIsDelete(false)
+                                        setEditDelete(true)
+                                    }}><i class="fa-solid fa-ban"></i></button>
                                   {/* <MessageDropdown id={message.id} channelId={channelId} message={message.message}/> */}
                                 </div>
                     )}
