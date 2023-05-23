@@ -6,13 +6,17 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    align-items: center;
+    /* align-items: center; */
     overflow: hidden;
 }
 
-.create-channel-header{
+.create-channel-header  {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     /* gap:180px; */
+}
+
+.checkbox {
+    /* height: 20px; */
 }

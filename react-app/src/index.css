@@ -39,3 +39,16 @@ button {
     border-style: none;
     cursor: pointer;
 }
+
+textarea, input {
+    background-color: rgba(37, 37, 38, 1);
+    color: rgb(238, 238, 238);
+    border-radius: 5px;
+    border: 3px solid rgb(87, 86, 86);
+    outline: none;
+    resize: none;
+}
+
+::placeholder{
+    color: rgb(238, 238, 238)
+}

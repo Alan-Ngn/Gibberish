@@ -89,6 +89,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
                     {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
                         <div>
                             <input
+                            className="checkbox"
                              key={user.id}
                              type="checkbox"
                              id={user.id}

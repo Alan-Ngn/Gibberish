@@ -45,7 +45,7 @@
     background: none;
 }
 
-input {
+.email-input {
     height: 40px;
     width: 294px;
 }
@@ -53,4 +53,3 @@ input {
 .error-handling {
     color: white;
 }
-

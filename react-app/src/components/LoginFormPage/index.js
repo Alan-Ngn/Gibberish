@@ -53,6 +53,7 @@ function LoginFormPage() {
           </ul>
           <label>
             <input
+              className="email-input"
               type="text"
               placeholder="name@fun-email.com"
               value={email}
