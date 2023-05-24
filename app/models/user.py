@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
+    profile_pic = db.Column(db.String(255), nullable=True)
     admin = db.Column(db.Boolean, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -42,7 +43,8 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'admin': self.admin,
+            'profile_pic': self.profile_pic,
+            'admin': self.admin
         }
 
     def to_dict_relationship(self):
@@ -52,9 +54,10 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
+            'profile_pic': self.profile_pic,
             'admin': self.admin,
             'admin_channels': [channel.to_dict() for channel in self.users_channels],
             'messages': [message.to_dict() for message in self.users_messages],
             'channels': [channel.to_dict_relationship() for channel in self.users_members],
-            'replies': [reply.to_dict() for reply in self.user_replies]
+            'replies': [reply.to_dict() for reply in self.users_replies]
         }
