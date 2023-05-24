@@ -157,16 +157,22 @@ const ChannelById = () => {
             </div>
                 {/* {err.length > 0 && (<p className="error-handling">{err[0]}</p>)} */}
             <form className='chat-form' onSubmit={handleSubmit}>
-                <textarea
-                    className={ulClassName}
-                    name="message"
-                    id="message"
-                    type="text"
-                    placeholder={err.length > 0 ? (err[0]) : `Message ${getChannel.title}`}
-                    value={message}
-                    onChange={updateMessage}
-                >
-                </textarea>
+                <div className="chat-area">
+                    <textarea
+                        className={ulClassName}
+                        name="message"
+                        id="message"
+                        type="text"
+                        placeholder={err.length > 0 ? (err[0]) : `Message ${getChannel.title}`}
+                        value={message}
+                        onChange={updateMessage}
+                    >
+                    </textarea>
+                    <div className="message-box">
+
+                    {message.length === 0 ? <p>Maximum Character Limit: 255</p> : message.length > 255 ? <p className="char-over-limit">{`${message.length - 255} Characters Over Limit`}</p> : <p>{`${255-message.length} Characters Remaining`}</p>}
+                    </div>
+                </div>
                 <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
             </form>
         </section>

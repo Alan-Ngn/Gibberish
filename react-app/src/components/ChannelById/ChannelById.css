@@ -121,3 +121,14 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
     padding-top: 8px;
     border-radius: 3px;
 }
+
+.char-over-limit {
+    color: red;
+}
+.message-box {
+    width: 100%
+}
+
+.chat-area {
+    width: 100%
+}
