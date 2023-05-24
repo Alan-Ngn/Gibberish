@@ -53,3 +53,11 @@
 .error-handling {
     color: white;
 }
+
+.errors {
+    color: red;
+}
+
+.login-img {
+    height: 203px
+}

@@ -24,6 +24,7 @@ function SignupFormPage() {
     console.log(username, email, password)
     if (password === confirmPassword) {
         const data = await dispatch(signUp(username, email, password, firstName, lastName, status, admin));
+        console.log(data)
         if (data) {
           setErrors(data)
         }
@@ -34,14 +35,14 @@ function SignupFormPage() {
 
   return (
     <div className="sign-up-page">
-      <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>
+      {errors.length > 0 ? <img className="login-img" src={process.env.PUBLIC_URL + '/2760998.png'}></img> : <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>}
+      {/* <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img> */}
       <h1>Sign Up</h1>
       <form className="sign-up-form" onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
+        {errors.includes('Email address is already in use.') && <p className="text-error">Email address is already in use.</p>}
         <label>
           <input
+            className={errors.includes('Email address is already in use.') ? 'email-error' : 'email'}
             placeholder="Email"
             type="text"
             value={email}
@@ -49,8 +50,10 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.includes('Username is already in use.') && <p className="text-error">Username is already in use.</p>}
         <label>
           <input
+            className={errors.includes('Username is already in use.') ? 'username-error' : 'username'}
             type="text"
             placeholder="Username"
             value={username}
@@ -93,8 +96,10 @@ function SignupFormPage() {
             required
           />
         </label>
+        {errors.includes('Confirm Password field must be the same as the Password field') && <p className="text-error">Confirm Password field must be the same as the Password field</p>}
         <label>
           <input
+            className={errors.includes('Confirm Password field must be the same as the Password field') ? 'password-error' : 'password'}
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
