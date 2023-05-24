@@ -10,8 +10,7 @@ def seed_users():
         password='password',
         admin=False,
         first_name='Demo',
-        last_name='User',
-        status='Active'
+        last_name='User'
     )
     demo_admin = User(
         username='DemoAdmin',
@@ -19,8 +18,7 @@ def seed_users():
         password='password',
         admin=True,
         first_name='Demo',
-        last_name='Admin',
-        status='Active'
+        last_name='Admin'
     )
 
     all_users = [demo_user, demo_admin]

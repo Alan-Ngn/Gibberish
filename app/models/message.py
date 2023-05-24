@@ -14,6 +14,7 @@ class Message(db.Model):
 
     messages_users = db.relationship("User", back_populates="users_messages")
     messages_channels = db.relationship("Channel", back_populates="channels_messages")
+    messages_replies = db.relationship("Reply", back_populates="replies_messages", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -22,5 +23,6 @@ class Message(db.Model):
             'channel_id': self.channel_id,
             'message': self.message,
             'created_at': self.created_at,
-            'user': self.messages_users.to_dict()
+            'user': self.messages_users.to_dict(),
+            'replies': [reply.to_dict() for reply in self.messages_replies]
         }

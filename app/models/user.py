@@ -15,7 +15,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
-    status = db.Column(db.String(20), nullable=False)
     admin = db.Column(db.Boolean, nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
@@ -23,6 +22,7 @@ class User(db.Model, UserMixin):
     users_channels = db.relationship("Channel", back_populates="channels_users", cascade="all, delete-orphan")
     users_messages = db.relationship("Message", back_populates="messages_users", cascade="all, delete-orphan")
     users_members = db.relationship("Channel", secondary=members, back_populates="channels_members")
+    users_replies = db.relationship("Reply", back_populates="replies_users", cascade="all, delete-orphan")
 
     @property
     def password(self):
@@ -42,7 +42,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'status': self.status,
             'admin': self.admin,
         }
 
@@ -53,9 +52,9 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'status': self.status,
             'admin': self.admin,
             'admin_channels': [channel.to_dict() for channel in self.users_channels],
             'messages': [message.to_dict() for message in self.users_messages],
-            'channels': [channel.to_dict_relationship() for channel in self.users_members]
+            'channels': [channel.to_dict_relationship() for channel in self.users_members],
+            'replies': [reply.to_dict() for reply in self.user_replies]
         }

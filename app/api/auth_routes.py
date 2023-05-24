@@ -73,7 +73,6 @@ def sign_up():
             first_name = form.data['firstName'],
             last_name = form.data['lastName'],
             admin = req["admin"],
-            status = req["status"]
         )
         print('MORE TESTING')
         db.session.add(user)

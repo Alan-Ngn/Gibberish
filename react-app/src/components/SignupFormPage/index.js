@@ -12,7 +12,6 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [status, setStatus] = useState("Active");
   const [admin, setAdmin] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -23,7 +22,7 @@ function SignupFormPage() {
     e.preventDefault();
     console.log(username, email, password)
     if (password === confirmPassword) {
-        const data = await dispatch(signUp(username, email, password, firstName, lastName, status, admin));
+        const data = await dispatch(signUp(username, email, password, firstName, lastName, admin));
         console.log(data)
         if (data) {
           setErrors(data)
