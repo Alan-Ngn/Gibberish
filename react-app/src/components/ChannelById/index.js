@@ -9,6 +9,7 @@ import EditDeleteButton from "../EditDeleteButton"
 import ConfirmDeleteButton from "../ConfirmDeleteButton"
 import Thread from "../Thread"
 import ChatBox from "../ChatBox"
+import Replies from "../Replies"
 
 
 const ChannelById = () => {
@@ -28,22 +29,25 @@ const ChannelById = () => {
 
     return (
         <section className="ChannelById">
-            <div className="chat-area-wrapper">
-                <div className="chat-area">
-                    <h2>{getChannel.title}</h2>
-                {getChannel.messages.map((message) =>(
-                    <div className="chat">
-                        <Thread message={message} channelId={channelId}/>
-                        {sessionUser.id === message.user_id && editDelete && (
-                            <EditDeleteButton message={message}/>
-                        )}
-                        {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
-                            <ConfirmDeleteButton channelId={channelId}/>
-                        )}
+            <div className="chat-area-right-navigation">
+                <div className="chat-area-wrapper">
+                    <div className="chat-area">
+                        <h2>{getChannel.title}</h2>
+                    {getChannel.messages.map((message) =>(
+                        <div className="chat">
+                            <Thread message={message} channelId={channelId}/>
+                            {sessionUser.id === message.user_id && editDelete && (
+                                <EditDeleteButton message={message}/>
+                            )}
+                            {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
+                                <ConfirmDeleteButton channelId={channelId}/>
+                            )}
+                        </div>
+                    ))}
                     </div>
-                ))}
+                    <ChatBox channelId={channelId} getChannel={getChannel} sessionUser={sessionUser}/>
                 </div>
-                <ChatBox channelId={channelId} getChannel={getChannel} sessionUser={sessionUser}/>
+                <Replies/>
             </div>
         </section>
     )

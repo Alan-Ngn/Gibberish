@@ -4,9 +4,10 @@ import ChannelById from "../ChannelById";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createReplyThunk, deleteReplyThunk, editReplyThunk } from "../../store/reply";
+import './replies.css'
 
-const RightNavigation = () => {
-
+const Replies = () => {
+    const {openReply, setOpenReply} = useMessage()
     const dispatch = useDispatch()
     const [reply, setReply] = useState('')
     const [replyPayload, setReplyPayload] = useState({})
@@ -70,11 +71,18 @@ const RightNavigation = () => {
     const confirmDelete = (e) => {
         dispatch(deleteReplyThunk(replyId, messageById.id)).then(setIsDelete(false)).then(setEditDelete(true))
     }
+
+    const handleClose = (e) => {
+        setOpenReply(false)
+    }
     if (Object.values(messageById).length === 0 ) return null
 
     return (
-        <section>
-            <h2>Thread</h2><h3>{messageById.channel.title}</h3>
+        <>
+        {openReply &&
+
+(        <section className="replies-thread">
+            <h2>Thread</h2><h3>{messageById.channel.title}</h3><button onClick={handleClose}><i class="fa-solid fa-xmark"></i></button>
             <p>{messageById.user.first_name} {messageById.user.last_name}</p>
             <p>{messageById.message}</p>
             {(messageById.replies.map((reply) => (
@@ -150,8 +158,10 @@ const RightNavigation = () => {
                 </div>
                 <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
             </form>
-        </section>
+        </section>)
+        }
+        </>
     )
 }
 
-export default RightNavigation
+export default Replies

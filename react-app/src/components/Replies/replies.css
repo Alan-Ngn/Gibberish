@@ -1,0 +1,7 @@
+.replies-thread {
+    border-left: 1px solid rgb(218, 211, 211);
+    /* background-color: rgb(34, 34, 37); */
+    height: 100%;
+    min-width: 25%;
+    padding-left: 30px
+}

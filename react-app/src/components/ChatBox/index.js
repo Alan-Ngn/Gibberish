@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
 import { createMessageThunk } from "../../store/message"
 import { useEffect } from "react"
-
+import './ChatBox.css'
 const ChatBox = ({channelId, sessionUser, getChannel}) => {
     const dispatch = useDispatch()
     const messageObj ={}
@@ -28,7 +28,7 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
 
     return (
         <form className='chat-form' onSubmit={handleSubmit}>
-            <div className="chat-area">
+            <div className="chat-textarea">
                 <textarea
                     className={ulClassName}
                     name="message"

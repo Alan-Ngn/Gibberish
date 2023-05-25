@@ -16,13 +16,13 @@ export default function MessageProvider( { children } ){
     const [messagePayload, setMessagePayload] = useState({})
     const [err, setErr] = useState('')
     //for replies...
-
+    const [openReply, setOpenReply] = useState(false)
     const [ogMessage, setOgMessage] = useState('')
     const [repliedMessageId, setRepliedMessageId] = useState(0)
     const [repliedChannelId, setRepliedChannelId] = useState(0)
 
     return (
-        <MessageContext.Provider value={{edit, setEdit, messageId, setMessageId, editDelete, setEditDelete, isDelete, setIsDelete, editMessage, setEditMessage, editErr, setEditErr, editMessagePayload, setEditMessagePayload, message, setMessage, messagePayload, setMessagePayload, err, setErr, ogMessage, setOgMessage, repliedMessageId, setRepliedMessageId, repliedChannelId, setRepliedChannelId}}>
+        <MessageContext.Provider value={{edit, setEdit, messageId, setMessageId, editDelete, setEditDelete, isDelete, setIsDelete, editMessage, setEditMessage, editErr, setEditErr, editMessagePayload, setEditMessagePayload, message, setMessage, messagePayload, setMessagePayload, err, setErr, openReply, setOpenReply,ogMessage, setOgMessage, repliedMessageId, setRepliedMessageId, repliedChannelId, setRepliedChannelId}}>
             {children}
         </MessageContext.Provider>
 

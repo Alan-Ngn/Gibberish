@@ -1,0 +1,8 @@
+.reply {
+    color: white;
+}
+
+.chat-area {
+    overflow-y: auto;
+    scrollbar-color: red yellow;
+}
