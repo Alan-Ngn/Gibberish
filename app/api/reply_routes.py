@@ -28,3 +28,25 @@ def create_reply(message_id, user_id):
         db.session.commit()
         return new_reply.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@reply_routes.route('/<int:reply_id>/edit', methods=['PUT'])
+def edit_reply(reply_id):
+    form = ReplyForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        print(' FINSIDE BACKEND REPLY EDIT')
+        reply = Reply.query.get(reply_id)
+        reply.reply = form.data['reply']
+        db.session.add(reply)
+        db.session.commit()
+        return reply.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+@reply_routes.route('/<int:id>', methods=['DELETE'])
+def delete_reply(id):
+    reply = Reply.query.get(id)
+    deleted_reply = reply.to_dict()
+    db.session.delete(reply)
+    db.session.commit()
+    return deleted_reply

@@ -60,13 +60,17 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
         }
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault()
+        closeModal()
+    }
     if(!users) return null
 
     return (
         <div className="create-channel-modal">
             <div className="create-channel-header">
                 <h3>Create a channel</h3>
-                <button><i class="fa-solid fa-xmark"></i></button>
+                <button onClick={handleCancel}><i class="fa-solid fa-xmark"></i></button>
             </div>
             {err.length > 0 && (<p>{err[0]}</p>)}
             <form onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import { useMessage } from "../../context/EditMessage"
 import ChannelById from "../ChannelById";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { createReplyThunk } from "../../store/reply";
+import { createReplyThunk, deleteReplyThunk, editReplyThunk } from "../../store/reply";
 
 const RightNavigation = () => {
 
@@ -15,6 +15,7 @@ const RightNavigation = () => {
     const [editDelete, setEditDelete] = useState(true)
     const [replyId, setReplyId] = useState(0)
     const [editReply, setEditReply] = useState('')
+    const [editReplyPayload, setEditReplyPayload] = useState({})
     const [isDelete, setIsDelete] = useState(false)
     const [editErr, setEditErr] = useState('')
 	const sessionUser = useSelector(state => state.session.user);
@@ -23,11 +24,16 @@ const RightNavigation = () => {
     const updateReply = (e) => setReply(e.target.value)
     const updateEditReply = (e) => setEditReply(e.target.value)
     const replyObj ={}
+    const editReplyObj = {}
     useEffect(()=>{
         replyObj.reply = reply
-
         setReplyPayload(replyObj)
     },[reply])
+
+    useEffect(()=>{
+        editReplyObj.reply = editReply
+        setEditReplyPayload(editReplyObj)
+    },[editReply])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +48,7 @@ const RightNavigation = () => {
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch()
+        const data = await dispatch(editReplyThunk(editReplyPayload, messageById.id, replyId))
         // setEditMessage('')
         console.log(data,'HANDLE EDIT SUBMIT')
         if (data) {
@@ -62,7 +68,7 @@ const RightNavigation = () => {
         setEditDelete(true)
     }
     const confirmDelete = (e) => {
-        // dispatch(deleteMessageThunk(messageId, channelId)).then(setIsDelete(false)).then(setEditDelete(true))
+        dispatch(deleteReplyThunk(replyId, messageById.id)).then(setIsDelete(false)).then(setEditDelete(true))
     }
     if (Object.values(messageById).length === 0 ) return null
 
@@ -132,7 +138,7 @@ const RightNavigation = () => {
                         name="message"
                         id="message"
                         type="text"
-                        placeholder={`Reply...`}
+                        placeholder={err.length > 0 ? (err[0]) :`Reply...`}
                         value={reply}
                         onChange={updateReply}
                     >

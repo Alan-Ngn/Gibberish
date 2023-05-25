@@ -23,3 +23,37 @@ export const createReplyThunk = (reply, messageId, userId, channelId) => async(d
 		return ["An error occurred. Please try again."];
 	}
 }
+
+export const editReplyThunk = (reply, messageId, replyId) => async(dispatch) => {
+    console.log(reply)
+    const response = await fetch(`/api/replies/${replyId}/edit`, {
+        method:"PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reply)
+    })
+    if(response.ok){
+        dispatch(loadMessageThunk(messageId))
+	} else if (response.status < 500) {
+		const data = await response.json();
+        console.log(data.errors, 'ERRRORSRSRSR')
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+}
+
+export const deleteReplyThunk = (replyId, messageId) => async(dispatch) => {
+    const response = await fetch(`/api/replies/${replyId}`,{
+        method: "DELETE"
+    })
+    if(response.ok){
+        dispatch(loadMessageThunk(messageId))
+    } else {
+        console.log('DELETE MESSAGE THUNK FAILED')
+        return false
+    }
+}
