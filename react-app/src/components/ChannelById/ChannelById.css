@@ -40,6 +40,7 @@ p {
 .chat-form {
     display: flex;
     flex-direction: row;
+    width:100%
 
 }
 
@@ -130,5 +131,13 @@ textarea.edit-box-error::placeholder, textarea.chat-box-error::placeholder  {
 }
 
 .chat-area {
+
     width: 100%
+}
+
+.chat-area-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:100%
 }
