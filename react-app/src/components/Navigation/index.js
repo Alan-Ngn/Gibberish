@@ -32,7 +32,7 @@ function Navigation({ isLoaded }){
 					<div>Channels</div>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
-							<NavLink to={`/channels/${channel.id}`}>{channel.title}</NavLink>
+							<NavLink className='nav-channel-title' to={`/channels/${channel.id}`}>{channel.title}</NavLink>
 							{sessionUser.id === channel.admin_id && (
 								<ChannelDropdown id={channel.id} members={channel.members} channelTitle={channel.title}/>
 							)}

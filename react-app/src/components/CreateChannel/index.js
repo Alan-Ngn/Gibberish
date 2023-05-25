@@ -72,7 +72,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
                 <h3>Create a channel</h3>
                 <button onClick={handleCancel}><i class="fa-solid fa-xmark"></i></button>
             </div>
-            {err.length > 0 && (<p>{err[0]}</p>)}
+            {err.length > 0 && (<p className="channel-create-error">{err[0]}</p>)}
             <form onSubmit={handleSubmit}>
                 {type==='edit' && (
                     <input

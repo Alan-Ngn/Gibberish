@@ -26,6 +26,7 @@ const Replies = () => {
     const updateEditReply = (e) => setEditReply(e.target.value)
     const replyObj ={}
     const editReplyObj = {}
+    const ulClassName = "reply-box" + (err ? "-error" : "");
     useEffect(()=>{
         replyObj.reply = reply
         setReplyPayload(replyObj)
@@ -140,9 +141,10 @@ const Replies = () => {
                 </div>
 
             )))}
-            <form className='chat-form' onSubmit={handleSubmit}>
-                <div className="chat-area">
+            <form className='reply-form' onSubmit={handleSubmit}>
+                <div className="reply-area">
                     <textarea
+                        className={ulClassName}
                         name="message"
                         id="message"
                         type="text"
