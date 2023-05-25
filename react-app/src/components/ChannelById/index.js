@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadChannelByIdThunk } from "../../store/channel"
-import { useParams } from "react-router-dom"
+import { Link, NavLink, useParams } from "react-router-dom"
 import './ChannelById.css'
-import { createMessageThunk, deleteMessageThunk, editMessageThunk } from "../../store/message"
+import { createMessageThunk, deleteMessageThunk, editMessageThunk, loadMessageThunk } from "../../store/message"
 import MessageDropdown from "../MessageMenu"
 import { useMessage } from "../../context/EditMessage"
 import OpenModalButton from "../OpenModalButton"
@@ -12,6 +12,7 @@ import DeleteModal from "../DeleteChannel"
 
 const ChannelById = () => {
     const dispatch = useDispatch()
+    const { repliedMessageId, setRepliedMessageId, repliedChannelId, setRepliedChannelId } = useMessage()
     const { channelId } = useParams()
     const [messageId, setMessageId] = useState(0)
     const [edit, setEdit] = useState(false)
@@ -86,6 +87,9 @@ const ChannelById = () => {
     const confirmDelete = (e) => {
         dispatch(deleteMessageThunk(messageId, channelId)).then(setIsDelete(false)).then(setEditDelete(true))
     }
+
+
+
     if(getChannel.id !== Number(channelId)) return null
     // console.log(getChannel.id, 'MY CHANNEL', Number(channelId))
     // console.log(sessionUser.id, getChannel.messages[0].user_id)
@@ -115,6 +119,12 @@ const ChannelById = () => {
                         </form>
                         : (<p className="message">{message.message}</p>)}
                         </div>
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            dispatch(loadMessageThunk(message.id))
+                        }}>
+                            {`${message.replies.length} Replies`}
+                        </button>
                     </div>
                     {sessionUser.id === message.user_id && editDelete && (
                                   <div className="hide-edit-delete">

@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import ChannelById from "./components/ChannelById";
 import "./index.css";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import RightNavigation from "./components/RightNavigation";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,9 @@ function App() {
               <Route path='/channels/:channelId' component={ChannelById} />
             </Switch>
           )}
+          <div className="nav-right-list-wrapper">
+            <RightNavigation isLoaded={isLoaded} />
+          </div>
       </ProtectedRoute>
       </div>
     </>

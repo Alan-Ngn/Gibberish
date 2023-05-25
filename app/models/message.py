@@ -24,5 +24,6 @@ class Message(db.Model):
             'message': self.message,
             'created_at': self.created_at,
             'user': self.messages_users.to_dict(),
-            'replies': [reply.to_dict() for reply in self.messages_replies]
+            'replies': [reply.to_dict() for reply in self.messages_replies],
+            'channel': self.messages_channels.to_dict()
         }

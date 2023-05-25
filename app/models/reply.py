@@ -20,7 +20,8 @@ class Reply(db.Model):
             'message_id': self.message_id,
             'user_id': self.user_id,
             'reply': self.reply,
-            'created_at': self.created_at
+            'created_at': self.created_at,
+            'user': self.replies_users.to_dict()
         }
 
     def to_dict_relationship(self):
@@ -30,5 +31,6 @@ class Reply(db.Model):
             'user_id': self.user_id,
             'reply': self.reply,
             'created_at': self.created_at,
-            'message': self.replies_messages.to_dict()
+            'message': self.replies_messages.to_dict(),
+            'user': self.replies_users.to_dict()
         }

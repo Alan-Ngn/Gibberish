@@ -14,6 +14,11 @@ def validation_errors_to_error_messages(validation_errors):
             errorMessages.append(f'{error}')
     return errorMessages
 
+@message_routes.route('/<int:id>')
+def get_message_by_id(id):
+    message = Message.query.get(id)
+    return message.to_dict()
+
 @message_routes.route('/channel/<int:channel_id>/user/<int:user_id>', methods=['POST'])
 def create_message(channel_id, user_id):
     print('inside the backend message route', channel_id, user_id)
