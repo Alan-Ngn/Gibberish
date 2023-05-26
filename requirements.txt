@@ -28,3 +28,4 @@ sqlalchemy==1.4.46
 werkzeug==2.2.2
 wtforms==3.0.1
 email-validator==1.0.5
+eventlet==0.30.2

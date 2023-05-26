@@ -5,7 +5,7 @@ socketio = SocketIO()
 
 #! Needs to be changed for RENDER
 if os.environ.get("FLASK_ENV") == "production":
-    origins = []
+    origins = ['http://gibberish-z0ju.onrender.com', 'https://gibberish-z0ju.onrender.com']
 else:
     origins = "*"
 

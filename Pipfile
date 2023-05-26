@@ -27,6 +27,7 @@ greenlet = "==2.0.1"
 Mako = "==1.2.4"
 email-validator = "==1.0.5"
 flask-socketio = "*"
+eventlet = "==0.30.2"
 
 [dev-packages]
 
