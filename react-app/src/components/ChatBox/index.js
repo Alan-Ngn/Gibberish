@@ -2,7 +2,12 @@ import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
 import { createMessageThunk } from "../../store/message"
 import { useEffect } from "react"
+import { io } from 'socket.io-client';
 import './ChatBox.css'
+import { authenticate } from "../../store/session";
+
+let socket;
+
 const ChatBox = ({channelId, sessionUser, getChannel}) => {
     const dispatch = useDispatch()
     const messageObj ={}
@@ -10,20 +15,41 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
     const updateMessage = (e) => setMessage(e.target.value)
     const ulClassName = "chat-box" + (err ? "-error" : "");
 
+    useEffect(() => {
+        // open socket connection
+        // create websocket
+        socket = io();
+        // dispatch(getDMS(userId,ownerId))
+        socket.on("chat", (chat) => {
+            // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
+            dispatch(authenticate())
+            // let msgArr = Object.values(msg)
+            // setMessages(...msgArr)
+
+        })
+        // when component unmounts, disconnect
+        return (() => {
+            socket.disconnect()
+        })
+    }, [])
+
     useEffect(()=>{
         messageObj.message = message
+        messageObj.userId = sessionUser.id
+        messageObj.channelId = channelId
         setMessagePayload(messageObj)
     },[message])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
+        // const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
+        socket.emit("chat", messagePayload);
         setMessage('')
-        if (data) {
-            setErr(data)
-        } else {
-            setErr('')
-        }
+        // if (data) {
+        //     setErr(data)
+        // } else {
+        //     setErr('')
+        // }
     }
 
     return (

@@ -33,8 +33,7 @@ export const createMessageThunk = (message, channelId, userId) => async(dispatch
         body: JSON.stringify(message)
     })
     if(response.ok){
-        const data = await response.json();
-        dispatch(loadChannelByIdThunk(channelId))
+        await dispatch(authenticate())
 	} else if (response.status < 500) {
 		const data = await response.json();
         console.log(data.errors, 'ERRRORSRSRSR')
@@ -52,7 +51,7 @@ export const deleteMessageThunk = (id, channelId) => async(dispatch) => {
         method: "DELETE"
     })
     if(response.ok){
-        dispatch(loadChannelByIdThunk(channelId))
+        await dispatch(authenticate())
     } else {
         console.log('DELETE MESSAGE THUNK FAILED')
         return false
@@ -69,7 +68,7 @@ export const editMessageThunk = (message, id, channelId) => async(dispatch) => {
         body: JSON.stringify(message)
     })
     if(response.ok){
-        dispatch(loadChannelByIdThunk(channelId))
+        await dispatch(authenticate())
 	} else if (response.status < 500) {
 		const data = await response.json();
         console.log(data.errors, 'ERRRORSRSRSR')

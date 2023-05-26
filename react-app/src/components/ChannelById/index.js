@@ -16,24 +16,25 @@ const ChannelById = () => {
     const dispatch = useDispatch()
     const { messageId, editDelete, isDelete } = useMessage()
     const { channelId } = useParams()
-    const getChannel = useSelector(state => state.channels)
+    // const getChannel = useSelector(state => state.channels)
 	const sessionUser = useSelector(state => state.session.user);
+    const channel = sessionUser.channels.filter(channel => channel.id === Number(channelId))[0]
 
-    useEffect(() => {
-        if(getChannel.id !== Number(channelId)){
-            dispatch(loadChannelByIdThunk(channelId))
-        }
-    },[dispatch, channelId])
+    // useEffect(() => {
+    //     if(getChannel.id !== Number(channelId)){
+    //         dispatch(loadChannelByIdThunk(channelId))
+    //     }
+    // },[dispatch, channelId])
 
-    if(getChannel.id !== Number(channelId)) return null
+    // if(getChannel.id !== Number(channelId)) return null
 
     return (
         <section className="ChannelById">
             <div className="chat-area-right-navigation">
                 <div className="chat-area-wrapper">
                     <div className="chat-area">
-                        <h2>{getChannel.title}</h2>
-                    {getChannel.messages.map((message) =>(
+                        <h2>{channel.title}</h2>
+                    {channel.messages.map((message) =>(
                         <div className="chat">
                             <div className="chat-user">
                                 <i class="fa-solid fa-user"></i>
@@ -48,7 +49,7 @@ const ChannelById = () => {
                         </div>
                     ))}
                     </div>
-                    <ChatBox channelId={channelId} getChannel={getChannel} sessionUser={sessionUser}/>
+                    <ChatBox channelId={channelId} getChannel={channel} sessionUser={sessionUser}/>
                 </div>
                 <Replies/>
             </div>
