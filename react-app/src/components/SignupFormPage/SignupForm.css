@@ -27,3 +27,25 @@
     gap: 20px;
     height: 50px
 }
+
+
+.hide-email-text {
+    visibility: hidden;
+    position: absolute;
+    margin-top: -50px;
+    z-index: 1;
+    border: 1px solid rgb(87, 86, 86);
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    background-color: black;
+}
+
+.email:hover .hide-email-text{
+    visibility: visible;
+}
+
+.sign-up-button {
+    background-color: white;
+    border: 1px solid black;
+}

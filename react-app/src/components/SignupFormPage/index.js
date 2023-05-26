@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { signUp } from "../../store/session";
 import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -32,6 +33,10 @@ function SignupFormPage() {
     }
   };
 
+  const handleRedirect = (e) => {
+    e.preventDefault()
+    history.push(`/login`)
+  }
   return (
     <div className="sign-up-page">
       {errors.length > 0 ? <img className="login-img" src={process.env.PUBLIC_URL + '/2760998.png'}></img> : <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>}
@@ -39,9 +44,10 @@ function SignupFormPage() {
       <h1>Sign Up</h1>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         {errors.includes('Email address is already in use.') && <p className="text-error">Email address is already in use.</p>}
+        {errors.includes('Invalid email address.') && <p className="text-error">Invalid email address.</p>}
         <label>
           <input
-            className={errors.includes('Email address is already in use.') ? 'email-error' : 'email'}
+            className={errors.includes('Email address is already in use.') || errors.includes('Invalid email address.') ? 'email-error' : 'email'}
             placeholder="Email"
             type="text"
             value={email}
@@ -49,6 +55,7 @@ function SignupFormPage() {
             required
           />
         </label>
+          <p className="hide-email-text">Email</p>
         {errors.includes('Username is already in use.') && <p className="text-error">Username is already in use.</p>}
         <label>
           <input
@@ -106,7 +113,8 @@ function SignupFormPage() {
             required
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className="sign-up-button" type="submit">Sign Up</button>
+        <button className="sign-up-button" onClick={handleRedirect}>Back to Login</button>
       </form>
     </div>
   );

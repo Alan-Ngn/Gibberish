@@ -107,7 +107,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
                         </div>
                     ))}
                 </fieldset>
-                <button type="submit">Create Channel</button>
+                <button className="channel-create-button" type="submit">Create Channel</button>
             </form>
         </div>
     )
