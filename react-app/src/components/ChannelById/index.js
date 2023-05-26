@@ -35,7 +35,10 @@ const ChannelById = () => {
                         <h2>{getChannel.title}</h2>
                     {getChannel.messages.map((message) =>(
                         <div className="chat">
-                            <Thread message={message} channelId={channelId}/>
+                            <div className="chat-user">
+                                <i class="fa-solid fa-user"></i>
+                                <Thread message={message} channelId={channelId}/>
+                            </div>
                             {sessionUser.id === message.user_id && editDelete && (
                                 <EditDeleteButton message={message}/>
                             )}

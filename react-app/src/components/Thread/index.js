@@ -38,6 +38,7 @@ const Thread = ({message, channelId}) => {
 
     return (
         <div className="chat-name-message">
+            
             <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
             <div className="message-wrapper">
                 {edit && messageId === message.id ?

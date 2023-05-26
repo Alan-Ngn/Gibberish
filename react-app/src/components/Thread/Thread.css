@@ -3,6 +3,10 @@
 }
 
 .chat-area {
-    overflow-y: auto;
+    overflow-y:hidden;
     scrollbar-color: red yellow;
+}
+
+.chat-area:hover {
+    overflow-y:auto;
 }
