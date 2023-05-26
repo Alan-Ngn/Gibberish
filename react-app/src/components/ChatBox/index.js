@@ -42,9 +42,16 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErr('')
         // const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
-        socket.emit("chat", messagePayload);
-        setMessage('')
+        if (messagePayload.message.length === 0){
+            setErr(['Please enter a message'])
+        } else if (messagePayload.message.length > 255){
+            setErr(['Message must be less than 255 characters'])
+        } else {
+            socket.emit("chat", messagePayload);
+            setMessage('')
+        }
         // if (data) {
         //     setErr(data)
         // } else {
