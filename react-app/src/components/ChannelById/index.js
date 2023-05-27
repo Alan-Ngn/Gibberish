@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { loadChannelByIdThunk } from "../../store/channel"
-import { useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import './ChannelById.css'
 import { useMessage } from "../../context/EditMessage"
 
@@ -14,12 +14,17 @@ import Replies from "../Replies"
 
 const ChannelById = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const { messageId, editDelete, isDelete } = useMessage()
     const { channelId } = useParams()
     // const getChannel = useSelector(state => state.channels)
 	const sessionUser = useSelector(state => state.session.user);
     const channel = sessionUser.channels.filter(channel => channel.id === Number(channelId))[0]
-
+    console.log( (typeof channel === 'undefined') , 'testing after channel delete')
+    if(typeof channel === 'undefined') {
+        history.push('/')
+        return null
+    }
     // useEffect(() => {
     //     if(getChannel.id !== Number(channelId)){
     //         dispatch(loadChannelByIdThunk(channelId))

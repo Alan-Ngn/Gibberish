@@ -43,7 +43,7 @@ const Thread = ({message, channelId}) => {
             <div className="message-wrapper">
                 {edit && messageId === message.id ?
                 <form onSubmit={handleEditSubmit}>
-                    <textarea
+                    <input
                     className={ulEditClassName}
                     name="edit-message"
                     id="edit-message"
@@ -52,7 +52,7 @@ const Thread = ({message, channelId}) => {
                     value={editMessage}
                     onChange={updateEditMessage}
                     >
-                    </textarea>
+                    </input>
                     <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
                     <button className="message-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
                 </form>

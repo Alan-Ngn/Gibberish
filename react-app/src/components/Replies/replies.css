@@ -19,6 +19,6 @@
     height: 80px
 }
 
-textarea.reply-box-error::placeholder {
+input.reply-box-error::placeholder {
     color: red
 }

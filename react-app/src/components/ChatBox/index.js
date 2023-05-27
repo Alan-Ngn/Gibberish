@@ -61,8 +61,8 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
 
     return (
         <form className='chat-form' onSubmit={handleSubmit}>
-            <div className="chat-textarea">
-                <textarea
+            <div className="chat-input">
+                <input
                     className={ulClassName}
                     name="message"
                     id="message"
@@ -71,7 +71,7 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
                     value={message}
                     onChange={updateMessage}
                 >
-                </textarea>
+                </input>
                 <div className="message-box">
 
                 {message.length === 0 ? <p>Maximum Character Limit: 255</p> : message.length > 255 ? <p className="char-over-limit">{`${message.length - 255} Characters Over Limit`}</p> : <p>{`${255-message.length} Characters Remaining`}</p>}

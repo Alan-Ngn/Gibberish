@@ -98,7 +98,7 @@ const Replies = () => {
                         <p>{reply.user.first_name} {reply.user.last_name}</p>
                         {edit && replyId === reply.id ?
                         <form onSubmit={handleEditSubmit}>
-                            <textarea
+                            <input
                             name="edit-message"
                             id="edit-message"
                             type='text'
@@ -106,7 +106,7 @@ const Replies = () => {
                             value={editReply}
                             onChange={updateEditReply}
                             >
-                            </textarea>
+                            </input>
                             <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
                             <button className="message-button" onClick  ={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
                         </form>
@@ -149,7 +149,7 @@ const Replies = () => {
             )))}
             <form className='reply-form' onSubmit={handleSubmit}>
                 <div className="reply-area">
-                    <textarea
+                    <input
                         className={ulClassName}
                         name="message"
                         id="message"
@@ -158,7 +158,7 @@ const Replies = () => {
                         value={reply}
                         onChange={updateReply}
                     >
-                    </textarea>
+                    </input>
                     <div className="message-box">
 
                     {reply.length === 0 ? <p>Maximum Character Limit: 255</p> : reply.length > 255 ? <p className="char-over-limit">{`${reply.length - 255} Characters Over Limit`}</p> : <p>{`${255-reply.length} Characters Remaining`}</p>}

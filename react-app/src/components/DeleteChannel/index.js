@@ -9,18 +9,20 @@ const DeleteModal = ({id, type, channelId}) => {
   console.log(type, 'this is the type to delte')
     const dispatch = useDispatch()
     const {closeModal} = useModal()
-    const users = useSelector(state => state.users)
-	const sessionUser = useSelector(state => state.session.user);
-    const [title, setTitle] = useState('')
-    const [checkUser, setCheckUser] = useState([])
-    const [err, setErr] = useState(null)
-    const updateTitle =(e) => setTitle(e.target.value)
+    
+  //   const users = useSelector(state => state.users)
+	// const sessionUser = useSelector(state => state.session.user);
+  //   const [title, setTitle] = useState('')
+  //   const [checkUser, setCheckUser] = useState([])
+  //   const [err, setErr] = useState(null)
+  //   const updateTitle =(e) => setTitle(e.target.value)
 
-    console.log(id, 'this is my channel Id')
+    console.log(id, channelId, 'this is my channel Id')
     const deleteOnClick = (e) => {
         e.preventDefault();
         if (type === 'channel'){
           dispatch(deleteChannelThunk(id)).then(closeModal);
+
         }
         if (type === 'message'){
           dispatch(deleteMessageThunk(id, channelId)).then(closeModal)
