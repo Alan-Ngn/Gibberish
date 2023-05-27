@@ -1,5 +1,6 @@
 import { loadChannelByIdThunk } from "./channel";
 import { loadMessageThunk } from "./message";
+import { authenticate } from "./session";
 
 export const createReplyThunk = (reply, messageId, userId, channelId) => async(dispatch) => {
     console.log('Inside create REPLY THUNK', reply, messageId, userId)
@@ -11,8 +12,9 @@ export const createReplyThunk = (reply, messageId, userId, channelId) => async(d
         body: JSON.stringify(reply)
     })
     if(response.ok){
-        dispatch(loadMessageThunk(messageId))
-        dispatch(loadChannelByIdThunk(channelId))
+        // dispatch(loadMessageThunk(messageId))
+        // dispatch(loadChannelByIdThunk(channelId))
+        dispatch(authenticate())
 	} else if (response.status < 500) {
 		const data = await response.json();
         console.log(data.errors, 'ERRRORSRSRSR')
@@ -34,7 +36,8 @@ export const editReplyThunk = (reply, messageId, replyId) => async(dispatch) => 
         body: JSON.stringify(reply)
     })
     if(response.ok){
-        dispatch(loadMessageThunk(messageId))
+        // dispatch(loadMessageThunk(messageId))
+        dispatch(authenticate())
 	} else if (response.status < 500) {
 		const data = await response.json();
         console.log(data.errors, 'ERRRORSRSRSR')
@@ -51,7 +54,8 @@ export const deleteReplyThunk = (replyId, messageId) => async(dispatch) => {
         method: "DELETE"
     })
     if(response.ok){
-        dispatch(loadMessageThunk(messageId))
+        // dispatch(loadMessageThunk(messageId))
+        dispatch(authenticate())
     } else {
         console.log('DELETE MESSAGE THUNK FAILED')
         return false

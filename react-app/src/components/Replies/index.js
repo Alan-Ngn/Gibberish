@@ -7,7 +7,7 @@ import { createReplyThunk, deleteReplyThunk, editReplyThunk } from "../../store/
 import './replies.css'
 
 const Replies = () => {
-    const {openReply, setOpenReply} = useMessage()
+    const {openReply, setOpenReply, messageReplyId, channelReplyId} = useMessage()
     const dispatch = useDispatch()
     const [reply, setReply] = useState('')
     const [replyPayload, setReplyPayload] = useState({})
@@ -20,8 +20,8 @@ const Replies = () => {
     const [isDelete, setIsDelete] = useState(false)
     const [editErr, setEditErr] = useState('')
 	const sessionUser = useSelector(state => state.session.user);
-    const messageById = useSelector(state => state.messages)
-    const channel = useSelector(state => state.channels)
+    // const messageById = useSelector(state => state.messages)
+    // const channel = useSelector(state => state.channels)
     const updateReply = (e) => setReply(e.target.value)
     const updateEditReply = (e) => setEditReply(e.target.value)
     const replyObj ={}
@@ -36,6 +36,11 @@ const Replies = () => {
         editReplyObj.reply = editReply
         setEditReplyPayload(editReplyObj)
     },[editReply])
+    const channel = sessionUser.channels.filter(channel => channel.id === Number(channelReplyId))[0]
+    console.log(channel, 'my channel')
+    if (typeof channel === 'undefined') return null
+    const messageById = sessionUser.channels.filter(channel => channel.id === Number(channelReplyId))[0].messages.filter(message=>message.id===messageReplyId)[0]
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -76,7 +81,8 @@ const Replies = () => {
     const handleClose = (e) => {
         setOpenReply(false)
     }
-    if (Object.values(messageById).length === 0 ) return null
+
+
 
     return (
         <>

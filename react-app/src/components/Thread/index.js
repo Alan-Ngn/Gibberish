@@ -7,7 +7,7 @@ import './Thread.css'
 const Thread = ({message, channelId}) => {
     const dispatch = useDispatch()
     const editMessageObj = {}
-    const {editMessage, setEditMessage, edit, messageId, setEdit, setEditDelete, editErr, setEditErr, editMessagePayload, setEditMessagePayload, setOpenReply} = useMessage()
+    const {editMessage, setEditMessage, edit, messageId, setEdit, setEditDelete, editErr, setEditErr, editMessagePayload, setEditMessagePayload, setOpenReply, setMessageReplyId, setChannelReplyId} = useMessage()
     const updateEditMessage = (e) => setEditMessage(e.target.value)
     const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
 
@@ -38,7 +38,7 @@ const Thread = ({message, channelId}) => {
 
     return (
         <div className="chat-name-message">
-            
+
             <p className="chat-name">{message.user.first_name} {message.user.last_name}</p>
             <div className="message-wrapper">
                 {edit && messageId === message.id ?
@@ -62,7 +62,8 @@ const Thread = ({message, channelId}) => {
                 className='reply'
                 onClick={(e) => {
                 e.preventDefault()
-
+                setMessageReplyId(message.id)
+                setChannelReplyId(channelId)
                 dispatch(loadMessageThunk(message.id)).then(() => setOpenReply(true))
             }}>
                 {`${message.replies.length} Replies`}
