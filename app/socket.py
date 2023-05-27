@@ -1,6 +1,6 @@
 from flask_socketio import SocketIO, emit
 import os
-from app.models import Message,db
+from app.models import Message,db, Reply
 socketio = SocketIO()
 
 #! Needs to be changed for RENDER
@@ -13,7 +13,7 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-# handle chat messages
+# handle thread messages
 @socketio.on("chat")
 def handle_chat(data):
     if data != "User connected!":
@@ -25,3 +25,16 @@ def handle_chat(data):
         db.session.add(message)
         db.session.commit()
     emit("chat", data, broadcast=True)
+
+#handle reply messages
+@socketio.on("reply")
+def handle_reply(data):
+    if data != "User connected!":
+        reply = Reply(
+            user_id=data['userId'],
+            message_id=data['messageId'],
+            reply=data['reply'],
+        )
+        db.session.add(reply)
+        db.session.commit()
+    emit("reply", data, broadcast=True)

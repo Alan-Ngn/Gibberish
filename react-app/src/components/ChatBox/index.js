@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
-import { createMessageThunk } from "../../store/message"
 import { useEffect } from "react"
 import { io } from 'socket.io-client';
 import './ChatBox.css'
@@ -19,13 +18,9 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
         // open socket connection
         // create websocket
         socket = io();
-        // dispatch(getDMS(userId,ownerId))
         socket.on("chat", (chat) => {
             // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
             dispatch(authenticate())
-            // let msgArr = Object.values(msg)
-            // setMessages(...msgArr)
-
         })
         // when component unmounts, disconnect
         return (() => {
@@ -43,7 +38,6 @@ const ChatBox = ({channelId, sessionUser, getChannel}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErr('')
-        // const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
         if (messagePayload.message.length === 0){
             setErr(['Please enter a message'])
         } else if (messagePayload.message.length > 255){
