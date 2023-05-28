@@ -30,6 +30,10 @@ def handle_chat(data):
             message.message = data['message']
             db.session.add(message)
             db.session.commit()
+        if data['type'] == 'message-DELETE':
+            message = Message.query.get(data["id"])
+            db.session.delete(message)
+            db.session.commit()
         if data['type'] == 'reply-POST':
             reply = Reply(
                 user_id=data['userId'],
@@ -42,6 +46,10 @@ def handle_chat(data):
             reply = Reply.query.get(data['id'])
             reply.reply =data['reply']
             db.session.add(reply)
+            db.session.commit()
+        if data['type'] == 'reply-DELETE':
+            reply = Reply.query.get(data['id'])
+            db.session.delete(reply)
             db.session.commit()
     emit("chat", data, broadcast=True)
 

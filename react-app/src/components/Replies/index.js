@@ -34,7 +34,7 @@ const Replies = ({socket}) => {
                         <ReplyEditDeleteButton reply={reply} />
                     )}
                     {sessionUser.id === reply.user_id && replyId === reply.id && isReplyDelete && (
-                        <ReplyConfirmDeleteButton replyId={replyId} messageById={messageById}/>
+                        <ReplyConfirmDeleteButton socket={socket} replyId={replyId} messageById={messageById}/>
                     )}
                 </div>
             )))}

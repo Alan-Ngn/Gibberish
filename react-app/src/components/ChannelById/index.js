@@ -37,7 +37,7 @@ const ChannelById = ({socket}) => {
                                 <EditDeleteButton message={message}/>
                             )}
                             {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
-                                <ConfirmDeleteButton channelId={channelId}/>
+                                <ConfirmDeleteButton socket={socket} channelId={channelId}/>
                             )}
                         </div>
                     ))}

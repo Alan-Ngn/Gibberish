@@ -1,13 +1,16 @@
-import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
-import { deleteMessageThunk } from "../../store/message"
 
-const ConfirmDeleteButton = ({channelId}) => {
-    const dispatch = useDispatch()
+const ConfirmDeleteButton = ({socket, channelId}) => {
     const {setEditDelete, setIsDelete, messageId} = useMessage()
-    
+    const deleteMessagePayload ={}
     const confirmDelete = (e) => {
-        dispatch(deleteMessageThunk(messageId, channelId)).then(setIsDelete(false)).then(setEditDelete(true))
+        e.preventDefault();
+        deleteMessagePayload.id = messageId
+        deleteMessagePayload.type = 'message-DELETE'
+        socket.emit('chat', deleteMessagePayload)
+        // dispatch(deleteMessageThunk(messageId, channelId)).then(setIsDelete(false)).then(setEditDelete(true))
+        setIsDelete(false)
+        setEditDelete(true)
     }
 
     return (
