@@ -24,44 +24,61 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
         payload.id = id
         payload.members = checkUser
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
-            const data = await dispatch(editChannelThunk(payload, id))
-            const deleteMembers = memberId.filter(member => !checkUser.includes(member))
-            const addMembers = checkUser.filter(member => !memberId.includes(member))
-            if (data) {
-                setErr(data)
+            payload.type = 'channel-PUT'
+            if (payload.title.length === 0){
+                setErr(['Please enter a title'])
+            } else if (payload.title.length > 255){
+                setErr(['Title must be less than 255 characters'])
             } else {
+                console.log(payload)
+                socket.emit("chat", payload);
+                const deleteMembers = memberId.filter(member => !checkUser.includes(member))
+                const addMembers = checkUser.filter(member => !memberId.includes(member))
                 setErr('')
                 if(deleteMembers.length > 0){
-                    dispatch(deleteMemberThunk(id, deleteMembers))
+                    // dispatch(deleteMemberThunk(id, deleteMembers))
+                    payload.type = 'member-DELETE'
+                    for (let i = 0; i < deleteMembers.length; i++) {
+                        payload.deleteMember = deleteMembers[i]
+                        socket.emit("chat", payload);
+                    }
                 }
                 if(addMembers.length > 0){
-                    dispatch(createMemberThunk(id, addMembers))
+                    // dispatch(createMemberThunk(id, addMembers))
+                    payload.type = 'member-POST'
+                    for (let i = 0; i < addMembers.length; i++) {
+                        payload.addMember = addMembers[i]
+                        socket.emit("chat", payload);
+                    }
                 }
                 closeModal()
             }
+            // const data = await dispatch(editChannelThunk(payload, id))
+
+            // if (data) {
+            //     setErr(data)
+            // } else {
+            //     setErr('')
+            //     if(deleteMembers.length > 0){
+            //         dispatch(deleteMemberThunk(id, deleteMembers))
+            //     }
+            //     if(addMembers.length > 0){
+            //         dispatch(createMemberThunk(id, addMembers))
+            //     }
+            //     closeModal()
+            // }
         }
         else if(type==='create' && checkUser.length > 0){
             payload.type = 'channel-POST'
-            // const data = await dispatch(createChannelThunk(payload, checkUser))
             if (payload.title.length === 0){
                 setErr(['Please enter a title'])
             } else if (payload.title.length > 255){
                 setErr(['Title must be less than 255 characters'])
             } else {
                 socket.emit("chat", payload);
-                // for (let i = 0; i < checkUser.length; i++) {
-                //     payload.type ='member-POST'
-                //     socket.emit("chat", checkUser[i])
-                // }
                 setErr('')
                 closeModal()
             }
-            // if (data) {
-            //     setErr(data)
-            // } else {
-            //     setErr('')
-            //     closeModal()
-            // }
         } else {
             setErr('Please add members')
         }

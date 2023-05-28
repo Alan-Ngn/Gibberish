@@ -66,6 +66,20 @@ def handle_chat(data):
                 db.session.execute(members.insert().values(user_id=member, channel_id = channel.to_dict()['id']))
                 db.session.commit()
 
+        if data['type'] == 'channel-PUT':
+            channel = Channel.query.get(data['id'])
+            # print(data, 'channel post')
+            channel.title = data['title']
+            db.session.add(channel)
+            db.session.commit()
+
+        if data['type'] == 'member-DELETE':
+            db.session.execute(members.delete().where(members.c.user_id==data['deleteMember']).where(members.c.channel_id==data['id']))
+            db.session.commit()
+
+        if data['type'] == 'member-POST':
+            db.session.execute(members.insert().values(user_id=data['addMember'], channel_id = data['id']))
+            db.session.commit()
     emit("chat", data, broadcast=True)
 
 #handle reply messages
