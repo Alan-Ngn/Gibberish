@@ -29,6 +29,7 @@ const Thread = ({socket, message, channelId}) => {
             setEditMessage('')
             setEdit(false)
             setEditDelete(true)
+            setEditErr('')
         }
         // if (data) {
         //     setEditErr(data)

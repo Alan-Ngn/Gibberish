@@ -9,6 +9,7 @@ import ChannelById from "./components/ChannelById";
 import "./index.css";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { io } from 'socket.io-client';
+import { loadUsersThunk } from "./store/user";
 let socket;
 function App() {
   const dispatch = useDispatch();
@@ -25,9 +26,10 @@ function App() {
         // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
         dispatch(authenticate())
     })
-    // socket.on("reply", (chat) => {
-    //     dispatch(authenticate())
-    // })
+    socket.on("all", (chat) => {
+        // dispatch(authenticate())
+        dispatch(loadUsersThunk())
+    })
     // when component unmounts, disconnect
     return (() => {
         socket.disconnect()

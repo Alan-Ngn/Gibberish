@@ -1,7 +1,7 @@
 from flask_socketio import SocketIO, emit
 import os
-from app.models import Message, db, Reply, Channel, members
-socketio = SocketIO()
+from app.models import Message, db, Reply, Channel, members, User
+# socketio = SocketIO()
 
 #! Needs to be changed for RENDER
 if os.environ.get("FLASK_ENV") == "production":
@@ -84,22 +84,16 @@ def handle_chat(data):
         if data['type'] == 'member-POST':
             db.session.execute(members.insert().values(user_id=data['addMember'], channel_id = data['id']))
             db.session.commit()
+    print(data, 'chat data?')
     emit("chat", data, broadcast=True)
 
-#handle reply messages
-# @socketio.on("reply")
-# def handle_reply(data):
-#     if data != "User connected!":
-#         reply = Reply(
-#             user_id=data['userId'],
-#             message_id=data['messageId'],
-#             reply=data['reply'],
-#         )
-#         db.session.add(reply)
-#         db.session.commit()
-#     emit("reply", data, broadcast=True)
-
-
+# handle reply messages
+# @socketio.on("all")
+# def handle_all(data):
+#     print(data,'what is this data?')
+#     emit("all", data, broadcast=True)
+# {'id': 31, 'username': 'lolfffffffsafdasfadf', 'email': 'lasdffffsfdfk@aa.io', 'first_name': 'lolf', 'last_name': 'llolf', 'profile_pic': None, 'admin': False} what is this data?
+# {'message': 'test', 'userId': 2, 'channelId': '14', 'type': 'message-POST'} chat data?
 # @socketio.on("editMessage")
 # def handle_edit_chat(data):
 #     print('we in here')

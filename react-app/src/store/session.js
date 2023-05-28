@@ -81,8 +81,7 @@ export const signUp = (username, email, password, firstName, lastName, admin) =>
 			lastName,
 			admin
 		}),
-	});
-
+	})
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
@@ -93,6 +92,8 @@ export const signUp = (username, email, password, firstName, lastName, admin) =>
 			return data.errors;
 		}
 	} else {
+		const data = await response.json();
+		console.log(data)
 		return ["An error occurred. Please try again."];
 	}
 };

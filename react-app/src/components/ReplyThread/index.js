@@ -10,7 +10,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
     const dispatch = useDispatch()
     const updateEditReply = (e) => setEditReply(e.target.value)
     const editReplyObj = {}
-
+    const ulEditClassName = "edit-box" + (replyEditErr ? "-error" : "");
     useEffect(()=>{
         editReplyObj.reply = editReply
         editReplyObj.id = replyId
@@ -28,6 +28,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
             socket.emit('chat', editReplyPayload)
             setReplyEdit(false)
             setReplyEditDelete(true)
+            setReplyEditErr('')
         }
 
 
@@ -56,6 +57,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
             {replyEdit && replyId === reply.id ?
             <form onSubmit={handleEditSubmit}>
                 <input
+                className={ulEditClassName}
                 name="edit-message"
                 id="edit-message"
                 type='text'
