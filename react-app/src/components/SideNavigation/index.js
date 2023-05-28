@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileButton from './ProfileButton';
+
 import './Navigation.css';
 import OpenModalButton from '../OpenModalButton';
 import CreateChannelModal from '../CreateChannel';
@@ -18,15 +18,8 @@ function Navigation({ socket, isLoaded }){
 	}
 
 	return (
-		<nav className='main-nav'>
-			<div>
-				<NavLink exact to="/">Home</NavLink>
-			</div>
-			{isLoaded && (
-				<div>
-					<ProfileButton user={sessionUser} />
-				</div>
-			)}
+		<>
+		{/* <nav className='main-nav'> */}
 			{isLoaded && sessionUser && (
 				<nav className='side-nav'>
 					<div>Channels</div>
@@ -48,7 +41,8 @@ function Navigation({ socket, isLoaded }){
 					)}
 				</nav>
 			)}
-		</nav>
+		{/* </nav> */}
+		</>
 	);
 }
 

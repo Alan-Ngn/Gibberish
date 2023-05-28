@@ -4,12 +4,13 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/SideNavigation";
 import ChannelById from "./components/ChannelById";
 import "./index.css";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { io } from 'socket.io-client';
 import { loadUsersThunk } from "./store/user";
+import TopNavigation from "./components/TopNavigation";
 let socket;
 function App() {
   const dispatch = useDispatch();
@@ -42,14 +43,18 @@ function App() {
         <Route path="/login" component={LoginFormPage} />
         <Route path="/signup" component={SignupFormPage}/>
         <ProtectedRoute>
-          <div className="nav-list-wrapper">
-            <Navigation socket={socket} isLoaded={isLoaded} />
-          </div>
-          {isLoaded && (
-            <Switch>
-              <Route path='/channels/:channelId' render={(props)=> <ChannelById {...props} socket={socket}/> } />
-            </Switch>
-          )}
+          {/* <div className="nav-list-wrapper"> */}
+            <TopNavigation isLoaded={isLoaded}/>
+            <div className="content">
+
+              <Navigation socket={socket} isLoaded={isLoaded} />
+            {/* </div> */}
+            {isLoaded && (
+              <Switch>
+                <Route path='/channels/:channelId' render={(props)=> <ChannelById {...props} socket={socket}/> } />
+              </Switch>
+            )}
+            </div>
       </ProtectedRoute>
       </div>
     </>
