@@ -14,7 +14,7 @@ const Replies = ({socket}) => {
 
     if (typeof channel === 'undefined') return null
     const messageById = sessionUser.channels.filter(channel => channel.id === Number(channelReplyId))[0].messages.filter(message=>message.id===messageReplyId)[0]
-
+    if (typeof messageById === 'undefined') return null
     const handleClose = (e) => {
         setOpenReply(false)
     }
