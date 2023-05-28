@@ -6,7 +6,7 @@ import { io } from 'socket.io-client';
 
 let socket;
 
-const ReplyBox = ({messageById, channel, sessionUser}) => {
+const ReplyBox = ({socket, messageById, channel, sessionUser}) => {
     const dispatch = useDispatch()
     const [err, setErr] = useState('')
     const [reply, setReply] = useState('')
@@ -16,22 +16,22 @@ const ReplyBox = ({messageById, channel, sessionUser}) => {
     const updateReply = (e) => setReply(e.target.value)
 
 
-    useEffect(() => {
-        // open socket connection
-        // create websocket
-        socket = io();
-        socket.on("chat", (chat) => {
-            // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
-            dispatch(authenticate())
-        })
-        socket.on("reply", (chat) => {
-            dispatch(authenticate())
-        })
-        // when component unmounts, disconnect
-        return (() => {
-            socket.disconnect()
-        })
-    }, [])
+    // useEffect(() => {
+    //     // open socket connection
+    //     // create websocket
+    //     socket = io();
+    //     socket.on("chat", (chat) => {
+    //         // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
+    //         dispatch(authenticate())
+    //     })
+    //     socket.on("reply", (chat) => {
+    //         dispatch(authenticate())
+    //     })
+    //     // when component unmounts, disconnect
+    //     return (() => {
+    //         socket.disconnect()
+    //     })
+    // }, [])
 
     useEffect(()=>{
         replyObj.reply = reply

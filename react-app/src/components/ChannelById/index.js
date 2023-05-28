@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import './ChannelById.css'
 import { useMessage } from "../../context/EditMessage"
@@ -8,10 +8,29 @@ import ConfirmDeleteButton from "../ConfirmDeleteButton"
 import Thread from "../Thread"
 import ChatBox from "../ChatBox"
 import Replies from "../Replies"
-
+import { authenticate } from "../../store/session";
+import { io } from 'socket.io-client';
+import { useEffect } from "react"
+let socket;
 
 const ChannelById = () => {
-
+    const dispatch = useDispatch()
+    useEffect(() => {
+        // open socket connection
+        // create websocket
+        socket = io();
+        socket.on("chat", (chat) => {
+            // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
+            dispatch(authenticate())
+        })
+        socket.on("reply", (chat) => {
+            dispatch(authenticate())
+        })
+        // when component unmounts, disconnect
+        return (() => {
+            socket.disconnect()
+        })
+    }, [])
     const { messageId, editDelete, isDelete } = useMessage()
     const { channelId } = useParams()
 
@@ -31,7 +50,7 @@ const ChannelById = () => {
                         <div className="chat">
                             <div className="chat-user">
                                 <i class="fa-solid fa-user"></i>
-                                <Thread message={message} channelId={channelId}/>
+                                <Thread socket={socket} message={message} channelId={channelId}/>
                             </div>
                             {sessionUser.id === message.user_id && editDelete && (
                                 <EditDeleteButton message={message}/>
@@ -42,9 +61,9 @@ const ChannelById = () => {
                         </div>
                     ))}
                     </div>
-                    <ChatBox channelId={channelId} getChannel={channel} sessionUser={sessionUser}/>
+                    <ChatBox socket={socket} channelId={channelId} getChannel={channel} sessionUser={sessionUser}/>
                 </div>
-                <Replies/>
+                <Replies socket={socket}/>
             </div>
         </section>
     )

@@ -17,13 +17,19 @@ socketio = SocketIO(cors_allowed_origins=origins)
 @socketio.on("chat")
 def handle_chat(data):
     if data != "User connected!":
-        message = Message(
-            user_id=data['userId'],
-            channel_id=data['channelId'],
-            message=data['message'],
-        )
-        db.session.add(message)
-        db.session.commit()
+        if data['type'] == 'POST':
+            message = Message(
+                user_id=data['userId'],
+                channel_id=data['channelId'],
+                message=data['message'],
+            )
+            db.session.add(message)
+            db.session.commit()
+        if data['type'] == 'PUT':
+            message = Message.query.get(data["id"])
+            message.message = data['message']
+            db.session.add(message)
+            db.session.commit()
     emit("chat", data, broadcast=True)
 
 #handle reply messages
@@ -38,3 +44,14 @@ def handle_reply(data):
         db.session.add(reply)
         db.session.commit()
     emit("reply", data, broadcast=True)
+
+
+# @socketio.on("editMessage")
+# def handle_edit_chat(data):
+#     print('we in here')
+#     if data != "User connected!":
+#         message = Message.query.get(data["id"])
+#         message.message = data['message']
+#         db.session.add(message)
+#         db.session.commit()
+#     emit("editMessage", data, broadcast=True)

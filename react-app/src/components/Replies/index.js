@@ -6,7 +6,7 @@ import ReplyConfirmDeleteButton from "../ReplyConfirmDeleteButton";
 import ReplyEditDeleteButton from "../ReplyEditDeleteButton";
 import ReplyThread from "../ReplyThread";
 
-const Replies = () => {
+const Replies = ({socket}) => {
     const { openReply, setOpenReply, messageReplyId, channelReplyId, isReplyDelete, replyEditDelete, replyId } = useMessage()
 	const sessionUser = useSelector(state => state.session.user);
 
@@ -38,7 +38,7 @@ const Replies = () => {
                     )}
                 </div>
             )))}
-            <ReplyBox messageById={messageById} channel={channel} sessionUser={sessionUser}/>
+            <ReplyBox socket={socket} messageById={messageById} channel={channel} sessionUser={sessionUser}/>
         </section>)
         }
         </>
