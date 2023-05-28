@@ -5,11 +5,11 @@ import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 
 import { deleteMessageThunk } from "../../store/message"
 
-const DeleteModal = ({id, type, channelId}) => {
+const DeleteModal = ({socket, id, type, channelId}) => {
   console.log(type, 'this is the type to delte')
     const dispatch = useDispatch()
     const {closeModal} = useModal()
-    
+
   //   const users = useSelector(state => state.users)
 	// const sessionUser = useSelector(state => state.session.user);
   //   const [title, setTitle] = useState('')
@@ -20,9 +20,13 @@ const DeleteModal = ({id, type, channelId}) => {
     console.log(id, channelId, 'this is my channel Id')
     const deleteOnClick = (e) => {
         e.preventDefault();
+        const payload = {}
         if (type === 'channel'){
-          dispatch(deleteChannelThunk(id)).then(closeModal);
-
+          payload.id = id
+          payload.type = 'channel-DELETE'
+          // dispatch(deleteChannelThunk(id)).then(closeModal);
+          socket.emit("chat", payload);
+          closeModal()
         }
         if (type === 'message'){
           dispatch(deleteMessageThunk(id, channelId)).then(closeModal)

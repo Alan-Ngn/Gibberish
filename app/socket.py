@@ -72,6 +72,10 @@ def handle_chat(data):
             channel.title = data['title']
             db.session.add(channel)
             db.session.commit()
+        if data['type'] == 'channel-DELETE':
+            channel = Channel.query.get(data["id"])
+            db.session.delete(channel)
+            db.session.commit()
 
         if data['type'] == 'member-DELETE':
             db.session.execute(members.delete().where(members.c.user_id==data['deleteMember']).where(members.c.channel_id==data['id']))
