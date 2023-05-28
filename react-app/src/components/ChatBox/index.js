@@ -1,35 +1,14 @@
-import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
 import { useEffect } from "react"
-import { io } from 'socket.io-client';
-import './ChatBox.css'
-import { authenticate } from "../../store/session";
 
-let socket;
+import './ChatBox.css'
+
 
 const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
-    const dispatch = useDispatch()
     const messageObj ={}
     const {err, setErr, messagePayload, setMessagePayload, message, setMessage} = useMessage()
     const updateMessage = (e) => setMessage(e.target.value)
     const ulClassName = "chat-box" + (err ? "-error" : "");
-
-    // useEffect(() => {
-    //     // open socket connection
-    //     // create websocket
-    //     socket = io();
-    //     socket.on("chat", (chat) => {
-    //         // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
-    //         dispatch(authenticate())
-    //     })
-    //     socket.on("reply", (chat) => {
-    //         dispatch(authenticate())
-    //     })
-    //     // when component unmounts, disconnect
-    //     return (() => {
-    //         socket.disconnect()
-    //     })
-    // }, [])
 
     useEffect(()=>{
         messageObj.message = message

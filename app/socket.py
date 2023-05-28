@@ -1,6 +1,6 @@
 from flask_socketio import SocketIO, emit
 import os
-from app.models import Message,db, Reply
+from app.models import Message, db, Reply, Channel, members
 socketio = SocketIO()
 
 #! Needs to be changed for RENDER
@@ -34,6 +34,7 @@ def handle_chat(data):
             message = Message.query.get(data["id"])
             db.session.delete(message)
             db.session.commit()
+
         if data['type'] == 'reply-POST':
             reply = Reply(
                 user_id=data['userId'],
@@ -51,6 +52,20 @@ def handle_chat(data):
             reply = Reply.query.get(data['id'])
             db.session.delete(reply)
             db.session.commit()
+
+        if data['type'] == 'channel-POST':
+            print(data, 'channel post')
+            channel = Channel(
+                title=data['title'],
+                admin_id=data['admin_id']
+            )
+            db.session.add(channel)
+            db.session.commit()
+
+            for member in data['members']:
+                db.session.execute(members.insert().values(user_id=member, channel_id = channel.to_dict()['id']))
+                db.session.commit()
+
     emit("chat", data, broadcast=True)
 
 #handle reply messages

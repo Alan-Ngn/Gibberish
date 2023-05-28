@@ -5,7 +5,7 @@ import { createChannelThunk, editChannelThunk } from "../../store/channel"
 import { createMemberThunk, deleteMemberThunk } from "../../store/member"
 import './CreateChannel.css';
 
-const CreateChannelModal = ({id, members, channelTitle, type}) => {
+const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
     const memberId = members.map(member => (member.id))
     const dispatch = useDispatch()
     const {closeModal} = useModal()
@@ -22,7 +22,7 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
         payload.admin_id = sessionUser.id
         payload.title = title
         payload.id = id
-
+        payload.members = checkUser
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
             const data = await dispatch(editChannelThunk(payload, id))
             const deleteMembers = memberId.filter(member => !checkUser.includes(member))
@@ -41,13 +41,27 @@ const CreateChannelModal = ({id, members, channelTitle, type}) => {
             }
         }
         else if(type==='create' && checkUser.length > 0){
-            const data = await dispatch(createChannelThunk(payload, checkUser))
-            if (data) {
-                setErr(data)
+            payload.type = 'channel-POST'
+            // const data = await dispatch(createChannelThunk(payload, checkUser))
+            if (payload.title.length === 0){
+                setErr(['Please enter a title'])
+            } else if (payload.title.length > 255){
+                setErr(['Title must be less than 255 characters'])
             } else {
+                socket.emit("chat", payload);
+                // for (let i = 0; i < checkUser.length; i++) {
+                //     payload.type ='member-POST'
+                //     socket.emit("chat", checkUser[i])
+                // }
                 setErr('')
                 closeModal()
             }
+            // if (data) {
+            //     setErr(data)
+            // } else {
+            //     setErr('')
+            //     closeModal()
+            // }
         } else {
             setErr('Please add members')
         }

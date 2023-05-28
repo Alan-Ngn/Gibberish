@@ -8,7 +8,7 @@ import CreateChannelModal from '../CreateChannel';
 import { loadUsersThunk } from '../../store/user';
 import ChannelDropdown from '../ChannelMenu';
 
-function Navigation({ isLoaded }){
+function Navigation({ socket, isLoaded }){
 	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
 
@@ -43,7 +43,7 @@ function Navigation({ isLoaded }){
 						<OpenModalButton
 							buttonText='Add channels'
 							onButtonClick={onButtonClick}
-							modalComponent={<CreateChannelModal adminId={sessionUser.id} members={[sessionUser]} channelTitle={''} type={'create'}/>}
+							modalComponent={<CreateChannelModal socket={socket} adminId={sessionUser.id} members={[sessionUser]} channelTitle={''} type={'create'}/>}
 						/>
 					)}
 				</nav>

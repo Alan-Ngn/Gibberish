@@ -41,7 +41,7 @@ function App() {
         <Route path="/signup" component={SignupFormPage}/>
         <ProtectedRoute>
           <div className="nav-list-wrapper">
-            <Navigation isLoaded={isLoaded} />
+            <Navigation socket={socket} isLoaded={isLoaded} />
           </div>
           {isLoaded && (
             <Switch>
