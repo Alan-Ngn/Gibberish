@@ -24,7 +24,7 @@ const Replies = ({socket}) => {
         {openReply &&
 
 (        <section className="replies-thread">
-            <h2>Thread</h2><h3>{messageById.channel.title}</h3><button onClick={handleClose}><i class="fa-solid fa-xmark"></i></button>
+            <h2 className='content-header'>Thread</h2><h3>{messageById.channel.title}</h3><button onClick={handleClose}><i class="fa-solid fa-xmark"></i></button>
             <p>{messageById.user.first_name} {messageById.user.last_name}</p>
             <p>{messageById.message}</p>
             {(messageById.replies.map((reply) => (

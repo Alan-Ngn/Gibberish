@@ -83,3 +83,10 @@ input {
     /* margin:20px; */
     border: 1px solid rgb(87, 86, 86);
 }
+
+.content-header {
+    border-bottom: 1px solid rgb(87, 86, 86);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

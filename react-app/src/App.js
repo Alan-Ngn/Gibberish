@@ -42,13 +42,11 @@ function App() {
       <div className="site">
         <Route path="/login" component={LoginFormPage} />
         <Route path="/signup" component={SignupFormPage}/>
-        <ProtectedRoute>
-          {/* <div className="nav-list-wrapper"> */}
             <TopNavigation isLoaded={isLoaded}/>
-            <div className="content">
+        <ProtectedRoute>
 
+            <div className="content">
               <Navigation socket={socket} isLoaded={isLoaded} />
-            {/* </div> */}
             {isLoaded && (
               <Switch>
                 <Route path='/channels/:channelId' render={(props)=> <ChannelById {...props} socket={socket}/> } />

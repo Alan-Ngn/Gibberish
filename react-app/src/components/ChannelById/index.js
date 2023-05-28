@@ -26,21 +26,23 @@ const ChannelById = ({socket}) => {
             <div className="chat-area-right-navigation">
                 <div className="chat-area-wrapper">
                     <div className="chat-area">
-                        <h2>{channel.title}</h2>
-                    {channel.messages.map((message) =>(
-                        <div className="chat">
-                            <div className="chat-user">
-                                <i class="fa-solid fa-user"></i>
-                                <Thread socket={socket} message={message} channelId={channelId}/>
-                            </div>
-                            {sessionUser.id === message.user_id && editDelete && (
-                                <EditDeleteButton message={message}/>
-                            )}
-                            {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
-                                <ConfirmDeleteButton socket={socket} channelId={channelId}/>
-                            )}
+                        <h2 className='content-header'>{channel.title}</h2>
+                        <div className="chat-content-channel">
+                            {channel.messages.map((message) =>(
+                                <div className="chat">
+                                    <div className="chat-user">
+                                        <i class="fa-solid fa-user"></i>
+                                        <Thread socket={socket} message={message} channelId={channelId}/>
+                                    </div>
+                                    {sessionUser.id === message.user_id && editDelete && (
+                                        <EditDeleteButton message={message}/>
+                                    )}
+                                    {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
+                                        <ConfirmDeleteButton socket={socket} channelId={channelId}/>
+                                    )}
+                                </div>
+                            ))}
                         </div>
-                    ))}
                     </div>
                     <ChatBox socket={socket} channelId={channelId} getChannel={channel} sessionUser={sessionUser}/>
                 </div>

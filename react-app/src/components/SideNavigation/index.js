@@ -22,10 +22,10 @@ function Navigation({ socket, isLoaded }){
 		{/* <nav className='main-nav'> */}
 			{isLoaded && sessionUser && (
 				<nav className='side-nav'>
-					<div>Channels</div>
+					<h2 className='content-header'>Channels</h2>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
-							<NavLink className='nav-channel-title' to={`/channels/${channel.id}`}>{channel.title}</NavLink>
+							<NavLink className='nav-channel-title' to={`/channels/${channel.id}`}>{`# ${channel.title}`}</NavLink>
 							{sessionUser.id === channel.admin_id && (
 								<ChannelDropdown socket={socket} id={channel.id} members={channel.members} channelTitle={channel.title}/>
 							)}

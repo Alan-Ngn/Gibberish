@@ -4,9 +4,11 @@
 
 .chat-area {
     overflow-y:hidden;
+    width:100%;
     scrollbar-color: red yellow;
 }
 
-.chat-area:hover {
-    overflow-y:auto;
+.chat-content-channel:hover {
+    overflow-y:scroll;
+    height:100%
 }
