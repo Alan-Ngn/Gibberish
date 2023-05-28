@@ -28,6 +28,7 @@ const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
         } else {
             socket.emit("chat", messagePayload);
             setMessage('')
+            setErr('')
         }
         // if (data) {
         //     setErr(data)

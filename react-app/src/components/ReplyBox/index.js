@@ -32,6 +32,7 @@ const ReplyBox = ({socket, messageById, channel, sessionUser}) => {
         } else {
             socket.emit('chat', replyPayload)
             setReply('')
+            setErr('')
         }
     }
 
