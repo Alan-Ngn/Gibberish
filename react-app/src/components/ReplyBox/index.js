@@ -3,7 +3,7 @@ import { createReplyThunk } from "../../store/reply";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../../store/session";
 import { io } from 'socket.io-client';
-
+import './ReplyBox.css'
 let socket;
 
 const ReplyBox = ({socket, messageById, channel, sessionUser}) => {

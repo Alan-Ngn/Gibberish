@@ -1,11 +1,18 @@
 .replies-thread {
-    border-left: 1px solid rgb(218, 211, 211);
+    border-left: 1px solid rgb(87, 86, 86);
     /* background-color: rgb(34, 34, 37); */
     height: 100%;
     min-width: 25%;
-    padding-left: 30px;
-    padding-right: 30px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    /* margin: 20px; */
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
 }
+
 
 .reply-box-error {
     border: 3px solid red;
@@ -21,4 +28,83 @@
 
 input.reply-box-error::placeholder {
     color: red
+}
+
+.reply-content{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.reply-content-header-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(87, 86, 86);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* margin-bottom: 20px; */
+    padding:10px;
+    align-items: center;
+    gap: 10px
+}
+
+.reply-content-header-wrapper button {
+    height: 28px;
+}
+.reply-content-header-wrapper h2, .reply-title {
+    margin:0px
+}
+
+.reply-title {
+    /* border-bottom: 1px solid rgb(87, 86, 86); */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reply-chat-user {
+    display:flex;
+    flex-direction: row;
+    gap: 5px;
+    /* border-bottom: 1px solid rgb(87, 86, 86); */
+}
+
+.reply-chat-user .fa-solid.fa-user {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(8, 44, 44);
+    background-color: rgb(8, 44, 44);
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+}
+
+.reply-message {
+    display:flex;
+    flex-direction: column;
+
+}
+
+.reply-count-border {
+    width:70%;
+    border-bottom: 1px solid rgb(87, 86, 86);
+}
+
+.reply-count-border-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:20px
+}
+
+.reply-content {
+    overflow-y:hidden;
+    width:100%;
+}
+.reply-content:hover {
+    overflow-y:scroll;
+    /* height:100% */
 }

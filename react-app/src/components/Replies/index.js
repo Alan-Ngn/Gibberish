@@ -24,20 +24,45 @@ const Replies = ({socket}) => {
         {openReply &&
 
 (        <section className="replies-thread">
-            <h2 className='content-header'>Thread</h2><h3>{messageById.channel.title}</h3><button onClick={handleClose}><i class="fa-solid fa-xmark"></i></button>
-            <p>{messageById.user.first_name} {messageById.user.last_name}</p>
-            <p>{messageById.message}</p>
-            {(messageById.replies.map((reply) => (
-                <div className="chat">
-                    <ReplyThread socket={socket} reply={reply} messageById={messageById} />
-                    {sessionUser.id === reply.user_id && replyEditDelete &&(
-                        <ReplyEditDeleteButton reply={reply} />
-                    )}
-                    {sessionUser.id === reply.user_id && replyId === reply.id && isReplyDelete && (
-                        <ReplyConfirmDeleteButton socket={socket} replyId={replyId} messageById={messageById}/>
-                    )}
+            <div className="reply-content-header-wrapper">
+                <h2>Thread</h2>
+                <p className="reply-title">{`# ${messageById.channel.title}`}</p>
+                <button onClick={handleClose}>
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div className="reply-message">
+                <div className="reply-chat-user">
+                    <i class="fa-solid fa-user"></i>
+                    <div className="chat-user-message">
+                        <p>{messageById.user.first_name} {messageById.user.last_name}</p>
+                        <p className="message">{messageById.message}</p>
+                    </div>
                 </div>
-            )))}
+                <div className="reply-count-border-wrapper">
+
+                    <div className="reply-count">
+                    {`${messageById.replies.length} replies`}
+                    </div>
+                    <div className="reply-count-border"></div>
+                </div>
+            </div>
+            <div className="reply-content">
+                {(messageById.replies.map((reply) => (
+                    <div className="chat">
+                        <div className="chat-user">
+                            <i class="fa-solid fa-user"></i>
+                            <ReplyThread socket={socket} reply={reply} messageById={messageById} />
+                        </div>
+                        {sessionUser.id === reply.user_id && replyEditDelete &&(
+                            <ReplyEditDeleteButton reply={reply} />
+                        )}
+                        {sessionUser.id === reply.user_id && replyId === reply.id && isReplyDelete && (
+                            <ReplyConfirmDeleteButton socket={socket} replyId={replyId} messageById={messageById}/>
+                        )}
+                    </div>
+                )))}
+            </div>
             <ReplyBox socket={socket} messageById={messageById} channel={channel} sessionUser={sessionUser}/>
         </section>)
         }
