@@ -1,7 +1,7 @@
 .replies-thread {
     border-left: 1px solid rgb(87, 86, 86);
     /* background-color: rgb(34, 34, 37); */
-    height: 100%;
+    /* height: 100%; */
     min-width: 25%;
     /* padding-left: 30px;
     padding-right: 30px; */
@@ -9,8 +9,8 @@
     /* width: 100%; */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
+    /* justify-content: space-between; */
+    /* overflow: hidden; */
 }
 
 
@@ -31,8 +31,7 @@ input.reply-box-error::placeholder {
 }
 
 .reply-content{
-    padding-left: 20px;
-    padding-right: 20px;
+
 }
 
 .reply-content-header-wrapper{
@@ -41,12 +40,13 @@ input.reply-box-error::placeholder {
     justify-content: space-between;
     border-bottom: 1px solid rgb(87, 86, 86);
     white-space: nowrap;
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
     /* margin-bottom: 20px; */
     padding:10px;
     align-items: center;
-    gap: 10px
+    gap: 10px;
+    /* height: 100px; */
 }
 
 .reply-content-header-wrapper button {
@@ -101,10 +101,22 @@ input.reply-box-error::placeholder {
 }
 
 .reply-content {
-    overflow-y:hidden;
-    width:100%;
+    /* overflow-y:auto; */
+    overflow: hidden;
+    /* width:100%;
+     */
+     padding-left: 20px;
+     /* padding-right: 20px; */
 }
 .reply-content:hover {
     overflow-y:scroll;
-    /* height:100% */
+    height:100%
+}
+
+.reply-content-wrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y:hidden;
+    width:100%;
 }
