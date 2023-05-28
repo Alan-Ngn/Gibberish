@@ -88,10 +88,10 @@ def handle_chat(data):
     emit("chat", data, broadcast=True)
 
 # handle reply messages
-@socketio.on("all")
-def handle_all(data):
-    print(data,'what is this data?')
-    emit("all", data, broadcast=True)
+# @socketio.on("all")
+# def handle_all(data):
+#     print(data,'what is this data?')
+#     emit("all", data, broadcast=True)
 # {'id': 31, 'username': 'lolfffffffsafdasfadf', 'email': 'lasdffffsfdfk@aa.io', 'first_name': 'lolf', 'last_name': 'llolf', 'profile_pic': None, 'admin': False} what is this data?
 # {'message': 'test', 'userId': 2, 'channelId': '14', 'type': 'message-POST'} chat data?
 # @socketio.on("editMessage")

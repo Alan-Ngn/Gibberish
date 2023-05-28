@@ -9,6 +9,7 @@ import ChannelById from "./components/ChannelById";
 import "./index.css";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { io } from 'socket.io-client';
+import { loadUsersThunk } from "./store/user";
 let socket;
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ function App() {
         dispatch(authenticate())
     })
     socket.on("all", (chat) => {
-        dispatch(authenticate())
+        // dispatch(authenticate())
+        dispatch(loadUsersThunk())
     })
     // when component unmounts, disconnect
     return (() => {

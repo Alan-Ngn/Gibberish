@@ -24,7 +24,6 @@ function SignupFormPage() {
     console.log(username, email, password)
     if (password === confirmPassword) {
         const data = await dispatch(signUp(username, email, password, firstName, lastName, admin));
-        console.log(data)
         if (data) {
           setErrors(data)
         }
