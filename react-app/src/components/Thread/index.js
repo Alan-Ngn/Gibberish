@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
-import { editMessageThunk, loadMessageThunk } from "../../store/message"
+import { editMessageThunk } from "../../store/message"
 import { useEffect } from "react"
 import './Thread.css'
 
@@ -64,7 +64,7 @@ const Thread = ({message, channelId}) => {
                 e.preventDefault()
                 setMessageReplyId(message.id)
                 setChannelReplyId(channelId)
-                dispatch(loadMessageThunk(message.id)).then(() => setOpenReply(true))
+                setOpenReply(true)
             }}>
                 {`${message.replies.length} Replies`}
             </button>

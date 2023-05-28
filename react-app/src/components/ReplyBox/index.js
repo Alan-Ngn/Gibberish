@@ -17,10 +17,17 @@ const ReplyBox = ({messageById, channel, sessionUser}) => {
 
 
     useEffect(() => {
+        // open socket connection
+        // create websocket
         socket = io();
+        socket.on("chat", (chat) => {
+            // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
+            dispatch(authenticate())
+        })
         socket.on("reply", (chat) => {
             dispatch(authenticate())
         })
+        // when component unmounts, disconnect
         return (() => {
             socket.disconnect()
         })
