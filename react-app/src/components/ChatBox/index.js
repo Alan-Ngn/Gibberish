@@ -50,12 +50,11 @@ const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
                     onChange={updateMessage}
                 >
                 </input>
-                <div className="message-box">
-
-                {message.length === 0 ? <p>Maximum Character Limit: 255</p> : message.length > 255 ? <p className="char-over-limit">{`${message.length - 255} Characters Over Limit`}</p> : <p>{`${255-message.length} Characters Remaining`}</p>}
-                </div>
+                <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
             </div>
-            <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
+                <div className="message-box">
+                    {message.length === 0 ? <p>Maximum Character Limit: 255</p> : message.length > 255 ? <p className="char-over-limit">{`${message.length - 255} Characters Over Limit`}</p> : <p>{`${255-message.length} Characters Remaining`}</p>}
+                </div>
         </form>
     )
 }

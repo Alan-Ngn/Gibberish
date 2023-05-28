@@ -2,13 +2,13 @@
     color: white;
 }
 
-.chat-area {
+.chat-area, .chat-content-channel {
     overflow-y:hidden;
     width:100%;
     /* scrollbar-color: red yellow; */
 }
 
 .chat-content-channel:hover {
-    overflow-y:scroll;
-    height:100%
+    overflow-y:auto;
+    height:96.2%
 }
