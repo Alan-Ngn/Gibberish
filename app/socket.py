@@ -1,7 +1,7 @@
 from flask_socketio import SocketIO, emit
 import os
 from app.models import Message, db, Reply, Channel, members, User
-socketio = SocketIO()
+# socketio = SocketIO()
 
 #! Needs to be changed for RENDER
 if os.environ.get("FLASK_ENV") == "production":
