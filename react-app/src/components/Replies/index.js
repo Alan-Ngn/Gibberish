@@ -29,7 +29,7 @@ const Replies = ({socket}) => {
             <p>{messageById.message}</p>
             {(messageById.replies.map((reply) => (
                 <div className="chat">
-                    <ReplyThread reply={reply} messageById={messageById} />
+                    <ReplyThread socket={socket} reply={reply} messageById={messageById} />
                     {sessionUser.id === reply.user_id && replyEditDelete &&(
                         <ReplyEditDeleteButton reply={reply} />
                     )}

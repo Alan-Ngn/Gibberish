@@ -1,56 +1,34 @@
-import { useDispatch } from "react-redux"
 import { useMessage } from "../../context/EditMessage"
-import { editMessageThunk } from "../../store/message"
 import { useEffect } from "react"
 import './Thread.css'
-import { authenticate } from "../../store/session";
-import { io } from 'socket.io-client';
+
 
 
 
 const Thread = ({socket, message, channelId}) => {
-    const dispatch = useDispatch()
     const editMessageObj = {}
     const {editMessage, setEditMessage, edit, messageId, setEdit, setEditDelete, editErr, setEditErr, editMessagePayload, setEditMessagePayload, setOpenReply, setMessageReplyId, setChannelReplyId} = useMessage()
     const updateEditMessage = (e) => setEditMessage(e.target.value)
     const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
 
-
-    // useEffect(() => {
-    //     // open socket connection
-    //     // create websocket
-    //     socket = io();
-    //     socket.on("chat", (chat) => {
-    //         // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
-    //         dispatch(authenticate())
-    //     })
-    //     socket.on("reply", (chat) => {
-    //         dispatch(authenticate())
-    //     })
-    //     // when component unmounts, disconnect
-    //     return (() => {
-    //         socket.disconnect()
-    //     })
-    // }, [])
-
     useEffect(()=>{
         editMessageObj.message = editMessage
         editMessageObj.id = messageId
-        editMessageObj.type = "PUT"
+        editMessageObj.type = "message-PUT"
         setEditMessagePayload(editMessageObj)
     },[editMessage])
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        // const data = await dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
         if(editMessagePayload.message.length===0){
             setEditErr(['Please enter a message'])
         } else if (editMessagePayload.message.length > 255) {
             setEditErr(['Message must be less than 255 characters'])
         } else {
-            socket.emit('editMessage', editMessagePayload)
+            socket.emit('chat', editMessagePayload)
             setEditMessage('')
             setEdit(false)
+            setEditDelete(true)
         }
         // if (data) {
         //     setEditErr(data)

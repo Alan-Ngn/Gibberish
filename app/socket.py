@@ -17,7 +17,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 @socketio.on("chat")
 def handle_chat(data):
     if data != "User connected!":
-        if data['type'] == 'POST':
+        if data['type'] == 'message-POST':
             message = Message(
                 user_id=data['userId'],
                 channel_id=data['channelId'],
@@ -25,25 +25,38 @@ def handle_chat(data):
             )
             db.session.add(message)
             db.session.commit()
-        if data['type'] == 'PUT':
+        if data['type'] == 'message-PUT':
             message = Message.query.get(data["id"])
             message.message = data['message']
             db.session.add(message)
             db.session.commit()
+        if data['type'] == 'reply-POST':
+            reply = Reply(
+                user_id=data['userId'],
+                message_id=data['messageId'],
+                reply=data['reply'],
+            )
+            db.session.add(reply)
+            db.session.commit()
+        if data['type'] == 'reply-PUT':
+            reply = Reply.query.get(data['id'])
+            reply.reply =data['reply']
+            db.session.add(reply)
+            db.session.commit()
     emit("chat", data, broadcast=True)
 
 #handle reply messages
-@socketio.on("reply")
-def handle_reply(data):
-    if data != "User connected!":
-        reply = Reply(
-            user_id=data['userId'],
-            message_id=data['messageId'],
-            reply=data['reply'],
-        )
-        db.session.add(reply)
-        db.session.commit()
-    emit("reply", data, broadcast=True)
+# @socketio.on("reply")
+# def handle_reply(data):
+#     if data != "User connected!":
+#         reply = Reply(
+#             user_id=data['userId'],
+#             message_id=data['messageId'],
+#             reply=data['reply'],
+#         )
+#         db.session.add(reply)
+#         db.session.commit()
+#     emit("reply", data, broadcast=True)
 
 
 # @socketio.on("editMessage")

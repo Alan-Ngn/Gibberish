@@ -35,7 +35,7 @@ const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
         messageObj.message = message
         messageObj.userId = sessionUser.id
         messageObj.channelId = channelId
-        messageObj.type = 'POST'
+        messageObj.type = 'message-POST'
         setMessagePayload(messageObj)
     },[message])
 

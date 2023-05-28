@@ -3,8 +3,8 @@ import { useMessage } from "../../context/EditMessage"
 import { editReplyThunk } from "../../store/reply"
 import { useEffect, useState } from "react"
 
-const ReplyThread = ({reply, messageById}) => {
-    
+const ReplyThread = ({socket, reply, messageById}) => {
+
     const {replyEdit, setReplyEdit, setEditReply, setReplyEditDelete, replyId, editReply, replyEditErr, setReplyEditErr} = useMessage()
     const [editReplyPayload, setEditReplyPayload] = useState({})
     const dispatch = useDispatch()
@@ -13,19 +13,34 @@ const ReplyThread = ({reply, messageById}) => {
 
     useEffect(()=>{
         editReplyObj.reply = editReply
+        editReplyObj.id = replyId
+        editReplyObj.type = 'reply-PUT'
         setEditReplyPayload(editReplyObj)
     },[editReply])
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(editReplyThunk(editReplyPayload, messageById.id, replyId))
-        if (data) {
-            setReplyEditErr(data)
+        if(editReplyPayload.reply.length===0){
+            setReplyEditErr(['Please enter a message'])
+        } else if (editReplyPayload.reply.length > 255) {
+            setReplyEditErr(['Message must be less than 255 characters'])
         } else {
-            setReplyEditErr('')
+            socket.emit('chat', editReplyPayload)
             setReplyEdit(false)
             setReplyEditDelete(true)
         }
+
+
+
+
+        // const data = await dispatch(editReplyThunk(editReplyPayload, messageById.id, replyId))
+        // if (data) {
+        //     setReplyEditErr(data)
+        // } else {
+        //     setReplyEditErr('')
+        //     setReplyEdit(false)
+        //     setReplyEditDelete(true)
+        // }
     }
 
     const handleEditCancel = (e) =>{

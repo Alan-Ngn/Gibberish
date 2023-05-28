@@ -15,28 +15,11 @@ const ReplyBox = ({socket, messageById, channel, sessionUser}) => {
     const ulClassName = "reply-box" + (err ? "-error" : "");
     const updateReply = (e) => setReply(e.target.value)
 
-
-    // useEffect(() => {
-    //     // open socket connection
-    //     // create websocket
-    //     socket = io();
-    //     socket.on("chat", (chat) => {
-    //         // Whenver a chat is sent, Dispatch our fetch to get all messages and set the messages to the returned list
-    //         dispatch(authenticate())
-    //     })
-    //     socket.on("reply", (chat) => {
-    //         dispatch(authenticate())
-    //     })
-    //     // when component unmounts, disconnect
-    //     return (() => {
-    //         socket.disconnect()
-    //     })
-    // }, [])
-
     useEffect(()=>{
         replyObj.reply = reply
         replyObj.userId = sessionUser.id
         replyObj.messageId = messageById.id
+        replyObj.type = 'reply-POST'
         setReplyPayload(replyObj)
     },[reply])
 
@@ -47,16 +30,9 @@ const ReplyBox = ({socket, messageById, channel, sessionUser}) => {
         } else if (replyPayload.reply.length > 255) {
             setErr(['Message must be less than 255 characters'])
         } else {
-            socket.emit('reply', replyPayload)
+            socket.emit('chat', replyPayload)
             setReply('')
         }
-        // const data = await dispatch(createReplyThunk(replyPayload, messageById.id, sessionUser.id, channel.id))
-        // setReply('')
-        // if (data) {
-        //     setErr(data)
-        // } else {
-        //     setErr('')
-        // }
     }
 
     return (
