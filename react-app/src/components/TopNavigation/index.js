@@ -13,17 +13,21 @@ const TopNavigation = ({isLoaded}) => {
             <div>
                 <NavLink exact to="/">Home</NavLink>
             </div>
-     
-                    <i class="fa-brands fa-linkedin" fa-10x>
-                <Link className='linkedin' to={{pathname: `https://www.linkedin.com/in/alannguyen21`}} target='_blank'/>
 
-                    </i>
+                        <Link className='linkedin' to={{pathname: `https://www.linkedin.com/in/alannguyen21`}} target='_blank'>
+                            <i class="fa-brands fa-linkedin" />
+
+                        </Link>
 
 
-                    <i class="fa-brands fa-github">
-                <Link className='github' to={{pathname: `https://github.com/Alan-Ngn`}} target='_blank'/>
 
-                    </i>
+
+                <Link className='github' to={{pathname: `https://github.com/Alan-Ngn`}} target='_blank'>
+                    <i class="fa-brands fa-github"/>
+
+                </Link>
+
+
 
             {isLoaded && (
                 <div>

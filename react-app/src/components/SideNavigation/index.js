@@ -22,7 +22,8 @@ function Navigation({ socket, isLoaded }){
 		{/* <nav className='main-nav'> */}
 			{isLoaded && sessionUser && (
 				<nav className='side-nav'>
-					<h2 className='content-header'>Channels</h2>
+					<h2 className='content-header'>Workspace</h2>
+					<p className='channel-header'>Channels</p>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
 						<div className='channel-nav'>
 							<NavLink className='nav-channel-title' to={`/channels/${channel.id}`}>{`# ${channel.title}`}</NavLink>
