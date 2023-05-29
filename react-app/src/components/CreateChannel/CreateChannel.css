@@ -15,6 +15,7 @@
     flex-direction: row;
     justify-content: space-between;
     /* gap:180px; */
+
 }
 
 .channel-create-error{
@@ -24,4 +25,15 @@
 .channel-create-button {
     background-color: white;
     border: 1px solid black;
+}
+
+.channel-name-err {
+    border: 3px solid red;
+    width: 100%;
+    /* height: 80px; */
+    /* overflow: hidden; */
+}
+
+.channel-name {
+    width: 100%;
 }

@@ -180,3 +180,21 @@ input.edit-box-error::placeholder, input.chat-box-error::placeholder  {
     height: 30px;
     border-radius: 6px;
 }
+
+.channel-content-header-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(87, 86, 86);
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    /* margin-bottom: 20px; */
+    padding:10px;
+    align-items: center;
+    gap: 10px;
+    /* height: 100px; */
+}
+.channel-content-header {
+    margin: 0px;
+}

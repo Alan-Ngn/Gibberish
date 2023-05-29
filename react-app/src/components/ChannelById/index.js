@@ -26,7 +26,10 @@ const ChannelById = ({socket}) => {
             <div className="chat-area-right-navigation">
                 <div className="chat-area-wrapper">
                     <div className="chat-area">
-                        <h2 className='content-header'>{`# ${channel.title}`}</h2>
+                        <div className="channel-content-header-wrapper">
+                            <h2 className='channel-content-header'>{`# ${channel.title}`}</h2>
+                            <div>{`${channel.members.length} Members`}</div>
+                        </div>
                         <div className="chat-content-channel">
                             {channel.messages.map((message) =>(
                                 <div className="chat">

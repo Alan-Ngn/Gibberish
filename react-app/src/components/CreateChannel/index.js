@@ -16,7 +16,7 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
     const [err, setErr] = useState('')
     const updateTitle =(e) => setTitle(e.target.value)
     const payload = {}
-
+    const channelTitleName = "channel-name" + (err.length === 0 ? "" : "-err");
     const handleSubmit = async(e) => {
         e.preventDefault()
         payload.admin_id = sessionUser.id
@@ -26,9 +26,9 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
             payload.type = 'channel-PUT'
             if (payload.title.length === 0){
-                setErr(['Please enter a title'])
+                setErr(['Give your channel a name to continue. You can always change the name later.'])
             } else if (payload.title.length > 255){
-                setErr(['Title must be less than 255 characters'])
+                setErr(['Give your channel a name to continue. You can always change the name later.'])
             } else {
                 console.log(payload)
                 socket.emit("chat", payload);
@@ -71,9 +71,9 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
         else if(type==='create' && checkUser.length > 0){
             payload.type = 'channel-POST'
             if (payload.title.length === 0){
-                setErr(['Please enter a title'])
+                setErr(['Give your channel a name to continue. You can always change the name later.'])
             } else if (payload.title.length > 255){
-                setErr(['Title must be less than 255 characters'])
+                setErr(['Give your channel a name to continue. You can always change the name later.'])
             } else {
                 socket.emit("chat", payload);
                 setErr('')
@@ -95,6 +95,7 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
         e.preventDefault()
         closeModal()
     }
+
     if(!users) return null
 
     return (
@@ -103,7 +104,7 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
                 <h3>Create a channel</h3>
                 <button onClick={handleCancel}><i class="fa-solid fa-xmark"></i></button>
             </div>
-            {err.length > 0 && (<p className="channel-create-error">{err[0]}</p>)}
+
             <form onSubmit={handleSubmit}>
                 {type==='edit' && (
                     <input
@@ -112,13 +113,16 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
                     id='id'
                     value={id}/>
                 )}
+                <label for={'title'}>Name</label>
                 <input
+                    className={channelTitleName}
                     name="title"
                     id="title"
-                    placeholder="Title"
+                    placeholder="# eg.gym-bros"
                     value={title}
                     onChange={updateTitle}
                 />
+                {err.length > 0 && (<p className="channel-create-error">{err[0]}</p>)}
                 <p>Channels are where conversations happen around a topic. Use a name that is easy to find and understand</p>
                 <fieldset>
                     {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
