@@ -22,60 +22,28 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
         payload.admin_id = sessionUser.id
         payload.title = title
         payload.id = id
-        payload.members = checkUser
         if(type==='edit' && members.length > 0 && checkUser.length > 0){
-            payload.type = 'channel-PUT'
-            if (payload.title.length === 0){
-                setErr(['Give your channel a name to continue. You can always change the name later.'])
-            } else if (payload.title.length > 255){
-                setErr(['Give your channel a name to continue. You can always change the name later.'])
+            const data = await dispatch(editChannelThunk(payload, id))
+            const deleteMembers = memberId.filter(member => !checkUser.includes(member))
+            const addMembers = checkUser.filter(member => !memberId.includes(member))
+            if (data) {
+                setErr(data)
             } else {
-                console.log(payload)
-                socket.emit("chat", payload);
-                const deleteMembers = memberId.filter(member => !checkUser.includes(member))
-                const addMembers = checkUser.filter(member => !memberId.includes(member))
                 setErr('')
                 if(deleteMembers.length > 0){
-                    // dispatch(deleteMemberThunk(id, deleteMembers))
-                    payload.type = 'member-DELETE'
-                    for (let i = 0; i < deleteMembers.length; i++) {
-                        payload.deleteMember = deleteMembers[i]
-                        socket.emit("chat", payload);
-                    }
+                    dispatch(deleteMemberThunk(id, deleteMembers))
                 }
                 if(addMembers.length > 0){
-                    // dispatch(createMemberThunk(id, addMembers))
-                    payload.type = 'member-POST'
-                    for (let i = 0; i < addMembers.length; i++) {
-                        payload.addMember = addMembers[i]
-                        socket.emit("chat", payload);
-                    }
+                    dispatch(createMemberThunk(id, addMembers))
                 }
                 closeModal()
             }
-            // const data = await dispatch(editChannelThunk(payload, id))
-
-            // if (data) {
-            //     setErr(data)
-            // } else {
-            //     setErr('')
-            //     if(deleteMembers.length > 0){
-            //         dispatch(deleteMemberThunk(id, deleteMembers))
-            //     }
-            //     if(addMembers.length > 0){
-            //         dispatch(createMemberThunk(id, addMembers))
-            //     }
-            //     closeModal()
-            // }
         }
         else if(type==='create' && checkUser.length > 0){
-            payload.type = 'channel-POST'
-            if (payload.title.length === 0){
-                setErr(['Give your channel a name to continue. You can always change the name later.'])
-            } else if (payload.title.length > 255){
-                setErr(['Give your channel a name to continue. You can always change the name later.'])
+            const data = await dispatch(createChannelThunk(payload, checkUser))
+            if (data) {
+                setErr(data)
             } else {
-                socket.emit("chat", payload);
                 setErr('')
                 closeModal()
             }

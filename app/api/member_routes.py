@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response
 from app.models import db, members
 from flask_login import current_user, login_required
-
+from app.socket import socketio
 member_routes = Blueprint('members', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -21,10 +21,12 @@ def create_member(channelId):
     user_id = request.get_json()
     db.session.execute(members.insert().values(user_id=user_id, channel_id = channelId))
     db.session.commit()
+    socketio.emit('chat')
     return 'success'
 
 @member_routes.route('/<int:id>/channel/<int:channelId>/delete', methods=['DELETE'])
 def delete_member(id, channelId):
     db.session.execute(members.delete().where(members.c.user_id==id).where(members.c.channel_id==channelId))
     db.session.commit()
+    socketio.emit('chat')
     return 'success'

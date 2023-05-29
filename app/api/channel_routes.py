@@ -2,6 +2,7 @@ from flask import Blueprint, request, make_response
 from app.models import Channel, db
 from flask_login import current_user, login_required
 from app.forms import ChannelForm
+from app.socket import socketio
 channel_routes = Blueprint('channels', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -32,6 +33,7 @@ def create_channel(id):
         )
         db.session.add(new_channel)
         db.session.commit()
+        socketio.emit('chat',new_channel.to_dict())
         return new_channel.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
