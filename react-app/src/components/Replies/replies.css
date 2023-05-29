@@ -119,4 +119,5 @@ input.reply-box-error::placeholder {
     justify-content: space-between;
     overflow-y:hidden;
     width:100%;
+    /* overflow-x: hidden; */
 }

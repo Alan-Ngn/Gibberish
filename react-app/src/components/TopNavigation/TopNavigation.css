@@ -10,3 +10,11 @@
      */
 
 }
+
+.fa-linkedin, .fa-github{
+    /* text-decoration: none; */
+    /* display:block; */
+    color: white;
+
+    font-size: 35px;
+}
