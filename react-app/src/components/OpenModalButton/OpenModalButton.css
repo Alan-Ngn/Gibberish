@@ -1,6 +1,6 @@
 .modal-button {
 	/* background: none; */
-    color: rgb(238, 238, 238);
+    /* color: rgb(238, 238, 238); */
 	/* border: none; */
 	/* padding: 0; */
 	/* font: inherit; */
@@ -9,13 +9,7 @@
 
 }
 
-.add-channel{
-	display:flex;
-	flex-direction: row;
-	justify-content:left;
-	gap: 40px;
 
-}
 
 .button-text{
 	font-size: 15px;
@@ -24,5 +18,5 @@
 .add-channel i::before {
     /* background-color: rgb(23, 23, 24);
 	padding: 2px */
-	size: 20px;
+	/* size: 20px; */
 }

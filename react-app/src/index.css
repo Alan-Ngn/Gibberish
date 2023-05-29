@@ -4,7 +4,7 @@ html{
     text-decoration: none;
     height: 100%;
     min-height: 100%;
-
+    font-size: 17px;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     min-height: 100%;
     overflow: hidden;
     /* scrollbar-color: black purple; */
-    background-color: rgb(34, 34, 37);
+    background-color: #1A1D22
 }
 
 
@@ -46,7 +46,7 @@ body {
     height: 100vh;
     /* border: 1px solid rgba(64, 64,64, 1); */
 
-    color: rgb(238, 238, 238)
+    color: #CCD6CB
 }
 
 button {

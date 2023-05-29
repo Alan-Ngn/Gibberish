@@ -1,5 +1,5 @@
 .reply {
-    color: white;
+    color: #2F93C4
 }
 
 .chat-area, .chat-content-channel {
@@ -11,4 +11,8 @@
 .chat-content-channel:hover {
     overflow-y:auto;
     height:94%
+}
+
+.chat-content-channel{
+    padding-top: 5px;
 }

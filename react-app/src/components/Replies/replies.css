@@ -11,6 +11,7 @@
     flex-direction: column;
     /* justify-content: space-between; */
     /* overflow: hidden; */
+    background-color: #1A1D22;
 }
 
 
@@ -88,7 +89,8 @@ input.reply-box-error::placeholder {
 }
 
 .reply-count-border {
-    width:70%;
+    min-width:80%;
+    /* max-width: 90%; */
     border-bottom: 1px solid rgb(87, 86, 86);
 }
 
@@ -119,5 +121,6 @@ input.reply-box-error::placeholder {
     justify-content: space-between;
     overflow-y:hidden;
     width:100%;
+    padding-top: 10px;
     /* overflow-x: hidden; */
 }
