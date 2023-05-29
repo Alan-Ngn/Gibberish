@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,8 +11,8 @@ import ChannelDropdown from '../ChannelMenu';
 function Navigation({ socket, isLoaded }){
 	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
-
-
+	const [selectChannel, setSelectChannel] = useState(0)
+	console.log(selectChannel,'testing channel id')
 	const onButtonClick = (e) =>{
 		dispatch(loadUsersThunk())
 	}
@@ -25,12 +25,14 @@ function Navigation({ socket, isLoaded }){
 					<h2 className='content-header'>Workspace</h2>
 					<p className='channel-header'>Channels</p>
 					{sessionUser.channels && sessionUser.channels.map((channel)=>(
-						<div className='channel-nav'>
-							<NavLink className='nav-channel-title' to={`/channels/${channel.id}`}>{`# ${channel.title}`}</NavLink>
+
+						<div className={'channel-nav' + (channel.id === selectChannel ? '-highlight' : '')}>
+							<NavLink onClick={()=>{setSelectChannel(channel.id)}} className={'nav-channel-title' + (channel.id === selectChannel ? '-highlight' : '')} to={`/channels/${channel.id}`}>{`# ${channel.title}`}</NavLink>
 							{sessionUser.id === channel.admin_id && (
 								<ChannelDropdown socket={socket} id={channel.id} members={channel.members} channelTitle={channel.title}/>
 							)}
 						</div>
+
 
 					))}
 					{sessionUser.admin && (

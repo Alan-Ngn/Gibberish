@@ -13,7 +13,7 @@
 }
 
 
-.side-nav div a{
+.nav-channel-title{
   text-decoration: none;
   color:#9D9AA1
 
@@ -35,7 +35,7 @@
   background-color: #19161D;
 }
 
-.channel-nav {
+.channel-nav, .channel-nav-highlight {
   display:flex;
   justify-content: space-between;
   padding-left: 20px;
@@ -43,7 +43,18 @@
 
 }
 
-.nav-channel-title {
+.channel-nav-highlight {
+  border: 1px solid #126DA6;
+  border-radius: 5px;
+  background-color: #126DA6;
+  color: azure;
+
+}
+.nav-channel-title-highlight {
+  color:#F5FFFF;
+  text-decoration: none;
+}
+.nav-channel-title, .nav-channel-title-highlight {
   /* width: 250px; */
   white-space: nowrap;
   overflow: hidden;
