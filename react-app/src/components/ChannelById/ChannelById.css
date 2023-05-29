@@ -93,7 +93,7 @@ input.edit-box-error::placeholder, input.chat-box-error::placeholder  {
     color: white;
 }
 
-.edit-button-text, .delete-button-text, .confirm-delete-button-text, .cancel-delete-button-text {
+.edit-button-text, .delete-button-text, .confirm-delete-button-text, .cancel-delete-button-text, .reply-button-text{
     visibility: hidden;
     position: absolute;
     margin-top: -50px;
@@ -108,6 +108,9 @@ input.edit-box-error::placeholder, input.chat-box-error::placeholder  {
     visibility: visible;
 }
 .delete-button:hover .delete-button-text{
+    visibility: visible;
+}
+.reply-button:hover .reply-button-text{
     visibility: visible;
 }
 .fa-solid, .fa-regular {

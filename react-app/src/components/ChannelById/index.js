@@ -34,9 +34,9 @@ const ChannelById = ({socket}) => {
                                         <i class="fa-solid fa-user"></i>
                                         <Thread socket={socket} message={message} channelId={channelId}/>
                                     </div>
-                                    {sessionUser.id === message.user_id && editDelete && (
-                                        <EditDeleteButton message={message}/>
-                                    )}
+                                    {/* {(sessionUser.id === message.user_id && editDelete) && ( */}
+                                        <EditDeleteButton message={message} channelId={channelId} sessionUser={sessionUser}/>
+                                    {/* )} */}
                                     {sessionUser.id === message.user_id && messageId === message.id && isDelete && (
                                         <ConfirmDeleteButton socket={socket} channelId={channelId}/>
                                     )}

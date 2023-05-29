@@ -77,7 +77,7 @@ const Thread = ({socket, message, channelId}) => {
                 setChannelReplyId(channelId)
                 setOpenReply(true)
             }}>
-                {`${message.replies.length} Replies`}
+                {message.replies.length > 1 ? `${message.replies.length} Replies` : message.replies.length === 1 ? `${message.replies.length} Reply` : ''}
             </button>
         </div>
     )
