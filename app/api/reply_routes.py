@@ -2,6 +2,7 @@ from flask import Blueprint, request, make_response
 from app.models import Reply, db
 from flask_login import current_user, login_required
 from app.forms import ReplyForm
+from app.socket import socketio
 reply_routes = Blueprint('replies', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -26,6 +27,7 @@ def create_reply(message_id, user_id):
         )
         db.session.add(new_reply)
         db.session.commit()
+        socketio.emit('chat')
         return new_reply.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -39,6 +41,7 @@ def edit_reply(reply_id):
         reply.reply = form.data['reply']
         db.session.add(reply)
         db.session.commit()
+        socketio.emit('chat')
         return reply.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -49,4 +52,5 @@ def delete_reply(id):
     deleted_reply = reply.to_dict()
     db.session.delete(reply)
     db.session.commit()
+    socketio.emit('chat')
     return deleted_reply

@@ -15,26 +15,20 @@ const ReplyBox = ({socket, messageById, channel, sessionUser}) => {
     const ulClassName = "reply-box" + (err ? "-error" : "");
     const updateReply = (e) => setReply(e.target.value)
 
-    useEffect(()=>{
-        replyObj.reply = reply
-        replyObj.userId = sessionUser.id
-        replyObj.messageId = messageById.id
-        replyObj.type = 'reply-POST'
-        setReplyPayload(replyObj)
-    },[reply])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if(replyPayload.reply.length === 0) {
-            setErr(['Please enter a message'])
-        } else if (replyPayload.reply.length > 255) {
-            setErr(['Message must be less than 255 characters'])
+        const data = await dispatch(createReplyThunk(replyPayload, messageById.id, sessionUser.id, channel.id))
+        if (data) {
+            setErr(data)
         } else {
-            socket.emit('chat', replyPayload)
             setReply('')
             setErr('')
         }
     }
+    useEffect(()=>{
+        replyObj.reply = reply
+        setReplyPayload(replyObj)
+    },[reply])
 
     return (
         <form className='reply-form' onSubmit={handleSubmit}>

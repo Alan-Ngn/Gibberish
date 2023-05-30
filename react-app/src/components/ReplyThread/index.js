@@ -11,27 +11,25 @@ const ReplyThread = ({socket, reply, messageById}) => {
     const updateEditReply = (e) => setEditReply(e.target.value)
     const editReplyObj = {}
     const ulEditClassName = "edit-box" + (replyEditErr ? "-error" : "");
+
+
+
     useEffect(()=>{
         editReplyObj.reply = editReply
-        editReplyObj.id = replyId
-        editReplyObj.type = 'reply-PUT'
         setEditReplyPayload(editReplyObj)
     },[editReply])
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        if(editReplyPayload.reply.length===0){
-            setReplyEditErr(['Please enter a message'])
-        } else if (editReplyPayload.reply.length > 255) {
-            setReplyEditErr(['Message must be less than 255 characters'])
+        const data = await dispatch(editReplyThunk(editReplyPayload, messageById.id, replyId))
+        if (data) {
+            setReplyEditErr(data)
         } else {
-            socket.emit('chat', editReplyPayload)
+            setReplyEditErr('')
             setReplyEdit(false)
             setReplyEditDelete(true)
-            setReplyEditErr('')
         }
-
-
+    }
 
 
         // const data = await dispatch(editReplyThunk(editReplyPayload, messageById.id, replyId))
@@ -42,7 +40,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
         //     setReplyEdit(false)
         //     setReplyEditDelete(true)
         // }
-    }
+    
 
     const handleEditCancel = (e) =>{
         e.preventDefault()

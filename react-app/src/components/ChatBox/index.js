@@ -21,10 +21,10 @@ const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
-        setMessage('')
         if (data) {
             setErr(data)
         } else {
+            setMessage('')
             setErr('')
         }
     }
