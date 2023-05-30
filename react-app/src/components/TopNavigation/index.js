@@ -9,32 +9,37 @@ const TopNavigation = ({isLoaded}) => {
     // const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
     return (
-        <nav className='top-nav'>
-            <div>
-                <NavLink exact to="/">Home</NavLink>
-            </div>
+        <>
+            {isLoaded && sessionUser && (
 
-                        <Link className='linkedin' to={{pathname: `https://www.linkedin.com/in/alannguyen21`}} target='_blank'>
-                            <i class="fa-brands fa-linkedin" />
+                <nav className='top-nav'>
+                    <div>
+                        <NavLink exact to="/"><i class="fa-solid fa-house"></i></NavLink>
+                    </div>
+
+                                <Link className='linkedin' to={{pathname: `https://www.linkedin.com/in/alannguyen21`}} target='_blank'>
+                                    <i class="fa-brands fa-linkedin" />
+
+                                </Link>
+
+
+
+
+                        <Link className='github' to={{pathname: `https://github.com/Alan-Ngn`}} target='_blank'>
+                            <i class="fa-brands fa-github"/>
 
                         </Link>
 
 
 
-
-                <Link className='github' to={{pathname: `https://github.com/Alan-Ngn`}} target='_blank'>
-                    <i class="fa-brands fa-github"/>
-
-                </Link>
-
-
-
-            {isLoaded && (
-                <div>
-                    <ProfileButton user={sessionUser} />
-                </div>
+                    {isLoaded && (
+                        <div>
+                            <ProfileButton user={sessionUser} />
+                        </div>
+                    )}
+                </nav>
             )}
-        </nav>
+        </>
     )
 }
 

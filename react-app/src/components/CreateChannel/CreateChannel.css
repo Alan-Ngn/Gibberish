@@ -5,9 +5,9 @@
 .create-channel-modal {
     display: flex;
     flex-direction: column;
-    width: fit-content;
+    width: 100%;
     /* align-items: center; */
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .create-channel-header  {
@@ -25,6 +25,7 @@
 .channel-create-button {
     background-color: white;
     border: 1px solid black;
+    width: 40%
 }
 
 .channel-name-err {
@@ -36,4 +37,37 @@
 
 .channel-name {
     width: 100%;
+    height: 40px;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+}
+
+.channel-create-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    width:100%
+}
+
+.create-channel-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%
+}
+
+.create-channel-form fieldset {
+    width:97.5%;
+    border: 3px solid rgb(87, 86, 86);
+    border-radius: 3px;
+}
+
+.create-channel-form button {
+    color: rgb(87, 86, 86);
+    border: 1px solid;
+    gap: 10px;
+    height: 40px;
+    /* width: 300px; */
+    border-radius: 3px;
 }

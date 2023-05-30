@@ -7,3 +7,17 @@
 	/* cursor: pointer; */
 	/* outline: inherit; */
 }
+
+.channel-item-dropdown {
+	position: absolute;
+
+
+	background-color: rgb(87, 86, 86);
+	/* width:125px; */
+	padding: 3px;
+    /* display:block; */
+    border: 1px solid rgb(87, 86, 86);
+    /* padding-top: 8px; */
+    border-radius: 3px;
+	margin:0px;
+  }

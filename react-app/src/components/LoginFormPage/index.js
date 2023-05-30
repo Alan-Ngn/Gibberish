@@ -59,6 +59,7 @@ function LoginFormPage() {
           </label>
           <label>
             <input
+              className="password-input"
               type="password"
               value={password}
               placeholder="super duper secret email"

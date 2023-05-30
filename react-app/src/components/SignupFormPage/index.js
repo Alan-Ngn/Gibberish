@@ -84,13 +84,15 @@ function SignupFormPage() {
             required
           />
         </label>
-        <label>
+        <label className="admin-sign-up">
+          <p>Admin</p>
         <input
+          className="sign-up-checkbox"
           type='checkbox'
           onChange={(e) => setAdmin(true)}
           >
         </input>
-        Admin
+
         </label>
         <label>
           <input

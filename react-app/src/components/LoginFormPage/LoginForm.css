@@ -22,11 +22,14 @@
     gap: 10px;
     height: 40px;
     width: 300px;
+    border-radius: 3px;
+    
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
+    gap: 7px
 }
 
 .sign-up{
@@ -45,9 +48,10 @@
     background: none;
 }
 
-.email-input {
+.email-input, .password-input {
     height: 40px;
     width: 294px;
+    /* border-radius: 1px; */
 }
 
 .error-handling {

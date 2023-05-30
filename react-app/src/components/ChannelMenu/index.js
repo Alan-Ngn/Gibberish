@@ -34,7 +34,7 @@ function ChannelDropdown({socket, id, members, channelTitle}) {
   }, [showMenu]);
 
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const ulClassName = "channel-item-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
   return (

@@ -1,6 +1,7 @@
 .profile-dropdown {
   position: absolute;
-
+  right: 10px;
+  top: 25px;
 
   background-color: rgb(87, 86, 86);
   /* width:125px; */
@@ -86,8 +87,8 @@
 	/* font: inherit; */
 	/* cursor: pointer; */
 	/* outline: inherit; */
-  padding-left: 16px;
-  padding-right: 20px;
+  /* padding-left: 16px;
+  padding-right: 20px; */
   color:#9D9AA1
 }
 

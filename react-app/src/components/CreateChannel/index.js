@@ -72,46 +72,51 @@ const CreateChannelModal = ({socket, id, members, channelTitle, type}) => {
                 <h3>Create a channel</h3>
                 <button onClick={handleCancel}><i class="fa-solid fa-xmark"></i></button>
             </div>
+            <div className="create-channel-form">
 
-            <form onSubmit={handleSubmit}>
-                {type==='edit' && (
-                    <input
-                    className="id-hide"
-                    name='id'
-                    id='id'
-                    value={id}/>
-                )}
-                <label for={'title'}>Name</label>
-                <input
-                    className={channelTitleName}
-                    name="title"
-                    id="title"
-                    placeholder="# eg.gym-bros"
-                    value={title}
-                    onChange={updateTitle}
-                />
-                {err.length > 0 && (<p className="channel-create-error">{err[0]}</p>)}
-                <p>Channels are where conversations happen around a topic. Use a name that is easy to find and understand</p>
-                <fieldset>
-                    {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
-                        <div>
-                            <input
-                            className="checkbox"
-                             key={user.id}
-                             type="checkbox"
-                             id={user.id}
-                             name={user.username}
-                             onChange={handleClick}
-                             checked={checkUser.includes(user.id)}
-                             >
-                            </input>
-                            <label
-                             for={user.username}>{user.first_name} {user.last_name}</label>
-                        </div>
-                    ))}
-                </fieldset>
-                <button className="channel-create-button" type="submit">Create Channel</button>
-            </form>
+                <form  onSubmit={handleSubmit}>
+                    {type==='edit' && (
+                        <input
+                        className="id-hide"
+                        name='id'
+                        id='id'
+                        value={id}/>
+                    )}
+                    <div className="channel-create-title-wrapper">
+
+                        <label for={'title'}>Name</label>
+                        <input
+                            className={channelTitleName}
+                            name="title"
+                            id="title"
+                            placeholder="# eg.gym-bros"
+                            value={title}
+                            onChange={updateTitle}
+                        />
+                    </div>
+                    {err.length > 0 && (<p className="channel-create-error">{err[0]}</p>)}
+                    <p>Channels are where conversations happen around a topic. Use a name that is easy to find and understand</p>
+                    <fieldset>
+                        {Object.values(users).filter(admin => admin.id !== sessionUser.id).map((user)=>(
+                            <div>
+                                <input
+                                className="checkbox"
+                                key={user.id}
+                                type="checkbox"
+                                id={user.id}
+                                name={user.username}
+                                onChange={handleClick}
+                                checked={checkUser.includes(user.id)}
+                                >
+                                </input>
+                                <label
+                                for={user.username}>{user.first_name} {user.last_name}</label>
+                            </div>
+                        ))}
+                    </fieldset>
+                    <button className="channel-create-button" type="submit">Create Channel</button>
+                </form>
+            </div>
         </div>
     )
 }

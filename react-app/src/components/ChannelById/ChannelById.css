@@ -48,7 +48,9 @@ p {
     overflow-y:hidden; */
 
 }
-
+/* form{
+    width: 100%;
+} */
 #edit-message.edit-box{
     width: 100%
 }
@@ -79,10 +81,12 @@ input.edit-box-error::placeholder, input.chat-box-error::placeholder  {
 }
 
 .chat:hover  .hide-edit-delete {
-    display:block;
+    display:flex;
     border: 1px solid rgb(87, 86, 86);
-    padding-top: 8px;
+    padding: 5px;
     border-radius: 3px;
+    height: fit-content;
+    margin-right: 19px
 }
 
 .chat:hover{
