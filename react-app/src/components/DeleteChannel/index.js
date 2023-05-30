@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 
 import { deleteMessageThunk } from "../../store/message"
-
+import './DeleteChannel.css'
 const DeleteModal = ({socket, id, type, channelId}) => {
   console.log(type, 'this is the type to delte')
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const DeleteModal = ({socket, id, type, channelId}) => {
       };
 
     return (
-        <div className="modal channel-modal">
+        <div className="delete-channel">
           <h1>Comfirm Delete</h1>
           <p>Are you sure you want to remove this channel from the listings?</p>
           <button onClick={deleteOnClick}>Yes (Delete Channel)</button>

@@ -62,7 +62,7 @@ function LoginFormPage() {
               className="password-input"
               type="password"
               value={password}
-              placeholder="super duper secret email"
+              placeholder="super duper secret password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />
