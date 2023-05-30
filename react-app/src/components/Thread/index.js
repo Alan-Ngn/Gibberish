@@ -13,7 +13,7 @@ const Thread = ({socket, message, channelId}) => {
     const {editMessage, setEditMessage, edit, messageId, setEdit, setEditDelete, editErr, setEditErr, editMessagePayload, setEditMessagePayload, setOpenReply, setMessageReplyId, setChannelReplyId} = useMessage()
     const updateEditMessage = (e) => setEditMessage(e.target.value)
     const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
-    
+
     useEffect(()=>{
         editMessageObj.message = editMessage
         setEditMessagePayload(editMessageObj)
@@ -56,6 +56,7 @@ const Thread = ({socket, message, channelId}) => {
                     onChange={updateEditMessage}
                     >
                     </input>
+                    {editMessage.length === 0 ? <p>Maximum Character Limit: 255</p> : editMessage.length > 255 ? <p className="char-over-limit">{`${editMessage.length - 255} Characters Over Limit`}</p> : <p>{`${255-editMessage.length} Characters Remaining`}</p>}
                     <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
                     <button className="message-button" onClick={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
                 </form>

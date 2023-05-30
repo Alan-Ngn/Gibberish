@@ -40,7 +40,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
         //     setReplyEdit(false)
         //     setReplyEditDelete(true)
         // }
-    
+
 
     const handleEditCancel = (e) =>{
         e.preventDefault()
@@ -64,6 +64,7 @@ const ReplyThread = ({socket, reply, messageById}) => {
                 onChange={updateEditReply}
                 >
                 </input>
+                {editReply.length === 0 ? <p>Maximum Character Limit: 255</p> : editReply.length > 255 ? <p className="char-over-limit">{`${editReply.length - 255} Characters Over Limit`}</p> : <p>{`${255-editReply.length} Characters Remaining`}</p>}
                 <button className="message-button" type="submit"><i class="fa-sharp fa-solid fa-arrow-right-to-bracket"></i></button>
                 <button className="message-button" onClick  ={handleEditCancel}><i class="fa-solid fa-ban"></i></button>
             </form>
