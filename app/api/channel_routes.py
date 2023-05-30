@@ -33,7 +33,7 @@ def create_channel(id):
         )
         db.session.add(new_channel)
         db.session.commit()
-        socketio.emit('chat',new_channel.to_dict())
+        socketio.emit('chat')
         return new_channel.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
