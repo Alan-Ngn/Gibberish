@@ -41,9 +41,9 @@ def create_channel(id):
 def delete_channel(channelId):
     channel = Channel.query.get(channelId)
     deleted_channel = channel.to_dict()
-    print(deleted_channel,'WHAT ARE WE DOING')
     db.session.delete(channel)
     db.session.commit()
+    socketio.emit('chat')
     return deleted_channel
 
 @channel_routes.route('/<int:channelId>/edit', methods=['PUT'])
@@ -56,6 +56,7 @@ def edit_channel(channelId):
         channel.title = form.data['title']
         db.session.add(channel)
         db.session.commit()
+        socketio.emit('chat')
         return channel.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

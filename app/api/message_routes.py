@@ -2,6 +2,7 @@ from flask import Blueprint, request, make_response
 from app.models import Message, db
 from flask_login import current_user, login_required
 from app.forms import MessageForm
+from app.socket import socketio
 message_routes = Blueprint('messages', __name__)
 
 def validation_errors_to_error_messages(validation_errors):
@@ -21,10 +22,10 @@ def get_message_by_id(id):
 
 @message_routes.route('/channel/<int:channel_id>/user/<int:user_id>', methods=['POST'])
 def create_message(channel_id, user_id):
-    print('inside the backend message route', channel_id, user_id)
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('inside the backend message route', channel_id, user_id)
         new_message = Message(
             user_id = user_id,
             channel_id = channel_id,
@@ -32,6 +33,7 @@ def create_message(channel_id, user_id):
         )
         db.session.add(new_message)
         db.session.commit()
+        socketio.emit('chat')
         return new_message.to_dict(), 201
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -41,6 +43,7 @@ def delete_message(id):
     deleted_message = message.to_dict()
     db.session.delete(message)
     db.session.commit()
+    socketio.emit('chat')
     return deleted_message
 
 @message_routes.route('/<int:id>/edit', methods=['PUT'])
@@ -53,6 +56,7 @@ def edit_message(id):
         message.message = form.data['message']
         db.session.add(message)
         db.session.commit()
+        socketio.emit('chat')
         return message.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

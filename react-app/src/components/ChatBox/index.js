@@ -2,9 +2,12 @@ import { useMessage } from "../../context/EditMessage"
 import { useEffect } from "react"
 
 import './ChatBox.css'
+import { useDispatch } from "react-redux"
+import { createMessageThunk } from "../../store/message"
 
 
 const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
+    const dispatch = useDispatch()
     const messageObj ={}
     const {err, setErr, messagePayload, setMessagePayload, message, setMessage} = useMessage()
     const updateMessage = (e) => setMessage(e.target.value)
@@ -12,30 +15,20 @@ const ChatBox = ({socket, channelId, sessionUser, getChannel}) => {
 
     useEffect(()=>{
         messageObj.message = message
-        messageObj.userId = sessionUser.id
-        messageObj.channelId = channelId
-        messageObj.type = 'message-POST'
         setMessagePayload(messageObj)
     },[message])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErr('')
-        if (messagePayload.message.length === 0){
-            setErr(['Please enter a message'])
-        } else if (messagePayload.message.length > 255){
-            setErr(['Message must be less than 255 characters'])
+        const data = await dispatch(createMessageThunk(messagePayload, channelId, sessionUser.id))
+        setMessage('')
+        if (data) {
+            setErr(data)
         } else {
-            socket.emit("chat", messagePayload);
-            setMessage('')
             setErr('')
         }
-        // if (data) {
-        //     setErr(data)
-        // } else {
-        //     setErr('')
-        // }
     }
+
 
     return (
         <form className='chat-form' onSubmit={handleSubmit}>

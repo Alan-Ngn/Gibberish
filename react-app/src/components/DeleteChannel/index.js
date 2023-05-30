@@ -17,21 +17,15 @@ const DeleteModal = ({socket, id, type, channelId}) => {
   //   const [err, setErr] = useState(null)
   //   const updateTitle =(e) => setTitle(e.target.value)
 
-    console.log(id, channelId, 'this is my channel Id')
-    const deleteOnClick = (e) => {
-        e.preventDefault();
-        const payload = {}
-        if (type === 'channel'){
-          payload.id = id
-          payload.type = 'channel-DELETE'
-          // dispatch(deleteChannelThunk(id)).then(closeModal);
-          socket.emit("chat", payload);
-          closeModal()
-        }
-        if (type === 'message'){
-          dispatch(deleteMessageThunk(id, channelId)).then(closeModal)
-        }
-      };
+  const deleteOnClick = (e) => {
+    e.preventDefault();
+    if (type === 'channel'){
+      dispatch(deleteChannelThunk(id)).then(closeModal);
+    }
+    if (type === 'message'){
+      dispatch(deleteMessageThunk(id, channelId)).then(closeModal)
+    }
+  };
 
     const cancelOnClick = (e) => {
         e.preventDefault();

@@ -1,43 +1,35 @@
 import { useMessage } from "../../context/EditMessage"
 import { useEffect } from "react"
 import './Thread.css'
+import { useDispatch } from "react-redux"
+import { editMessageThunk } from "../../store/message"
 
 
 
 
 const Thread = ({socket, message, channelId}) => {
+    const dispatch = useDispatch()
     const editMessageObj = {}
     const {editMessage, setEditMessage, edit, messageId, setEdit, setEditDelete, editErr, setEditErr, editMessagePayload, setEditMessagePayload, setOpenReply, setMessageReplyId, setChannelReplyId} = useMessage()
     const updateEditMessage = (e) => setEditMessage(e.target.value)
     const ulEditClassName = "edit-box" + (editErr ? "-error" : "");
-
+    
     useEffect(()=>{
         editMessageObj.message = editMessage
-        editMessageObj.id = messageId
-        editMessageObj.type = "message-PUT"
         setEditMessagePayload(editMessageObj)
     },[editMessage])
 
     const handleEditSubmit = async (e) => {
         e.preventDefault();
-        if(editMessagePayload.message.length===0){
-            setEditErr(['Please enter a message'])
-        } else if (editMessagePayload.message.length > 255) {
-            setEditErr(['Message must be less than 255 characters'])
+        const data = await dispatch(editMessageThunk(editMessagePayload, messageId, channelId))
+
+        if (data) {
+            setEditErr(data)
         } else {
-            socket.emit('chat', editMessagePayload)
-            setEditMessage('')
+            setEditErr('')
             setEdit(false)
             setEditDelete(true)
-            setEditErr('')
         }
-        // if (data) {
-        //     setEditErr(data)
-        // } else {
-        //     setEditErr('')
-        //     setEdit(false)
-        //     setEditDelete(true)
-        // }
     }
 
     const handleEditCancel = (e) =>{
