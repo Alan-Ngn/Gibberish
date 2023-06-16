@@ -1,0 +1,23 @@
+.splash-trusted-companies {
+    display: flex;
+    flex-direction: column;
+    background-color: #F4EDE4;
+    justify-content: center;
+}
+.splash-companies {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.company-image {
+    height: 50px;
+    width: 50px;
+}
+
+.splash-companies a {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
