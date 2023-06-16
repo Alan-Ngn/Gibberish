@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { io } from 'socket.io-client';
 import { loadUsersThunk } from "./store/user";
 import TopNavigation from "./components/TopNavigation";
+import SplashPage from "./components/Splash";
 let socket;
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
   return (
     <>
       <div className="site">
+        <Route exact path='/' component={SplashPage}/>
         <Route path="/login" component={LoginFormPage} />
         <Route path="/signup" component={SignupFormPage}/>
             <TopNavigation isLoaded={isLoaded}/>

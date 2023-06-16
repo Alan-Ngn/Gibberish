@@ -1,0 +1,43 @@
+.splash-nav {
+    padding: 20px;
+    background-color: #581859;
+    display: flex;
+    flex-direction: column;
+
+    font-weight: 800;
+}
+
+.top-splash-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+
+.top-splash-nav-right, .top-splash-nav-left {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* justify-content: space-around */
+}
+
+
+
+.demo-login {
+    padding: 10px;
+    border-radius: 5px;
+    border: 3px solid #FFFFFF;
+    background-color: #FFFFFF;
+    color: #581859;
+    font-weight: 800;
+}
+
+a .splash-sign-up {
+    text-decoration: none;
+}
+
+.sign-up-splash {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
