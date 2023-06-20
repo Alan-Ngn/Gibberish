@@ -1,22 +1,27 @@
 .splash-nav {
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 100px;
     background-color: #581859;
     display: flex;
     flex-direction: column;
-
-    font-weight: 800;
+    color: white;
+    font-weight: 600;
+    gap: 40px;
 }
 
 .top-splash-nav {
     display: flex;
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
+    align-items: center;
 }
 
 .top-splash-nav-right, .top-splash-nav-left {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;
     /* justify-content: space-around */
 }
 
@@ -40,4 +45,37 @@ a .splash-sign-up {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    gap: 50px;
+}
+
+.modal-button-log-in {
+    color: white;
+    font-weight: 600;
+}
+
+.first-title, .second-title {
+    font-size: 50px;
+    margin: 0px;
+
+}
+
+.second-title {
+    color: #ECB22E
+}
+
+.splash-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.modal-button-sign-up {
+    padding: 10px;
+    width: 40%;
+    border-radius: 5px;
+    border: 3px solid #FFFFFF;
+    background-color: #FFFFFF;
+    color: #581859;
+    font-weight: 800;
 }

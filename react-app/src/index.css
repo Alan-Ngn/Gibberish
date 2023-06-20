@@ -36,6 +36,7 @@ body {
     display: flex;
     flex-direction: row;
     height: 100%;
+    background-color: #1A1D22;
 }
 .site {
     display: flex;

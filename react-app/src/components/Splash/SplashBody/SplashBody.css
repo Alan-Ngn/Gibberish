@@ -2,12 +2,23 @@
     display: flex;
     flex-direction: column;
     background-color: #F4EDE4;
-    justify-content: center;
+    /* justify-content: center; */
+    flex-grow: 1;
+    align-items: center;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 100px;
+    gap: 20px;
+    border-radius: 100% / 50%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 .splash-companies {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    gap:70px;
 
 }
 
@@ -20,4 +31,9 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+.splash-body-title {
+    color: black;
+    margin: 0px;
 }

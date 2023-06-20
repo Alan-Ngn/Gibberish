@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import SplashNav from "./SplashNav"
 import SplashBody from "./SplashBody";
+import SplashFooter from "./SplashFooter";
 
 const SplashPage = ({isLoaded}) => {
     console.log(isLoaded)
@@ -13,6 +14,7 @@ const SplashPage = ({isLoaded}) => {
                 <>
                     <SplashNav />
                     <SplashBody />
+                    <SplashFooter />
                 </>
 
             )

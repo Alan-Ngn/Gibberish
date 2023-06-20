@@ -4,7 +4,7 @@ import './SplashBody.css'
 const SplashBody = () =>{
     return (
         <div className="splash-trusted-companies">
-            <h2>TRUSTED BY COMPANIES ALL OVER THE WORLD</h2>
+            <h4 className="splash-body-title">TRUSTED BY COMPANIES ALL OVER THE WORLD</h4>
             <div className="splash-companies">
                 <a href='https://mango-music-4c4k.onrender.com' target="_blank">
                     <img className='company-image' src={process.env.PUBLIC_URL + '/MangoMusic.png'}></img>
