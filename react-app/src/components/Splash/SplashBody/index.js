@@ -17,7 +17,29 @@ const SplashBody = () =>{
                     <h3>EarthBnb</h3>
                 </a>
             </div>
+            <div className="splash-body-content">
+                <div className='top-splash-gif'>
+                    <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img>
+                </div>
+                <div className="splash-body-content-text">
+                    <h2>
+                        Bring your team together
+                    </h2>
+                    <p>At the heart of Slack are channels: organized spaces for everyone and everything you need for work. In channels, it’s easier to connect across departments, offices, time zones and even other companies.</p>
+                </div>
+            </div>
+            <div className="splash-body-content">
 
+                <div className="splash-body-content-text">
+                    <h2>
+                        Bring your team together
+                    </h2>
+                    <p>At the heart of Slack are channels: organized spaces for everyone and everything you need for work. In channels, it’s easier to connect across departments, offices, time zones and even other companies.</p>
+                </div>
+                <div className='top-splash-gif'>
+                    <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img>
+                </div>
+            </div>
         </div>
     )
 }

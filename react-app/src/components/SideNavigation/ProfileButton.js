@@ -45,13 +45,19 @@ function ProfileButton({ user }) {
       <button className="profile-button" onClick={openMenu}>
         <i class="fa-solid fa-user"></i>
       </button>
-      <ul className={ulClassName} ref={ulRef}>
+      <div className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <div>{user.username}</div>
-            <div>{user.email}</div>
-            <div>
-              <button onClick={handleLogout}>Log Out</button>
+            <div className="profile-dropdown-user">
+              <div className="profile-button">
+
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div>{user.username}</div>
+            </div>
+            {/* <div>{user.email}</div> */}
+            <div className="sign-out-button">
+              <button onClick={handleLogout}>Sign Out of Gibberish</button>
             </div>
           </>
         ) : (
@@ -69,7 +75,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }

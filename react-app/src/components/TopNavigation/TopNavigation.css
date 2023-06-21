@@ -10,9 +10,10 @@
      */
     background-color: #120F16;
 
+
 }
 
-.fa-linkedin, .fa-github{
+.top-nav .fa-linkedin, .top-nav .fa-github{
     /* text-decoration: none; */
     /* display:block; */
     color: white;

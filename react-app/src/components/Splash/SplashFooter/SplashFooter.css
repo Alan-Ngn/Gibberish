@@ -1,8 +1,22 @@
 .splash-footer {
-    height: 10%;
+    /* height: 50%; */
     background-color: white;
-
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 30px;
+    padding: 50px;
 }
+
+.splash-footer a .fa-brands {
+    color: black;
+}
+
+.splash-footer a .fa-brands:hover {
+    color: blue;
+}
+
 .site {
     background-color: white;
 }

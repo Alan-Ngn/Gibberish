@@ -3,7 +3,7 @@
     flex-direction: column;
     background-color: #F4EDE4;
     /* justify-content: center; */
-    flex-grow: 1;
+    /* flex-grow: 1; */
     align-items: center;
     padding-top: 50px;
     padding-left: 100px;
@@ -36,4 +36,24 @@
 .splash-body-title {
     color: black;
     margin: 0px;
+}
+
+.splash-companies a {
+    text-decoration: none;
+    color: black
+}
+
+.splash-body-content {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 100px;
+}
+
+.splash-body-content-text {
+    color: black;
+    font-weight: bold;
 }
