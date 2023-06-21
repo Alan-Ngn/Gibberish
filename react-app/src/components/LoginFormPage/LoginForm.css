@@ -11,9 +11,10 @@
 
     display: flex;
     flex-direction: column;
-    position: relative;
-    top: 25%;
-    /* justify-content: center; */
+    /* position: relative; */
+    /* top: 25%; */
+    justify-content: center;
+    width: 100%;
     align-items: center;
     gap:5px
 }
@@ -38,7 +39,7 @@
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: 7px
+    gap: 10px
 }
 
 .sign-up{
@@ -62,6 +63,7 @@
     width: 100%;
     background-color: #F2EAE4;
     color: black;
+    gap: 20px;
     /* border-radius: 1px; */
 }
 

@@ -21,3 +21,23 @@
     border-radius: 3px;
 	margin:0px;
   }
+
+  .delete-channel-text, .edit-channel-text{
+    visibility: hidden;
+    position: absolute;
+    /* margin-top: 1px;
+    right: 6px; */
+    z-index: 6;
+    border: 1px solid rgb(87, 86, 86);
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    background-color: black;
+}
+.modal-button-channel-delete:hover .delete-channel-text {
+	visibility: visible
+}
+
+.modal-button-channel-edit:hover .edit-channel-text {
+	visibility: visible
+}

@@ -24,6 +24,8 @@ function OpenModalButton({
             <i class="fa-solid fa-plus" />
             <div className='button-text'>{buttonText}</div>
           </div> : buttonText}
+          <div className="delete-channel-text">Delete</div>
+          <div className="edit-channel-text">Edit</div>
       </button>
 
   );

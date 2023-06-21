@@ -41,21 +41,23 @@ function ChannelDropdown({socket, id, members, channelTitle}) {
     <>
       <button className="channel-dropdown" onClick={openMenu}>
         <i class="fa-solid fa-ellipsis-vertical" />
-        <ul className={ulClassName} ref={ulRef}>
+        <div className={ulClassName} ref={ulRef}>
           {
             <>
               <OpenModalButton
               buttonText='Delete'
+              buttonClassName='channel-delete'
               modalComponent={<DeleteModal socket={socket} id={id} type={'channel'}/>}
               />
 
               <OpenModalButton
               buttonText='Edit Channel'
+              buttonClassName='channel-edit'
               modalComponent={<CreateChannelModal socket={socket} id={id} members={members} channelTitle={channelTitle} type={'edit'}/>}
               />
             </>
           }
-        </ul>
+        </div>
       </button>
     </>
   );
