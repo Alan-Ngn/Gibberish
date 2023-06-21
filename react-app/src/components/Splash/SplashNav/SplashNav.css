@@ -92,12 +92,15 @@ a .splash-sign-up {
 }
 .top-splash-gif{
     background-color: #4B154B;
-    padding-right: 30px;
+    /* padding-right: 30px; */
     /* border-radius: 100% / 90%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; */
 }
-
+.top-splash-gif img {
+    height: 100%;
+    width: 500px
+}
 .top-splash-nav-wrapper {
 
     max-width: 1100px;

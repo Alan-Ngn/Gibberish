@@ -49,8 +49,10 @@ const SplashNav = () => {
                         />
                         <p>Slack is free to try for as long as you’d like</p>
                     </div>
+
                     <div className='top-splash-gif'>
-                        <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img>
+                        <img src='https://media.giphy.com/media/dGO32vklhOR0qHsfA0/giphy.gif'/>
+                        {/* <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img> */}
                     </div>
                 </div>
             </div>
