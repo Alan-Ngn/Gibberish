@@ -40,15 +40,15 @@ const SplashNav = () => {
                 </div>
                 <div className='sign-up-splash'>
                     <div className='splash-text'>
-                        <h1 className='first-title'>Made for people.</h1>
-                        <h1 className='second-title'>Built for productivity.</h1>
-                        <p>Connect the right people, find anything you need and automate the rest. That’s work in Slack, your productivity platform.</p>
+                        <h1 className='first-title'>Made for friends.</h1>
+                        <h1 className='second-title'>Built for connections.</h1>
+                        <p>Connect with the right people. Connect with new people. Be productive or not.</p>
                         <OpenModalButton
                             buttonText='SIGN UP'
                             buttonClassName='sign-up'
                             modalComponent={<SignupFormModal />}
                         />
-                        <p>Slack is free to try for as long as you’d like</p>
+                        <p>Gibberish is free forever</p>
                     </div>
 
                     <div className='top-splash-gif'>

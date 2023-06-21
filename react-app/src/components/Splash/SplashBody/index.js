@@ -23,18 +23,18 @@ const SplashBody = () =>{
                 </div>
                 <div className="splash-body-content-text">
                     <h2>
-                        Bring your team together
+                        Bring your friends together
                     </h2>
-                    <p>At the heart of Slack are channels: organized spaces for everyone and everything you need for work. In channels, it’s easier to connect across departments, offices, time zones and even other companies.</p>
+                    <p>At the heart of Gibberish are channels: spaces to organize your projects with the people who are important to your mission.</p>
                 </div>
             </div>
             <div className="splash-body-content">
 
                 <div className="splash-body-content-text">
                     <h2>
-                        Bring your team together
+                        Stay flexible with your friends
                     </h2>
-                    <p>At the heart of Slack are channels: organized spaces for everyone and everything you need for work. In channels, it’s easier to connect across departments, offices, time zones and even other companies.</p>
+                    <p>Have the peace of mind to write down your thoughts and change it later.</p>
                 </div>
                 <div className='body-splash-gif'>
                     <img src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VxOWJscGoxbWd0OWJ5Z3ExM2Zwczc3ZnY2aXZqenBvbGtvd3hycyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9OBQq0azsEbMQNakRO/giphy.gif'></img>
