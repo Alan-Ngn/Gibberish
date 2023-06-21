@@ -23,9 +23,10 @@ const SplashNav = () => {
             <div className='top-splash-nav-wrapper'>
                 <div className='top-splash-nav'>
                     <div className='top-splash-nav-left'>
+                        <img className='splash-icon' src='2758343-200.png'/>
                         <div>Gibberish</div>
-                        <div>Product</div>
-                        <div>Resources</div>
+                        {/* <div>Product</div>
+                        <div>Resources</div> */}
                     </div>
                     <div className='top-splash-nav-right'>
                         <OpenModalButton
@@ -51,7 +52,7 @@ const SplashNav = () => {
                     </div>
 
                     <div className='top-splash-gif'>
-                        <img src='https://media.giphy.com/media/dGO32vklhOR0qHsfA0/giphy.gif'/>
+                        <img src='https://media.giphy.com/media/CALtIUyUQtpKtWX1iZ/giphy.gif'/>
                         {/* <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img> */}
                     </div>
                 </div>

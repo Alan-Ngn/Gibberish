@@ -1,5 +1,5 @@
 .sign-up-page {
-    margin-top: 200px;
+    /* margin-top: 200px; */
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -11,8 +11,9 @@
 .sign-up-form {
     display:flex;
     flex-direction: column;
-    width: 40%;
-    gap: 20px
+    /* width: 40%; */
+    gap: 10px;
+    justify-content: center;
 }
 
 .email-error, .username-error, .password-error {
@@ -21,17 +22,24 @@
 }
 
 .text-error {
-    color:red
+    color:red;
+    text-align: center;
 }
 
 .sign-up-form input {
     width: 100%;
     gap: 20px;
-    height: 40px;
+    height: 25px;
     background-color: #F2EAE4;
     color: black;
 }
 
+.sign-up-form label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
 
 .hide-email-text {
     visibility: hidden;
@@ -56,8 +64,13 @@
     height: 40px;
     /* width: 300px; */
     border-radius: 3px;
+    font-weight: bold;
 }
 
+.sign-up-button:hover {
+    background-color: white;
+    color: #19161D;
+}
 .admin-sign-up {
     display:flex;
     flex-direction: row;

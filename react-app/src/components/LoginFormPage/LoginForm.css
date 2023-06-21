@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: rgb(59, 59, 61);
+    /* background-color: rgb(59, 59, 61); */
     /* align-items: center; */
 }
 
@@ -15,6 +15,11 @@
     top: 25%;
     /* justify-content: center; */
     align-items: center;
+    gap:5px
+}
+.login h1 {
+    margin: 0px;
+    margin-bottom: 10px;
 }
 .login-button {
     color: rgb(238, 238, 238);
@@ -23,9 +28,13 @@
     height: 40px;
     width: 300px;
     border-radius: 3px;
-    
-}
+    font-weight: bold;
 
+}
+.login-button:hover {
+    background-color: white;
+    color: #19161D;
+}
 .login-form {
     display: flex;
     flex-direction: column;
@@ -49,8 +58,10 @@
 }
 
 .email-input, .password-input {
-    height: 40px;
-    width: 294px;
+    height: 25px;
+    width: 100%;
+    background-color: #F2EAE4;
+    color: black;
     /* border-radius: 1px; */
 }
 
@@ -60,6 +71,7 @@
 
 .errors {
     color: red;
+    text-align: center;
 }
 
 .login-img {

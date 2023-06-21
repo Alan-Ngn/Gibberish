@@ -18,8 +18,8 @@ const SplashBody = () =>{
                 </a>
             </div>
             <div className="splash-body-content">
-                <div className='top-splash-gif'>
-                    <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img>
+                <div className='left-body-splash-gif'>
+                    <img src='https://media.giphy.com/media/mZqbrGzNahVsSKG1Y9/giphy.gif'></img>
                 </div>
                 <div className="splash-body-content-text">
                     <h2>
@@ -36,8 +36,8 @@ const SplashBody = () =>{
                     </h2>
                     <p>At the heart of Slack are channels: organized spaces for everyone and everything you need for work. In channels, it’s easier to connect across departments, offices, time zones and even other companies.</p>
                 </div>
-                <div className='top-splash-gif'>
-                    <img src={process.env.PUBLIC_URL + '/GibberishPlaceholderGif.gif'}></img>
+                <div className='body-splash-gif'>
+                    <img src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2VxOWJscGoxbWd0OWJ5Z3ExM2Zwczc3ZnY2aXZqenBvbGtvd3hycyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9OBQq0azsEbMQNakRO/giphy.gif'></img>
                 </div>
             </div>
         </div>

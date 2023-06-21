@@ -46,7 +46,7 @@
 .splash-body-content {
     display: flex;
     flex-direction: row;
-    gap: 100px;
+    gap: 50px;
     padding-top: 50px;
     padding-left: 100px;
     padding-right: 100px;
@@ -56,4 +56,27 @@
 .splash-body-content-text {
     color: black;
     font-weight: bold;
+}
+.left-body-splash-gif {
+    margin: 10px;
+    /* background-color: #ccb596; */
+    box-shadow: -50px -16px #ECB22E;
+    /* padding: 10px; */
+    border-radius: 5px;
+}
+.body-splash-gif{
+    margin: 10px;
+    /* background-color: #ccb596; */
+    box-shadow: 50px -16px #ECB22E;
+    /* padding: 10px; */
+    border-radius: 5px;
+    /* border-radius: 100% / 900%;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; */
+}
+.body-splash-gif img {
+    height: 100%;
+    width: 500px;
+    /* border: 1px solid transparent; */
+    border-radius: 4px;
 }

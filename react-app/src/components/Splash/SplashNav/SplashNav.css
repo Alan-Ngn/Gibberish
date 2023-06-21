@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+    align-items: center;
     /* justify-content: space-around */
 }
 
@@ -48,7 +49,7 @@ a .splash-sign-up {
 }
 
 .sign-up-splash {
-    padding: 20px;
+    padding-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -61,7 +62,7 @@ a .splash-sign-up {
 }
 
 .first-title, .second-title {
-    font-size: 60px;
+    font-size: 47px;
     margin: 0px;
 
 }
@@ -91,17 +92,26 @@ a .splash-sign-up {
     border: 1px solid #581859;
 }
 .top-splash-gif{
-    background-color: #4B154B;
-    /* padding-right: 30px; */
-    /* border-radius: 100% / 90%;
+    /* margin: 10px; */
+    box-shadow: 50px 16px #ECB22E;
+    /* padding: 10px; */
+    border-radius: 5px;
+    /* border-radius: 100% / 900%;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0; */
 }
 .top-splash-gif img {
     height: 100%;
-    width: 500px
+    width: 500px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 .top-splash-nav-wrapper {
 
     max-width: 1100px;
+}
+
+.splash-icon {
+    height: 30px;
+
 }

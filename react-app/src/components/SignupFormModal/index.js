@@ -32,7 +32,7 @@ function SignupFormModal() {
 			}
 		} else {
 			setErrors([
-				"Confirm Password field must be the same as the Password field",
+				"Password fields must match",
 			]);
 		}
 	};
@@ -44,7 +44,7 @@ function SignupFormModal() {
 
 	return (
 		<div className="sign-up-page">
-		{errors.length > 0 ? <img className="login-img" src={process.env.PUBLIC_URL + '/2760998.png'}></img> : <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>}
+		{/* {errors.length > 0 ? <img className="login-img" src={process.env.PUBLIC_URL + '/2760998.png'}></img> : <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img>} */}
 		{/* <img className="login-img" src={process.env.PUBLIC_URL + '/2758343-200.png'}></img> */}
 		<h1>Sign Up</h1>
 		<form className="sign-up-form" onSubmit={handleSubmit}>
@@ -114,11 +114,11 @@ function SignupFormModal() {
 			  required
 			/>
 		  </label>
-		  {errors.includes('Confirm Password field must be the same as the Password field') && <p className="text-error">Confirm Password field must be the same as the Password field</p>}
+		  {errors.includes('Password fields must match') && <p className="text-error">Password fields must match</p>}
 		  <label>
 		  <i class="fa-solid fa-lock"></i>
 			<input
-			  className={errors.includes('Confirm Password field must be the same as the Password field') ? 'password-error' : 'password'}
+			  className={errors.includes('Password fields must match') ? 'password-error' : 'password'}
 			  type="password"
 			  placeholder="Confirm Password"
 			  value={confirmPassword}
@@ -127,7 +127,6 @@ function SignupFormModal() {
 			/>
 		  </label>
 		  <button className="sign-up-button" type="submit">Sign Up</button>
-		  <button className="sign-up-button" onClick={handleRedirect}>Back to Login</button>
 		</form>
 	  </div>
 	);
