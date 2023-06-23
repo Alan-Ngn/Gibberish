@@ -6,7 +6,6 @@ import { createChannelThunk, deleteChannelThunk } from "../../store/channel"
 import { deleteMessageThunk } from "../../store/message"
 import './DeleteChannel.css'
 const DeleteModal = ({socket, id, type, channelId}) => {
-  console.log(type, 'this is the type to delte')
     const dispatch = useDispatch()
     const {closeModal} = useModal()
 

@@ -24,7 +24,6 @@ def get_channel_by_id(channelId):
 @channel_routes.route('/new/<int:id>', methods=['POST'])
 def create_channel(id):
     form = ChannelForm()
-    print(form.data,'CHANNEL FORM DATA')
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_channel = Channel(
@@ -49,7 +48,6 @@ def delete_channel(channelId):
 @channel_routes.route('/<int:channelId>/edit', methods=['PUT'])
 def edit_channel(channelId):
     form = ChannelForm()
-    print('this is in the update backend', form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         channel = Channel.query.get(channelId)

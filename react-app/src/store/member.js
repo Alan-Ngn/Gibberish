@@ -13,7 +13,6 @@ export const createMemberThunk = (channelId, members) => async(dispatch) => {
         if(response.ok){
             await dispatch(authenticate())
         } else {
-            console.log('delete member thunk failed')
             return false
         }
     }
@@ -29,7 +28,6 @@ export const deleteMemberThunk = (channelId, members) => async(dispatch) => {
         if(response.ok){
             await dispatch(authenticate())
         } else {
-            console.log('delete member thunk failed')
             return false
         }
     }

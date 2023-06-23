@@ -36,7 +36,6 @@ def edit_reply(reply_id):
     form = ReplyForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print(' FINSIDE BACKEND REPLY EDIT')
         reply = Reply.query.get(reply_id)
         reply.reply = form.data['reply']
         db.session.add(reply)
