@@ -12,7 +12,6 @@ function Navigation({ socket, isLoaded }){
 	const dispatch = useDispatch()
 	const sessionUser = useSelector(state => state.session.user);
 	const [selectChannel, setSelectChannel] = useState(0)
-	console.log(selectChannel,'testing channel id')
 	const onButtonClick = (e) =>{
 		dispatch(loadUsersThunk())
 	}

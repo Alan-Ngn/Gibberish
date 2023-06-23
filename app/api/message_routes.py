@@ -25,7 +25,6 @@ def create_message(channel_id, user_id):
     form = MessageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('inside the backend message route', channel_id, user_id)
         new_message = Message(
             user_id = user_id,
             channel_id = channel_id,
@@ -49,7 +48,6 @@ def delete_message(id):
 @message_routes.route('/<int:id>/edit', methods=['PUT'])
 def edit_message(id):
     form = MessageForm()
-    print('inside backend for update message', id, form.data['message'])
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         message = Message.query.get(id)

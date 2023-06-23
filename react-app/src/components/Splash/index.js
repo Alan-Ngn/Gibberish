@@ -4,7 +4,6 @@ import SplashBody from "./SplashBody";
 import SplashFooter from "./SplashFooter";
 
 const SplashPage = ({isLoaded}) => {
-    console.log(isLoaded)
 
     const sessionUser = useSelector(state => state.session.user);
     return (

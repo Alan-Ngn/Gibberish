@@ -54,7 +54,6 @@ def handle_chat(data):
             db.session.commit()
 
         if data['type'] == 'channel-POST':
-            print(data, 'channel post')
             channel = Channel(
                 title=data['title'],
                 admin_id=data['admin_id']
@@ -68,7 +67,6 @@ def handle_chat(data):
 
         if data['type'] == 'channel-PUT':
             channel = Channel.query.get(data['id'])
-            # print(data, 'channel post')
             channel.title = data['title']
             db.session.add(channel)
             db.session.commit()
@@ -84,22 +82,4 @@ def handle_chat(data):
         if data['type'] == 'member-POST':
             db.session.execute(members.insert().values(user_id=data['addMember'], channel_id = data['id']))
             db.session.commit()
-    print(data, 'chat data?')
     emit("chat", data, broadcast=True)
-
-# handle reply messages
-# @socketio.on("all")
-# def handle_all(data):
-#     print(data,'what is this data?')
-#     emit("all", data, broadcast=True)
-# {'id': 31, 'username': 'lolfffffffsafdasfadf', 'email': 'lasdffffsfdfk@aa.io', 'first_name': 'lolf', 'last_name': 'llolf', 'profile_pic': None, 'admin': False} what is this data?
-# {'message': 'test', 'userId': 2, 'channelId': '14', 'type': 'message-POST'} chat data?
-# @socketio.on("editMessage")
-# def handle_edit_chat(data):
-#     print('we in here')
-#     if data != "User connected!":
-#         message = Message.query.get(data["id"])
-#         message.message = data['message']
-#         db.session.add(message)
-#         db.session.commit()
-#     emit("editMessage", data, broadcast=True)

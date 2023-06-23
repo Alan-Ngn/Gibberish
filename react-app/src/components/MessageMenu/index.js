@@ -11,7 +11,6 @@ import { useMessage } from "../../context/EditMessage";
 function MessageDropdown({id, members, channelTitle, channelId, message}) {
   const dispatch = useDispatch()
   const { edit, setEdit, messageId, setMessageId, ogMessage, setOgMessage } = useMessage();
-  console.log(id,'mkessage id')
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
 
