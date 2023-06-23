@@ -18,6 +18,7 @@ Please visit our website at: https://gibberish-z0ju.onrender.com
 # Routes
 
 ## Auth
+
 ### Get User
 Return current user details
 * Require Authenication: true
