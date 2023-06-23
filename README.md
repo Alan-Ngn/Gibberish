@@ -41,76 +41,478 @@ Return channnel by id
       "messages": [
         {
           "id": 1,
-          "user_id": ,
-          "channel_id": ,
-          "message": ,
-          "created_at":,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
           "user": {
-            "id": "id",
-            "username": self.username,
-            "email": self.email,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "profile_pic": self.profile_pic,
-            "admin": self.admin
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
           },
           "replies": [
             {
-            "id": self.id,
-            "message_id": self.message_id,
-            "user_id": self.user_id,
-            "reply": self.reply,
-            "created_at": self.created_at,
-            "user": self.replies_users.to_dict()
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
             }
           ],
           "channel": {
-            "id": self.id,
-            "admin_id": self.admin_id,
-            "title": self.title
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
            }
         }
       ], 
       "members": [
         {
-            "id": self.id,
-            "username": self.username,
-            "email": self.email,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "profile_pic": self.profile_pic,
-            "admin": self.admin
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+        },
+        {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
         }
       ]
   }
   ```
 
-### POST api/channels/new/<int:id>
-Create a new channel
-
-
-  
-Request:
-* Headers:
-    * Content-Type: application/json
-* Body ("artist" field not required):
-
+### Create a Channel
+Create and returns a new channel
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/channels/new/<int:userId>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
     ```json
     {
+        "title": "Demo Channel",
+        "admin_id": 2
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "id": 1,
+        "admin_id": 2,
         "title": "Demo Channel"
     }
     ```
 
-* Successful Response Body:
-  ```json
-  {
-      "id": 1,
-      "admin_id": 2,
-      "title": "Demo Channel"
-  }
-  ```
+ ### Edit Channel
+ Updates and return an existing channel.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/channels/<int:channelId>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+         "title": "Another Demo Channel",
+         "admin_id": 2
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+         "id": 1,
+         "admin_id": 2,
+         "title": "Another Demo Channel"
+     }
+     ```
+  ### Delete Channel
+  Delete an existing channel.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/channels/<int:channelId>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+      {
+          "id": 1,
+          "admin_id": 2,
+          "title": "Another Demo Channel"
+      }
+      ```
+       
 ## Messages
+### Create a Message
+Create and returns a new message
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/messages/channel/<int:channel_id>/user/<int:user_id>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 1,
+        "channel_id": 1,
+        "message": "Hey dood"
+    }
+    ```
 
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+          "channel": {
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
+           }
+        }
+    ```
+
+ ### Edit Message
+ Updates and return an existing message.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/messages/<int:id>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+        "message": "Hey dood!!!!!"
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+         {
+           "id": 1,
+           "user_id": 1,
+           "channel_id": 1,
+           "message": "Hey dood!!!!!",
+           "created_at": "2023-06-22 05:59:48",
+           "user": {
+             "id": 1,
+             "username": "DemoUser",
+             "email": "demo@aa.io",
+             "first_name": "Demo",
+             "last_name": "User",
+             "profile_pic": "profile_url",
+             "admin": false
+           },
+           "replies": [
+             {
+             "id": 1,
+             "message_id": 1,
+             "user_id": 2,
+             "reply": "Sup man",
+             "created_at": "2023-06-21 05:59:48",
+             "user": {
+               "id": 2,
+               "username": "DemoAdmin",
+               "email": "admin@aa.io",
+               "first_name": "Demo",
+               "last_name": "Admin",
+               "profile_pic": "profile_url",
+               "admin": true
+             }
+             }
+           ],
+           "channel": {
+             "id": 1,
+             "admin_id": 2,
+             "title": "Demo Channel"
+            }
+        }
+     ```
+  ### Delete Message
+  Delete an existing message.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/messages/<int:id>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+          "channel": {
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
+           }
+       }
+      ```
+      
 ## Replies
+### Create a Reply
+Create and returns a new reply
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/replies/message/<int:message_id>/user/<int:user_id>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 2,
+        "message_id": 1,
+        "reply": "Sup man"
+    }
+    ```
 
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Sup man",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
+
+    ```
+
+ ### Edit Reply
+ Updates and return an existing message.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/replies/<int:reply_id>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+        "reply": "Hey dood!!!!!"
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
+     ```
+  ### Delete Reply
+  Delete an existing message.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/replies/<int:id>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
+      ```
 ## Members
+### Create a Member
+Add a new member to a channel
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/members/channel/<int:channelId>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 2,
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+           "success"
+         }
+
+    ```
+### Delete a Member
+Delete an existing member.
+* Require Authenication: true
+* Request:
+  * Method: DELETE
+  * URL: /api/members/<int:id>/channel/<int:channelId>/delete
+  * Headers:
+     * Content-Type: application/json
+     * Body: none
+  
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+           "success"
+         }
+
+    ```
