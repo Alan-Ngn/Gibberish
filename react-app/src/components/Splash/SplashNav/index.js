@@ -35,7 +35,7 @@ const SplashNav = () => {
                             modalComponent={<LoginFormModal />}
                         />
                         <button className='demo-login' onClick={handleDemo}>DEMO USER</button>
-                        <button className='demo-login' onClick={handleAdmin}>DEMO ADMIN</button>
+                        {/* <button className='demo-login' onClick={handleAdmin}>DEMO ADMIN</button> */}
                     </div>
                 </div>
                 <div className='sign-up-splash'>
