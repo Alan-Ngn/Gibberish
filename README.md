@@ -1,148 +1,902 @@
-# Flask React Project
+# Gibberish
 
-This is the starter for the Flask React project.
+Please visit our website at: https://gibberish-z0ju.onrender.com
 
-## Getting started
-1. Clone this repository (only this branch)
 
-2. Install dependencies
 
-      ```bash
-      pipenv install -r requirements.txt
+
+## Splash Page
+![GibberishSplashPage](https://github.com/Alan-Ngn/Gibberish/assets/118578374/69f8982f-7db0-4148-8c9f-291adb619ebb)
+
+## Home Page
+
+![GibberishHomePage](https://github.com/Alan-Ngn/Gibberish/assets/118578374/ad9b778d-ca46-4e1f-8709-ca8b9d73afe5)
+
+## Channel Page
+![GibberishChannels](https://github.com/Alan-Ngn/Gibberish/assets/118578374/7d5b5c2b-7b8f-4424-88d6-ce0e3312a989)
+
+# Routes
+
+## Auth
+
+### Get User
+Return current user details
+* Require Authenication: true
+* Request:
+  * Method: GET
+  * URL: /api/auth/
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+  ```json
+  {
+     "id": 1,
+     "username": "DemoUser",
+     "email": "demo@aa.io",
+     "first_name": "Demo",
+     "last_name": "User",
+     "profile_pic": "profile_url",
+     "admin": false,
+     "admin_channels": [
+       {
+            "id": 3,
+            "admin_id": 1,
+            "title": "Another another Channel"
+        },
+      ],
+      "messages": [
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+        "channels": [
+         {
+           "id": 1,
+           "admin_id": 2,
+           "title": "Demo Channel"
+           "messages": [
+             {
+               "id": 1,
+               "user_id": 1,
+               "channel_id": 1,
+               "message": "Hey dood",
+               "created_at": "2023-06-21 05:59:48",
+               "user": {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+               },
+               "replies": [
+                 {
+                 "id": 1,
+                 "message_id": 1,
+                 "user_id": 2,
+                 "reply": "Sup man",
+                 "created_at": "2023-06-21 05:59:48",
+                 "user": {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+                 }
+                 }
+               ],
+               "channel": {
+                 "id": 1,
+                 "admin_id": 2,
+                 "title": "Demo Channel"
+                }
+             }
+           ], 
+           "members": [
+             {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+             },
+             {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+             }
+           ]
+       },
+      ],
+      "replies": [
+        {
+         "id": 1,
+         "message_id": 1,
+         "user_id": 2,
+         "reply": "Sup man",
+         "created_at": "2023-06-21 05:59:48",
+         "user": {
+           "id": 2,
+           "username": "DemoAdmin",
+           "email": "admin@aa.io",
+           "first_name": "Demo",
+           "last_name": "Admin",
+           "profile_pic": "profile_url",
+           "admin": true
+          }
+        },
+       ]
+  }
+  ```
+### Log In a User
+Logs in a current user with valid credentials and returns the current user's information.
+* Require Authenication: false
+* Request:
+  * Method: POST
+  * URL: /api/auth/login
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "email": "demo@aa.io",
+        "password": "secret password"
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+  ```json
+  {
+     "id": 1,
+     "username": "DemoUser",
+     "email": "demo@aa.io",
+     "first_name": "Demo",
+     "last_name": "User",
+     "profile_pic": "profile_url",
+     "admin": false,
+     "admin_channels": [
+       {
+            "id": 3,
+            "admin_id": 1,
+            "title": "Another another Channel"
+        },
+      ],
+      "messages": [
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+        "channels": [
+         {
+           "id": 1,
+           "admin_id": 2,
+           "title": "Demo Channel"
+           "messages": [
+             {
+               "id": 1,
+               "user_id": 1,
+               "channel_id": 1,
+               "message": "Hey dood",
+               "created_at": "2023-06-21 05:59:48",
+               "user": {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+               },
+               "replies": [
+                 {
+                 "id": 1,
+                 "message_id": 1,
+                 "user_id": 2,
+                 "reply": "Sup man",
+                 "created_at": "2023-06-21 05:59:48",
+                 "user": {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+                 }
+                 }
+               ],
+               "channel": {
+                 "id": 1,
+                 "admin_id": 2,
+                 "title": "Demo Channel"
+                }
+             }
+           ], 
+           "members": [
+             {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+             },
+             {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+             }
+           ]
+       },
+      ],
+      "replies": [
+        {
+         "id": 1,
+         "message_id": 1,
+         "user_id": 2,
+         "reply": "Sup man",
+         "created_at": "2023-06-21 05:59:48",
+         "user": {
+           "id": 2,
+           "username": "DemoAdmin",
+           "email": "admin@aa.io",
+           "first_name": "Demo",
+           "last_name": "Admin",
+           "profile_pic": "profile_url",
+           "admin": true
+          }
+        },
+       ]
+  }
+  ```
+### Logout
+Logs the current user out
+* Require Authenication: false
+* Request:
+  * Method: GET
+  * URL: /api/auth/logout
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+      "message": "User logged out"
+     }
+     ```
+### Sign up
+Creates a new user, logs them in as the current user, and returns the current user's information.
+* Require Authenication: false
+* Request:
+  * Method: POST
+  * URL: /api/auth/signup
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "username": "DemoUser",
+        "email": "demo@aa.io",
+        "password": "secret password",
+        "first_name": "Demo",
+        "last_name": "User",
+        "admin": false
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+  ```json
+  {
+      "id": 1,
+      "username": "DemoUser",
+      "email": "demo@aa.io",
+      "first_name": "Demo",
+      "last_name": "User",
+      "profile_pic": "profile_url",
+      "admin": false
+   }
+  ```
+## Users
+### Get all users
+Return all Users
+* Require Authenication: true
+* Request:
+  * Method: GET
+  * URL: /api/users/
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+  ```json
+   [
+    {
+        "id": 1,
+        "username": "DemoUser",
+        "email": "demo@aa.io",
+        "first_name": "Demo",
+        "last_name": "User",
+        "profile_pic": "profile_url",
+        "admin": false
+     },
+   ]
+  ```
+## Channel
+
+### Get details of a Channel from an id 
+Return channnel by id
+* Require Authenication: true
+* Request:
+  * Method: GET
+  * URL: /api/channels/<int:channelId>
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+  ```json
+  {
+      "id": 1,
+      "admin_id": 2,
+      "title": "Demo Channel"
+      "messages": [
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+          "channel": {
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
+           }
+        }
+      ], 
+      "members": [
+        {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+        },
+        {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+        }
+      ]
+  }
+  ```
+
+### Create a Channel
+Create and returns a new channel
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/channels/new/<int:userId>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "title": "Demo Channel",
+        "admin_id": 2
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "id": 1,
+        "admin_id": 2,
+        "title": "Demo Channel"
+    }
+    ```
+
+ ### Edit Channel
+ Updates and return an existing channel.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/channels/<int:channelId>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+         "title": "Another Demo Channel",
+         "admin_id": 2
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+         "id": 1,
+         "admin_id": 2,
+         "title": "Another Demo Channel"
+     }
+     ```
+  ### Delete Channel
+  Delete an existing channel.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/channels/<int:channelId>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+      {
+          "id": 1,
+          "admin_id": 2,
+          "title": "Another Demo Channel"
+      }
       ```
+       
+## Messages
+### Create a Message
+Create and returns a new message
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/messages/channel/<int:channel_id>/user/<int:user_id>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 1,
+        "channel_id": 1,
+        "message": "Hey dood"
+    }
+    ```
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+          "channel": {
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
+           }
+        }
+    ```
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+ ### Edit Message
+ Updates and return an existing message.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/messages/<int:id>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+        "message": "Hey dood!!!!!"
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+         {
+           "id": 1,
+           "user_id": 1,
+           "channel_id": 1,
+           "message": "Hey dood!!!!!",
+           "created_at": "2023-06-22 05:59:48",
+           "user": {
+             "id": 1,
+             "username": "DemoUser",
+             "email": "demo@aa.io",
+             "first_name": "Demo",
+             "last_name": "User",
+             "profile_pic": "profile_url",
+             "admin": false
+           },
+           "replies": [
+             {
+             "id": 1,
+             "message_id": 1,
+             "user_id": 2,
+             "reply": "Sup man",
+             "created_at": "2023-06-21 05:59:48",
+             "user": {
+               "id": 2,
+               "username": "DemoAdmin",
+               "email": "admin@aa.io",
+               "first_name": "Demo",
+               "last_name": "Admin",
+               "profile_pic": "profile_url",
+               "admin": true
+             }
+             }
+           ],
+           "channel": {
+             "id": 1,
+             "admin_id": 2,
+             "title": "Demo Channel"
+            }
+        }
+     ```
+  ### Delete Message
+  Delete an existing message.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/messages/<int:id>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+          "channel": {
+            "id": 1,
+            "admin_id": 2,
+            "title": "Demo Channel"
+           }
+       }
+      ```
+      
+## Replies
+### Create a Reply
+Create and returns a new reply
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/replies/message/<int:message_id>/user/<int:user_id>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 2,
+        "message_id": 1,
+        "reply": "Sup man"
+    }
+    ```
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Sup man",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+    ```
 
-   ```bash
-   pipenv shell
-   ```
+ ### Edit Reply
+ Updates and return an existing message.
+ * Require Authenication: true
+ * Request:
+   * Method: PUT
+   * URL: /api/replies/<int:reply_id>/edit
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+        "reply": "Hey dood!!!!!"
+     }
+     ```
+ 
+ * Successful Response:
+   * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
+     ```
+  ### Delete Reply
+  Delete an existing message.
+  * Require Authenication: true
+  * Request:
+    * Method: DELETE
+    * URL: /api/replies/<int:id>
+    * Headers:
+       * Content-Type: application/json
+       * Body: none
+  
+  * Successful Response:
+    * Headers:
+       * Content-Type: application/json
+       * Body:
+      ```json
+         {
+          "id": 1,
+          "message_id": 1,
+          "user_id": 2,
+          "reply": "Hey dood!!!!!",
+          "created_at": "2023-06-22 05:59:48",
+          "user": {
+            "id": 2,
+            "username": "DemoAdmin",
+            "email": "admin@aa.io",
+            "first_name": "Demo",
+            "last_name": "Admin",
+            "profile_pic": "profile_url",
+            "admin": true
+          }
+         }
+      ```
+## Members
+### Create a Member
+Add a new member to a channel
+* Require Authenication: true
+* Request:
+  * Method: POST
+  * URL: /api/members/channel/<int:channelId>
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "user_id": 2,
+    }
+    ```
 
-   ```bash
-   flask db upgrade
-   ```
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+           "success"
+         }
 
-   ```bash
-   flask seed all
-   ```
+    ```
+### Delete a Member
+Delete an existing member.
+* Require Authenication: true
+* Request:
+  * Method: DELETE
+  * URL: /api/members/<int:id>/channel/<int:channelId>/delete
+  * Headers:
+     * Content-Type: application/json
+     * Body: none
+  
+* Successful Response:
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+         {
+           "success"
+         }
 
-   ```bash
-   flask run
-   ```
-
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
-
-## Deployment through Render.com
-
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
-
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
-
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
-
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
-
-### Part A: Configure the Start and Build Commands
-
-Start by giving your application a name.
-
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+    ```
