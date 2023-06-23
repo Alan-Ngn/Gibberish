@@ -94,7 +94,7 @@ function SignupFormModal() {
 			  required
 			/>
 		  </label>
-		  <label className="admin-sign-up">
+		  {/* <label className="admin-sign-up">
 			<p>Admin</p>
 		  <input
 			className="sign-up-checkbox"
@@ -103,7 +103,7 @@ function SignupFormModal() {
 			>
 		  </input>
 
-		  </label>
+		  </label> */}
 		  <label>
 		  <i class="fa-solid fa-lock"></i>
 			<input

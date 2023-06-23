@@ -35,7 +35,7 @@ function Navigation({ socket, isLoaded }){
 
 
 					))}
-					{sessionUser.admin && (
+					{sessionUser && (
 						<OpenModalButton
 							buttonText='Add channels'
 							onButtonClick={onButtonClick}

@@ -12,6 +12,7 @@ import { io } from 'socket.io-client';
 import { loadUsersThunk } from "./store/user";
 import TopNavigation from "./components/TopNavigation";
 import SplashPage from "./components/Splash";
+import HomePage from "./components/HomePage";
 let socket;
 function App() {
   const dispatch = useDispatch();
@@ -49,8 +50,10 @@ function App() {
 
             <div className="content">
               <Navigation socket={socket} isLoaded={isLoaded} />
+
             {isLoaded && (
               <Switch>
+                <Route exact path='/' component={HomePage}/>
                 <Route path='/channels/:channelId' render={(props)=> <ChannelById {...props} socket={socket}/> } />
               </Switch>
             )}

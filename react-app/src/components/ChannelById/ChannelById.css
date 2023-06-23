@@ -30,6 +30,10 @@ p {
     min-width: 100%;
 }
 
+.message-wrapper form {
+    width: 80%;
+    height: fit-content
+}
 .chat-box{
     width: 100%;
     height: 80px;
@@ -51,8 +55,11 @@ p {
 /* form{
     width: 100%;
 } */
-#edit-message.edit-box{
-    width: 100%
+.edit-box{
+    width: 100%;
+    height: 50px;
+    /* word-wrap: break-word;
+    word-break: break-all; */
 }
 
 .chat-box-error {
@@ -172,7 +179,8 @@ input.edit-box-error::placeholder, input.chat-box-error::placeholder  {
 .chat-user {
     display:flex;
     flex-direction: row;
-    gap: 5px
+    gap: 5px;
+    width: 100%
 }
 
 .chat-user .fa-solid.fa-user {
