@@ -30,6 +30,7 @@ Return current user details
 * Successful Response:
   * Headers:
       * Content-Type: application/json
+      * Body:
   ```json
   {
      "id": 1,
@@ -42,7 +43,7 @@ Return current user details
      "admin_channels": [
        {
             "id": 3,
-            "admin_id": 3,
+            "admin_id": 1,
             "title": "Another another Channel"
         },
       ],
@@ -168,8 +169,241 @@ Return current user details
        ]
   }
   ```
-## Users
+### Log In a User
+Logs in a current user with valid credentials and returns the current user's information.
+* Require Authenication: false
+* Request:
+  * Method: POST
+  * URL: /api/auth/login
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "email": "demo@aa.io",
+        "password": "secret password"
+    }
+    ```
 
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+  ```json
+  {
+     "id": 1,
+     "username": "DemoUser",
+     "email": "demo@aa.io",
+     "first_name": "Demo",
+     "last_name": "User",
+     "profile_pic": "profile_url",
+     "admin": false,
+     "admin_channels": [
+       {
+            "id": 3,
+            "admin_id": 1,
+            "title": "Another another Channel"
+        },
+      ],
+      "messages": [
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+        "channels": [
+         {
+           "id": 1,
+           "admin_id": 2,
+           "title": "Demo Channel"
+           "messages": [
+             {
+               "id": 1,
+               "user_id": 1,
+               "channel_id": 1,
+               "message": "Hey dood",
+               "created_at": "2023-06-21 05:59:48",
+               "user": {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+               },
+               "replies": [
+                 {
+                 "id": 1,
+                 "message_id": 1,
+                 "user_id": 2,
+                 "reply": "Sup man",
+                 "created_at": "2023-06-21 05:59:48",
+                 "user": {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+                 }
+                 }
+               ],
+               "channel": {
+                 "id": 1,
+                 "admin_id": 2,
+                 "title": "Demo Channel"
+                }
+             }
+           ], 
+           "members": [
+             {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+             },
+             {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+             }
+           ]
+       },
+      ],
+      "replies": [
+        {
+         "id": 1,
+         "message_id": 1,
+         "user_id": 2,
+         "reply": "Sup man",
+         "created_at": "2023-06-21 05:59:48",
+         "user": {
+           "id": 2,
+           "username": "DemoAdmin",
+           "email": "admin@aa.io",
+           "first_name": "Demo",
+           "last_name": "Admin",
+           "profile_pic": "profile_url",
+           "admin": true
+          }
+        },
+       ]
+  }
+  ```
+### Logout
+Logs the current user out
+* Require Authenication: false
+* Request:
+  * Method: GET
+  * URL: /api/auth/logout
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+     ```json
+     {
+      "message": "User logged out"
+     }
+     ```
+### Sign up
+Creates a new user, logs them in as the current user, and returns the current user's information.
+* Require Authenication: false
+* Request:
+  * Method: POST
+  * URL: /api/auth/signup
+  * Headers:
+     * Content-Type: application/json
+     * Body:
+    ```json
+    {
+        "username": "DemoUser",
+        "email": "demo@aa.io",
+        "password": "secret password",
+        "first_name": "Demo",
+        "last_name": "User",
+        "admin": false
+    }
+    ```
+
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+      * Body:
+  ```json
+  {
+      "id": 1,
+      "username": "DemoUser",
+      "email": "demo@aa.io",
+      "first_name": "Demo",
+      "last_name": "User",
+      "profile_pic": "profile_url",
+      "admin": false
+   }
+  ```
+## Users
+### Get all users
+Return all Users
+* Require Authenication: true
+* Request:
+  * Method: GET
+  * URL: /api/users/
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+  ```json
+   [
+    {
+        "id": 1,
+        "username": "DemoUser",
+        "email": "demo@aa.io",
+        "first_name": "Demo",
+        "last_name": "User",
+        "profile_pic": "profile_url",
+        "admin": false
+     },
+   ]
+  ```
 ## Channel
 
 ### Get details of a Channel from an id 
