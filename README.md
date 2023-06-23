@@ -4,7 +4,6 @@ Please visit our website at: https://gibberish-z0ju.onrender.com
 
 
 
-For more info about this project please check out our [wiki]!
 
 ## Splash Page
 ![GibberishSplashPage](https://github.com/Alan-Ngn/Gibberish/assets/118578374/69f8982f-7db0-4148-8c9f-291adb619ebb)
