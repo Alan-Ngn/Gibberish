@@ -18,6 +18,156 @@ For more info about this project please check out our [wiki]!
 
 # Routes
 
+## Auth
+### Get User
+Return current user details
+* Require Authenication: true
+* Request:
+  * Method: GET
+  * URL: /api/auth/
+  * Body: none
+  
+* Successful Response:
+  * Headers:
+      * Content-Type: application/json
+  ```json
+  {
+     "id": 1,
+     "username": "DemoUser",
+     "email": "demo@aa.io",
+     "first_name": "Demo",
+     "last_name": "User",
+     "profile_pic": "profile_url",
+     "admin": false,
+     "admin_channels": [
+       {
+            "id": 3,
+            "admin_id": 3,
+            "title": "Another another Channel"
+        },
+      ],
+      "messages": [
+        {
+          "id": 1,
+          "user_id": 1,
+          "channel_id": 1,
+          "message": "Hey dood",
+          "created_at": "2023-06-21 05:59:48",
+          "user": {
+            "id": 1,
+            "username": "DemoUser",
+            "email": "demo@aa.io",
+            "first_name": "Demo",
+            "last_name": "User",
+            "profile_pic": "profile_url",
+            "admin": false
+          },
+          "replies": [
+            {
+            "id": 1,
+            "message_id": 1,
+            "user_id": 2,
+            "reply": "Sup man",
+            "created_at": "2023-06-21 05:59:48",
+            "user": {
+              "id": 2,
+              "username": "DemoAdmin",
+              "email": "admin@aa.io",
+              "first_name": "Demo",
+              "last_name": "Admin",
+              "profile_pic": "profile_url",
+              "admin": true
+            }
+            }
+          ],
+        "channels": [
+         {
+           "id": 1,
+           "admin_id": 2,
+           "title": "Demo Channel"
+           "messages": [
+             {
+               "id": 1,
+               "user_id": 1,
+               "channel_id": 1,
+               "message": "Hey dood",
+               "created_at": "2023-06-21 05:59:48",
+               "user": {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+               },
+               "replies": [
+                 {
+                 "id": 1,
+                 "message_id": 1,
+                 "user_id": 2,
+                 "reply": "Sup man",
+                 "created_at": "2023-06-21 05:59:48",
+                 "user": {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+                 }
+                 }
+               ],
+               "channel": {
+                 "id": 1,
+                 "admin_id": 2,
+                 "title": "Demo Channel"
+                }
+             }
+           ], 
+           "members": [
+             {
+                 "id": 1,
+                 "username": "DemoUser",
+                 "email": "demo@aa.io",
+                 "first_name": "Demo",
+                 "last_name": "User",
+                 "profile_pic": "profile_url",
+                 "admin": false
+             },
+             {
+                   "id": 2,
+                   "username": "DemoAdmin",
+                   "email": "admin@aa.io",
+                   "first_name": "Demo",
+                   "last_name": "Admin",
+                   "profile_pic": "profile_url",
+                   "admin": true
+             }
+           ]
+       },
+      ],
+      "replies": [
+        {
+         "id": 1,
+         "message_id": 1,
+         "user_id": 2,
+         "reply": "Sup man",
+         "created_at": "2023-06-21 05:59:48",
+         "user": {
+           "id": 2,
+           "username": "DemoAdmin",
+           "email": "admin@aa.io",
+           "first_name": "Demo",
+           "last_name": "Admin",
+           "profile_pic": "profile_url",
+           "admin": true
+          }
+        },
+       ]
+  }
+  ```
 ## Users
 
 ## Channel
