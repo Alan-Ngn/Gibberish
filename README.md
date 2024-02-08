@@ -1,6 +1,6 @@
 # Gibberish
 
-Please visit our website at: https://gibberish-z0ju.onrender.com
+Please visit my website at: https://gibberish-z0ju.onrender.com
 
 
 
